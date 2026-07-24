@@ -887,6 +887,7 @@ function adminTabContent(tab){
   return "";
 }
 
+  
 function adminDashboard(){
   const revenue = STORE.orders.filter(o=>o.status==="approved").reduce((a,o)=>a+o.total,0);
   const today = new Date().toLocaleDateString("fa-IR");
