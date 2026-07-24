@@ -10,7 +10,7 @@
 :root{
   --bg:#07080a; --bg2:#0d0f0b; --panel:#14170f; --panel2:#191c14;
   --gold:#d4af37; --gold-l:#f3d878; --gold-d:#a8842a;
-  --green:#1e8a4c; --green-l:#2fd170; --green-d:#0f5c31;
+  --green:#4a5d32; --green-l:#6b7f45; --green-d:#2c3a1c;
   --ink:#f5f1e6; --muted:#a7a493; --line:#2a2c22;
   --danger:#e05555; --radius:16px;
   --shadow-gold:0 0 30px rgba(212,175,55,.25);
@@ -70,7 +70,8 @@ h1,h2,h3{font-weight:800; line-height:1.25;}
 header{position:sticky; top:0; z-index:500; backdrop-filter:blur(14px); background:rgba(7,8,10,.82); border-bottom:1px solid var(--line);}
 .headbar{display:flex; align-items:center; justify-content:space-between; padding:14px 0;}
 .logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:20px;}
-.logo img{width:42px; height:42px; border-radius:50%; box-shadow:0 0 18px rgba(212,175,55,.4);}
+.logo img{width:42px; height:42px; border-radius:50%; box-shadow:0 0 18px rgba(168,132,42,.45); filter:brightness(.82) saturate(1.05);}
+.spin-logo{animation:spin 3.5s linear infinite;}
 .logo .sub{font-size:10px; color:var(--muted); letter-spacing:2px; display:block; font-family:'Cinzel',serif;}
 nav.mainnav{display:flex; gap:30px; align-items:center;}
 nav.mainnav a{font-size:14.5px; font-weight:600; color:var(--muted); position:relative; padding:6px 0;}
@@ -80,6 +81,9 @@ nav.mainnav a.active::after{content:''; position:absolute; bottom:-4px; right:0;
 .icon-btn{position:relative; width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:var(--panel); border:1px solid var(--line); font-size:17px; transition:.2s;}
 .icon-btn:hover{border-color:var(--gold);}
 .burger{display:none;}
+.mobile-menu{display:flex; flex-direction:column; gap:2px; padding:10px 24px 16px; border-top:1px solid var(--line); background:rgba(7,8,10,.96);}
+.mobile-menu a{padding:12px 6px; font-size:14.5px; font-weight:600; color:var(--muted); border-bottom:1px solid var(--line);}
+.mobile-menu a.active,.mobile-menu a:hover{color:var(--gold-l);}
 
 /* ---------- hero ---------- */
 .hero{position:relative; min-height:640px; display:flex; align-items:center; overflow:hidden; border-bottom:1px solid var(--line);}
@@ -87,8 +91,8 @@ nav.mainnav a.active::after{content:''; position:absolute; bottom:-4px; right:0;
 .hero-bg img{width:100%; height:100%; object-fit:cover; opacity:.55; transform:scale(1.04);}
 .hero-bg::after{content:''; position:absolute; inset:0; background:linear-gradient(90deg,rgba(7,8,10,.97) 20%,rgba(7,8,10,.55) 60%,rgba(7,8,10,.85) 100%);}
 .hero-content{position:relative; z-index:2; max-width:620px; padding:60px 0;}
-.hero-content h1{font-size:52px; margin-bottom:18px;}
-.hero-content h1 .gold-txt{background:linear-gradient(120deg,var(--gold-l),var(--gold));  -webkit-background-clip:text; background-clip:text; color:transparent;}
+.hero-content h1{font-size:52px; margin-bottom:18px; position:relative; display:inline-block; padding:6px 18px; border:1px solid var(--gold-d); border-radius:14px; box-shadow:0 0 0 1px rgba(212,175,55,.08) inset, 0 8px 30px rgba(0,0,0,.35);}
+.hero-content h1 .gold-txt{background:linear-gradient(120deg,var(--green-l),var(--gold-l),var(--green-l)); background-size:250% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:shimmer 4.5s linear infinite;}
 .hero-content p{color:var(--muted); font-size:16.5px; line-height:2; margin-bottom:30px; max-width:520px;}
 .hero-cta{display:flex; gap:16px; flex-wrap:wrap;}
 .hero-dec{position:absolute; z-index:1; inset:0; pointer-events:none;}
@@ -163,6 +167,9 @@ footer{background:linear-gradient(180deg,var(--bg2),#050604); border-top:1px sol
 .chat-input .icon-btn{width:38px; height:38px; font-size:15px;}
 
 /* ---------- cart drawer ---------- */
+.paymethod-tabs{display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap;}
+.pm-tab{flex:1; min-width:160px; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:var(--panel); font-size:13px; font-weight:600; color:var(--muted); text-align:center; transition:.2s;}
+.pm-tab.active{border-color:var(--gold); color:var(--gold-l); background:rgba(212,175,55,.08);}
 .overlay{position:fixed; inset:0; background:rgba(0,0,0,.6); backdrop-filter:blur(2px); z-index:900; display:none;}
 .overlay.show{display:block;}
 .drawer{position:fixed; top:0; left:-420px; width:400px; max-width:90vw; height:100%; background:var(--panel2); z-index:901; transition:.35s; display:flex; flex-direction:column; border-left:1px solid var(--gold-d);}
@@ -193,6 +200,12 @@ footer{background:linear-gradient(180deg,var(--bg2),#050604); border-top:1px sol
 .summary-row{display:flex; justify-content:space-between; font-size:14px; margin-bottom:10px; color:var(--muted);}
 .summary-row.total{color:var(--ink); font-weight:800; font-size:17px; border-top:1px solid var(--line); padding-top:14px; margin-top:6px;}
 
+.order-progress{display:flex; gap:10px; flex-wrap:wrap; padding-top:10px; border-top:1px solid var(--line);}
+.op-step{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--muted);}
+.op-step .op-dot{width:9px; height:9px; border-radius:50%; background:var(--line); display:inline-block;}
+.op-step.active{color:var(--green-l);}
+.op-step.active .op-dot{background:var(--green-l); box-shadow:0 0 0 3px rgba(107,127,69,.2);}
+
 /* ---------- admin ---------- */
 .admin-shell{display:grid; grid-template-columns:250px 1fr; min-height:100vh;}
 .admin-side{background:var(--bg2); border-left:1px solid var(--line); padding:22px 16px; display:flex; flex-direction:column;}
@@ -211,14 +224,20 @@ th{color:var(--muted); font-weight:600; font-size:12px;}
 tr:hover td{background:rgba(255,255,255,.02);}
 .status-pill{padding:4px 12px; border-radius:999px; font-size:11px; font-weight:700;}
 .status-pending{background:rgba(212,175,55,.15); color:var(--gold-l);}
-.status-approved{background:rgba(47,209,112,.15); color:var(--green-l);}
+.status-awaiting_telegram{background:rgba(90,150,220,.15); color:#8fc1f5;}
+.status-approved{background:rgba(107,127,69,.18); color:var(--green-l);}
+.status-packed{background:rgba(212,175,55,.15); color:var(--gold-l);}
+.status-shipped{background:rgba(107,127,69,.22); color:var(--green-l);}
 .status-rejected{background:rgba(224,85,85,.15); color:#ff9d9d;}
 .modal-bg{position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:1000; display:flex; align-items:center; justify-content:center; padding:20px;}
 .modal{background:var(--panel2); border:1px solid var(--gold-d); border-radius:18px; padding:28px; width:520px; max-width:100%; max-height:88vh; overflow-y:auto;}
 .modal h3{margin-bottom:18px;}
 .notif-dot{position:absolute; top:8px; left:10px; width:9px; height:9px; border-radius:50%; background:var(--green-l); box-shadow:0 0 0 2px var(--bg2);}
 .login-shell{min-height:100vh; display:flex; align-items:center; justify-content:center;}
-.login-card{width:380px; background:var(--panel); border:1px solid var(--gold-d); border-radius:20px; padding:38px; text-align:center;}
+.login-card{width:380px; background:rgba(20,23,15,.45); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); border:1px solid var(--gold-d); border-radius:20px; padding:38px; text-align:center; position:relative; box-shadow:0 20px 60px rgba(0,0,0,.5); user-select:none;}
+.login-drag-handle{position:absolute; top:0; right:0; left:0; height:26px; cursor:grab; border-radius:20px 20px 0 0;}
+.login-drag-handle:active{cursor:grabbing;}
+.login-drag-handle::after{content:''; position:absolute; top:9px; right:50%; transform:translateX(50%); width:40px; height:4px; border-radius:4px; background:var(--gold-d); opacity:.6;}
 .chat-inbox{display:grid; grid-template-columns:280px 1fr; gap:18px; height:600px;}
 .inbox-list{background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow-y:auto;}
 .inbox-item{padding:14px 16px; border-bottom:1px solid var(--line); cursor:pointer; transition:.15s;}
@@ -268,7 +287,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
 <div id="app"></div>
 
 <!-- floating chat -->
-<button class="chat-fab" id="chatFab" title="گفتگو با پشتیبانی">💬<span class="badge-count hide" id="chatBadge">0</span></button>
+<button class="chat-fab" id="chatFab" title="گفتگو با پشتیبانی">🤖<span class="badge-count hide" id="chatBadge">0</span></button>
 <div class="chat-panel" id="chatPanel">
   <div class="chat-head">
     <div><b>پشتیبانی افضلی‌شاپ</b><br><span>معمولاً ظرف چند دقیقه پاسخ می‌دهیم</span></div>
@@ -320,7 +339,7 @@ try{
 
 const DEFAULTS = {
   content: {
-    heroTitle: "به افضلی‌شاپ خوش آمدید",
+    heroTitle: "Afzali Shop",
     heroSubtitle: "عطرهای اورجینال و منتخب لوکس؛ ارسال به مشهد رایگان است و کمتر از ۴ ساعت درب منزل شماست.",
     heroEyebrow: "برند برتر عطر و محصولات لوکس",
     announceText: "🚚 ارسال به مشهد رایگان و زیر ۴ ساعت به دستتان می‌رسد  |  ✅ ضمانت اصالت کالا  |  💬 پشتیبانی آنلاین ۲۴ ساعته",
@@ -342,7 +361,12 @@ const DEFAULTS = {
   ],
   orders: [],
   chats: {},
-  settings: { adminUser:"admin", adminPass:"admin123" }
+  settings: {
+    adminUser:"admin", adminPass:"admin123",
+    cardNumber:"۶۰۳۷-۹۹۱۱-۰۰۰۰-۱۲۳۴", cardHolder:"افضلی‌شاپ",
+    telegramUsername:"afzalishop_support",
+    invoiceLogo:"assets/logo.png"
+  }
 };
 
 let STORE = JSON.parse(JSON.stringify(DEFAULTS));
@@ -390,7 +414,7 @@ function subscribeRealtime(){
       .on("postgres_changes", { event:"*", schema:"public", table:"site_data" }, (payload)=>{
         const row = payload.new; if(!row) return;
         if(row.key==="orders"){
-          const pend = (row.value||[]).filter(o=>o.status==="pending").length;
+          const pend = (row.value||[]).filter(o=>o.status==="pending"||o.status==="awaiting_telegram").length;
           if(IS_ADMIN && pend > lastSeenOrderCount){ toast("رسید بانکی جدیدی برای بررسی دریافت شد", "alert"); beep(); }
           lastSeenOrderCount = pend; STORE.orders = row.value || [];
         }
@@ -422,7 +446,7 @@ async function loadAll(){
   MY_SESSION = mySess;
   let admin = await sget("is-admin", false);
   IS_ADMIN = !!admin;
-  lastSeenOrderCount = STORE.orders.filter(o=>o.status==="pending").length;
+  lastSeenOrderCount = STORE.orders.filter(o=>o.status==="pending"||o.status==="awaiting_telegram").length;
 }
 
 function fmt(n){ return n.toLocaleString("fa-IR"); }
@@ -466,6 +490,8 @@ async function render(){
     app.innerHTML = siteShell(aboutView());
   } else if(route.startsWith("#/contact")){
     app.innerHTML = siteShell(contactView());
+  } else if(route.startsWith("#/account")){
+    app.innerHTML = siteShell(accountView());
   } else {
     app.innerHTML = siteShell(homeView());
   }
@@ -485,13 +511,18 @@ function siteShell(inner){
         <div><div>افضلی‌شاپ</div><span class="sub eng">AFZALI SHOP</span></div>
       </a>
       <nav class="mainnav">
-        ${nav('#/','خانه')}${nav('#/shop','فروشگاه')}${nav('#/about','درباره ما')}${nav('#/contact','تماس با ما')}
+        ${nav('#/','خانه')}${nav('#/shop','فروشگاه')}${nav('#/about','درباره ما')}${nav('#/contact','تماس با ما')}${nav('#/account','حساب من')}
       </nav>
       <div class="head-icons">
-        <button class="icon-btn" onclick="go('#/admin')" title="ورود پشتیبانی">🛠</button>
-        <button class="icon-btn" onclick="toggleCart(true)" title="سبد خرید">🛍<span class="badge-count ${CART.length?'':'hide'}" id="cartCount">${CART.reduce((a,c)=>a+c.qty,0)}</span></button>
+        <button class="icon-btn" id="headerCartBtn" onclick="toggleCart(true)" title="سبد خرید">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--gold-l)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none;"><path d="M6 8h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="badge-count ${CART.length?'':'hide'}" id="cartCount" style="pointer-events:none;">${CART.reduce((a,c)=>a+c.qty,0)}</span>
+        </button>
         <button class="icon-btn burger" onclick="toggleMobileNav()">☰</button>
       </div>
+    </div>
+    <div class="mobile-menu hide" id="mobileMenu">
+      ${nav('#/','خانه')}${nav('#/shop','فروشگاه')}${nav('#/about','درباره ما')}${nav('#/contact','تماس با ما')}${nav('#/account','حساب من')}
     </div>
   </header>
   <main>${inner}</main>
@@ -505,7 +536,7 @@ function siteShell(inner){
             <a href="#">📸</a><a href="#">✈️</a><a href="#">▶️</a><a href="#">✕</a>
           </div>
         </div>
-        <div><h4>دسترسی سریع</h4><ul><li><a href="#/shop">فروشگاه</a></li><li><a href="#/about">درباره ما</a></li><li><a href="#/contact">تماس با ما</a></li><li><a href="#/admin">ورود پشتیبانی</a></li></ul></div>
+        <div><h4>دسترسی سریع</h4><ul><li><a href="#/shop">فروشگاه</a></li><li><a href="#/about">درباره ما</a></li><li><a href="#/contact">تماس با ما</a></li><li><a href="#/account">حساب من</a></li></ul></div>
         <div><h4>خدمات مشتریان</h4><ul><li><a href="#">سوالات متداول</a></li><li><a href="#">شرایط ارسال</a></li><li><a href="#">بازگشت کالا</a></li><li><a href="#">پیگیری سفارش</a></li></ul></div>
         <div><h4>عضویت در خبرنامه</h4><p style="color:var(--muted); font-size:13px; margin-bottom:10px;">جدیدترین محصولات و تخفیف‌ها را دریافت کنید</p>
           <div class="newsletter-row"><input placeholder="ایمیل شما..."><button>عضویت</button></div>
@@ -514,6 +545,11 @@ function siteShell(inner){
       <div class="foot-bottom">
         <span>© ۱۴۰۴ افضلی‌شاپ. تمامی حقوق محفوظ است.</span>
         <span>طراحی و توسعه با ♥ برای عاشقان عطر</span>
+      </div>
+      <div style="text-align:center; padding:14px 0 4px; opacity:.45;">
+        <a href="#/admin" title="ورود پشتیبانی" style="display:inline-flex; align-items:center; justify-content:center;">
+          <img src="assets/logo.png" style="width:16px; height:16px; border-radius:50%; filter:grayscale(1);">
+        </a>
       </div>
     </div>
   </footer>`;
@@ -688,8 +724,10 @@ function toggleCart(open){
 
 /* ---------------- CHECKOUT ---------------- */
 let receiptBase64 = null;
+let payMethod = "receipt"; // "receipt" | "telegram"
 function checkoutView(){
   if(!CART.length) return `<section class="section wrap" style="text-align:center;"><p style="color:var(--muted);">سبد خرید شما خالی است.</p><a href="#/shop" class="btn btn-gold" style="margin-top:16px;">رفتن به فروشگاه</a></section>`;
+  const s = STORE.settings;
   return `
   <section class="page-hero wrap"><div class="eyebrow">نهایی‌سازی خرید</div><h1 style="font-size:30px;">تکمیل سفارش</h1></section>
   <section class="section wrap" style="padding-top:36px;">
@@ -702,68 +740,187 @@ function checkoutView(){
         </div>
         <div class="field"><label>آدرس کامل</label><textarea id="ckAddr" rows="3" placeholder="شهر، خیابان، پلاک، واحد..."></textarea></div>
         <div class="divider-gold"></div>
-        <h3 style="margin:18px 0;">پرداخت و ارسال رسید بانکی</h3>
-        <p style="font-size:12.5px; color:var(--muted); margin-bottom:14px;">مبلغ سفارش را به شماره کارت زیر واریز کرده و اسکرین‌شات رسید را آپلود کنید. سفارش شما پس از تایید پشتیبانی پردازش می‌شود.</p>
-        <div class="card" style="background:var(--bg2); margin-bottom:16px;"><b style="color:var(--gold-l);">شماره کارت:</b> ۶۰۳۷-۹۹۱۱-۰۰۰۰-۱۲۳۴ به نام افضلی‌شاپ</div>
-        <div class="upload-box" id="uploadBox" onclick="document.getElementById('receiptInput').click()">
-          <div id="uploadInner">📤 <br>برای آپلود اسکرین‌شات رسید بانکی کلیک کنید</div>
+        <h3 style="margin:18px 0 10px;">روش پرداخت</h3>
+        <div class="paymethod-tabs">
+          <button type="button" class="pm-tab ${payMethod==='receipt'?'active':''}" onclick="setPayMethod('receipt', this)">🏦 پرداخت کارت‌به‌کارت + ارسال رسید</button>
+          <button type="button" class="pm-tab ${payMethod==='telegram'?'active':''}" onclick="setPayMethod('telegram', this)">📨 سفارش از طریق تلگرام</button>
         </div>
-        <input type="file" id="receiptInput" accept="image/*" class="hide" onchange="handleReceipt(this)">
+
+        <div id="payMethodBody">${payMethodBody()}</div>
       </div>
       <div class="card">
         <h3 style="margin-bottom:16px;">خلاصه سفارش</h3>
         ${CART.map(it=>`<div class="summary-row"><span>${it.name} × ${it.qty}</span><span>${toman(it.price*it.qty)}</span></div>`).join('')}
         <div class="summary-row"><span>هزینه ارسال (${STORE.content.freeShipCity})</span><span style="color:var(--green-l);">رایگان</span></div>
         <div class="summary-row total"><span>مبلغ قابل پرداخت</span><span>${toman(cartTotal())}</span></div>
-        <button class="btn btn-green" style="width:100%; justify-content:center; margin-top:18px;" onclick="submitOrder()">ثبت نهایی سفارش</button>
+        <button class="btn btn-green" style="width:100%; justify-content:center; margin-top:18px;" id="ckSubmitBtn" onclick="submitOrder()">${payMethod==='telegram'?'ثبت و ارسال فاکتور در تلگرام':'ثبت نهایی سفارش'}</button>
       </div>
     </div>
   </section>`;
 }
+function payMethodBody(){
+  const s = STORE.settings;
+  if(payMethod==='telegram'){
+    return `<p style="font-size:12.5px; color:var(--muted); margin-bottom:14px;">با ثبت سفارش، فاکتور شما ساخته می‌شود و یک دکمه برای ارسال آن در تلگرام به پشتیبانی نمایش داده می‌شود. پشتیبانی پس از دریافت فاکتور، شماره کارت را برایتان در تلگرام ارسال می‌کند.</p>
+    <div class="card" style="background:var(--bg2);">پس از ثبت سفارش، دکمه «ارسال فاکتور در تلگرام» فعال می‌شود.</div>`;
+  }
+  return `<p style="font-size:12.5px; color:var(--muted); margin-bottom:14px;">مبلغ سفارش را به شماره کارت زیر واریز کرده و اسکرین‌شات رسید را آپلود کنید. سفارش شما پس از تایید پشتیبانی پردازش می‌شود.</p>
+    <div class="card" style="background:var(--bg2); margin-bottom:16px;"><b style="color:var(--gold-l);">شماره کارت:</b> ${s.cardNumber} به نام ${s.cardHolder}</div>
+    <div class="upload-box" id="uploadBox" onclick="document.getElementById('receiptInput').click()">
+      <div id="uploadInner">📤 <br>برای آپلود اسکرین‌شات رسید بانکی کلیک کنید</div>
+    </div>
+    <input type="file" id="receiptInput" accept="image/*" class="hide" onchange="handleReceipt(this)">`;
+}
+function setPayMethod(m, btnEl){
+  payMethod = m;
+  document.getElementById("payMethodBody").innerHTML = payMethodBody();
+  document.getElementById("ckSubmitBtn").textContent = m==='telegram' ? "ثبت و ارسال فاکتور در تلگرام" : "ثبت نهایی سفارش";
+  document.querySelectorAll(".pm-tab").forEach(b=>b.classList.remove("active"));
+  if(btnEl) btnEl.classList.add("active");
+}
+// shrink+compress the uploaded receipt photo so it doesn't fail to save (phone photos can be several MB)
+function compressImage(dataUrl, maxW){
+  return new Promise((resolve)=>{
+    const img = new Image();
+    img.onload = ()=>{
+      const scale = Math.min(1, maxW/img.width);
+      const w = Math.round(img.width*scale), h = Math.round(img.height*scale);
+      const canvas = document.createElement("canvas");
+      canvas.width = w; canvas.height = h;
+      canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+      resolve(canvas.toDataURL("image/jpeg", 0.65));
+    };
+    img.onerror = ()=> resolve(dataUrl);
+    img.src = dataUrl;
+  });
+}
 function handleReceipt(input){
   const file = input.files[0]; if(!file) return;
   const reader = new FileReader();
-  reader.onload = e=>{
-    receiptBase64 = e.target.result;
+  reader.onload = async e=>{
+    document.getElementById("uploadInner").innerHTML = `<div class="spinner" style="margin:10px auto;"></div><div style="font-size:12px; color:var(--muted);">در حال پردازش تصویر...</div>`;
+    receiptBase64 = await compressImage(e.target.result, 900);
     document.getElementById("uploadInner").innerHTML = `<img src="${receiptBase64}" class="upload-preview"><div style="margin-top:10px; color:var(--green-l); font-size:13px;">✔ رسید آپلود شد — برای تغییر کلیک کنید</div>`;
   };
   reader.readAsDataURL(file);
 }
 let lastOrderId = null;
+let lastOrderTelegramText = null;
 async function submitOrder(){
   const name = document.getElementById("ckName").value.trim();
   const phone = document.getElementById("ckPhone").value.trim();
   const addr = document.getElementById("ckAddr").value.trim();
   if(!name||!phone||!addr){ toast("لطفا اطلاعات گیرنده را کامل کنید"); return; }
-  if(!receiptBase64){ toast("لطفا تصویر رسید بانکی را آپلود کنید"); return; }
+  if(payMethod==='receipt' && !receiptBase64){ toast("لطفا تصویر رسید بانکی را آپلود کنید"); return; }
+
   const order = {
     id: "AFZ-" + Date.now().toString().slice(-8),
     sessionId: MY_SESSION,
     customer:{name,phone,addr},
     items: CART.map(i=>({id:i.id,name:i.name,price:i.price,qty:i.qty})),
     total: cartTotal(),
-    receiptImg: receiptBase64,
-    status: "pending",
+    payMethod: payMethod,
+    receiptImg: payMethod==='receipt' ? receiptBase64 : null,
+    status: payMethod==='telegram' ? "awaiting_telegram" : "pending",
     createdAt: nowStr(),
     invoiceNo: "INV-"+Date.now().toString().slice(-6)
   };
+
+  const btn = document.getElementById("ckSubmitBtn");
+  if(btn){ btn.disabled = true; btn.textContent = "در حال ثبت سفارش..."; }
+
+  // re-fetch latest orders right before writing, to avoid overwriting orders from other customers checking out at the same time
+  const freshOrders = await sget("orders", true);
+  STORE.orders = freshOrders || STORE.orders;
   STORE.orders.push(order);
   await sset("orders", STORE.orders, true);
-  // push into chat as a pinned "receipt" system message
+  // confirm the write actually landed (cloud saves can silently fail — verify instead of assuming success)
+  const verify = await sget("orders", true);
+  const saved = !cloudEnabled || (verify && verify.some(o=>o.id===order.id));
+  if(!saved){
+    if(btn){ btn.disabled = false; btn.textContent = payMethod==='telegram' ? "ثبت و ارسال فاکتور در تلگرام" : "ثبت نهایی سفارش"; }
+    toast("ثبت سفارش با مشکل مواجه شد — لطفا دوباره تلاش کنید یا از طریق چت با پشتیبانی تماس بگیرید");
+    return;
+  }
+
   if(!STORE.chats[MY_SESSION]) STORE.chats[MY_SESSION]=[];
-  STORE.chats[MY_SESSION].push({from:"user", text:"📎 رسید واریزی سفارش "+order.id+" ارسال شد.", img:receiptBase64, time:nowStr(), orderRef:order.id});
+  if(payMethod==='receipt'){
+    STORE.chats[MY_SESSION].push({from:"user", text:"📎 رسید واریزی سفارش "+order.id+" ارسال شد.", img:receiptBase64, time:nowStr(), orderRef:order.id});
+  } else {
+    STORE.chats[MY_SESSION].push({from:"user", text:"📨 سفارش "+order.id+" ثبت شد — فاکتور از طریق تلگرام برای پشتیبانی ارسال می‌شود.", time:nowStr(), orderRef:order.id});
+  }
   await sset("chats", STORE.chats, true);
+
   lastOrderId = order.id;
+  lastOrderTelegramText = buildTelegramInvoiceText(order);
   CART = []; receiptBase64 = null;
   go("#/order-success");
 }
+function buildTelegramInvoiceText(o){
+  const lines = [
+    `فاکتور سفارش افضلی‌شاپ`,
+    `شماره فاکتور: ${o.invoiceNo}`,
+    `کد سفارش: ${o.id}`,
+    `مشتری: ${o.customer.name}`,
+    `موبایل: ${o.customer.phone}`,
+    `آدرس: ${o.customer.addr}`,
+    `----------------`,
+    ...o.items.map(it=>`${it.name} × ${it.qty} = ${it.price*it.qty} تومان`),
+    `----------------`,
+    `مبلغ کل: ${o.total} تومان`,
+    `لطفا شماره کارت جهت واریز را ارسال کنید 🙏`
+  ];
+  return lines.join("\n");
+}
+function openTelegramInvoice(){
+  if(!lastOrderTelegramText) return;
+  const url = "https://t.me/" + STORE.settings.telegramUsername + "?text=" + encodeURIComponent(lastOrderTelegramText);
+  window.open(url, "_blank");
+}
 function orderSuccessView(){
   if(!lastOrderId) return `<section class="section wrap" style="text-align:center;"><a href="#/shop" class="btn btn-gold">رفتن به فروشگاه</a></section>`;
+  const isTelegram = lastOrderTelegramText !== null;
   return `<section class="section wrap" style="text-align:center; padding:120px 0;">
     <div style="font-size:60px;">✅</div>
     <h1 style="margin:20px 0 10px;">سفارش شما با موفقیت ثبت شد</h1>
-    <p style="color:var(--muted); max-width:480px; margin:0 auto 20px;">کد پیگیری سفارش: <b style="color:var(--gold-l);">${lastOrderId}</b><br>رسید بانکی شما برای پشتیبانی ارسال شد و پس از تایید، سفارش پردازش خواهد شد. می‌توانید از طریق چت آنلاین وضعیت سفارش را پیگیری کنید.</p>
-    <a href="#/shop" class="btn btn-gold">بازگشت به فروشگاه</a>
+    <p style="color:var(--muted); max-width:480px; margin:0 auto 20px;">کد پیگیری سفارش: <b style="color:var(--gold-l);">${lastOrderId}</b><br>${isTelegram ? 'برای تکمیل سفارش، فاکتور را در تلگرام برای پشتیبانی ارسال کنید تا شماره کارت برایتان ارسال شود.' : 'رسید بانکی شما برای پشتیبانی ارسال شد و پس از تایید، سفارش پردازش خواهد شد.'} می‌توانید وضعیت سفارش را از طریق چت آنلاین یا حساب کاربری خود پیگیری کنید.</p>
+    ${isTelegram ? `<button class="btn btn-gold" style="margin-left:10px;" onclick="openTelegramInvoice()">📨 ارسال فاکتور در تلگرام</button>` : ''}
+    <a href="#/shop" class="btn btn-outline">بازگشت به فروشگاه</a>
+  </section>`;
+}
+
+/* ---------------- CUSTOMER ACCOUNT ---------------- */
+function accountView(){
+  const myOrders = STORE.orders.filter(o=>o.sessionId===MY_SESSION).slice().reverse();
+  return `
+  <section class="page-hero wrap"><div class="eyebrow">حساب کاربری</div><h1 style="font-size:30px;">سفارش‌های من</h1></section>
+  <section class="section wrap" style="padding-top:20px;">
+    ${!myOrders.length ? `<p style="color:var(--muted); text-align:center;">هنوز سفارشی از این مرورگر ثبت نکرده‌اید. <a href="#/shop" style="color:var(--gold-l);">رفتن به فروشگاه ←</a></p>` : `
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      ${myOrders.map(o=>`
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+          <div><b style="color:var(--gold-l);">${o.id}</b><span style="color:var(--muted); font-size:12px; display:block;">${o.createdAt}</span></div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <span style="font-size:12px; color:var(--muted);">${o.payMethod==='telegram'?'📨 سفارش تلگرام':'🏦 کارت به کارت'}</span>
+            <span class="status-pill status-${o.status}">${statusLabel(o.status)}</span>
+          </div>
+        </div>
+        <div style="font-size:13px; color:var(--muted); margin-bottom:8px;">
+          ${o.items.map(it=>`${it.name} × ${it.qty}`).join(' • ')}
+        </div>
+        <div class="order-progress">
+          ${["pending_or_awaiting","approved","packed","shipped"].map((stage,i)=>{
+            const order_stages = ["pending","approved","packed","shipped"];
+            const curIdx = o.status==='rejected' ? -1 : (o.status==='awaiting_telegram' ? 0 : order_stages.indexOf(o.status));
+            const active = o.status!=='rejected' && curIdx>=i;
+            const labels = ["ثبت سفارش","تایید پرداخت","بسته‌بندی","ارسال"];
+            return `<div class="op-step ${active?'active':''}"><span class="op-dot"></span><span>${labels[i]}</span></div>`;
+          }).join('')}
+        </div>
+        <div style="text-align:left; margin-top:10px;"><b>${toman(o.total)}</b></div>
+      </div>`).join('')}
+    </div>`}
   </section>`;
 }
 
@@ -806,7 +963,8 @@ async function sendChatImage(input){
 /* ================= ADMIN ================= */
 function loginView(){
   return `<div class="login-shell wrap">
-    <div class="login-card">
+    <div class="login-card" id="loginCard">
+      <div class="login-drag-handle" id="loginDragHandle"></div>
       <div class="logo" style="justify-content:center; margin-bottom:20px;"><img src="assets/logo.png"><div style="text-align:right;">افضلی‌شاپ<div class="sub eng" style="font-size:9px;">ADMIN PANEL</div></div></div>
       <h3 style="margin-bottom:6px;">ورود پشتیبانی و مدیریت</h3>
       <p style="color:var(--muted); font-size:12.5px; margin-bottom:20px;">نام کاربری پیش‌فرض: admin — رمز: admin123</p>
@@ -816,6 +974,30 @@ function loginView(){
       <a href="#/" class="btn-ghost" style="display:block; margin-top:16px;">بازگشت به فروشگاه</a>
     </div>
   </div>`;
+}
+function initLoginDrag(){
+  const card = document.getElementById("loginCard");
+  const handle = document.getElementById("loginDragHandle");
+  if(!card || !handle) return;
+  let dragging=false, startX=0, startY=0, curX=0, curY=0;
+  const onDown = (e)=>{
+    dragging = true;
+    const p = e.touches ? e.touches[0] : e;
+    startX = p.clientX - curX; startY = p.clientY - curY;
+  };
+  const onMove = (e)=>{
+    if(!dragging) return;
+    const p = e.touches ? e.touches[0] : e;
+    curX = p.clientX - startX; curY = p.clientY - startY;
+    card.style.transform = `translate(${curX}px, ${curY}px)`;
+  };
+  const onUp = ()=>{ dragging = false; };
+  handle.addEventListener("mousedown", onDown);
+  handle.addEventListener("touchstart", onDown, {passive:true});
+  window.addEventListener("mousemove", onMove);
+  window.addEventListener("touchmove", onMove, {passive:true});
+  window.addEventListener("mouseup", onUp);
+  window.addEventListener("touchend", onUp);
 }
 async function doLogin(){
   const u = document.getElementById("loginUser").value.trim();
@@ -828,7 +1010,7 @@ async function doLogin(){
 }
 async function doLogout(){ IS_ADMIN=false; await sset("is-admin", false, false); go("#/"); }
 
-function pendingOrdersCount(){ return STORE.orders.filter(o=>o.status==="pending").length; }
+function pendingOrdersCount(){ return STORE.orders.filter(o=>o.status==="pending"||o.status==="awaiting_telegram").length; }
 function unreadChatSessions(){
   // any session whose last message is from user is considered "needs attention"
   return Object.entries(STORE.chats).filter(([sid,msgs])=>msgs.length && msgs[msgs.length-1].from==='user').length;
@@ -846,7 +1028,7 @@ function adminShell(){
   const pend = pendingOrdersCount(); const unread = unreadChatSessions();
   return `<div class="admin-shell">
     <aside class="admin-side">
-      <div class="logo"><img src="assets/logo.png" style="width:36px;height:36px;"><div style="font-size:15px;">افضلی‌شاپ<div class="sub eng" style="font-size:9px;">ADMIN</div></div></div>
+      <div class="logo" style="cursor:pointer;" onclick="setAdminTab('chat')" title="مشاهده پیام‌های ارسال شده"><img src="assets/logo.png" style="width:36px;height:36px;"><div style="font-size:15px;">افضلی‌شاپ<div class="sub eng" style="font-size:9px;">ADMIN</div></div></div>
       <nav class="admin-nav">
         ${items.map(([k,ic,label])=>`
         <a href="javascript:void(0)" class="${adminTab===k?'active':''}" onclick="setAdminTab('${k}')" style="position:relative;">
@@ -887,7 +1069,6 @@ function adminTabContent(tab){
   return "";
 }
 
-  
 function adminDashboard(){
   const revenue = STORE.orders.filter(o=>o.status==="approved").reduce((a,o)=>a+o.total,0);
   const today = new Date().toLocaleDateString("fa-IR");
@@ -904,23 +1085,29 @@ function adminDashboard(){
     <tbody>${STORE.orders.slice(-6).reverse().map(o=>`<tr><td>${o.id}</td><td>${o.customer.name}</td><td>${toman(o.total)}</td><td><span class="status-pill status-${o.status}">${statusLabel(o.status)}</span></td><td>${o.createdAt}</td></tr>`).join('') || `<tr><td colspan="5" style="color:var(--muted); text-align:center;">هنوز سفارشی ثبت نشده</td></tr>`}</tbody></table>
   </div>`;
 }
-function statusLabel(s){ return s==='pending'?'در انتظار بررسی':s==='approved'?'تایید شده':'رد شده'; }
+function statusLabel(s){
+  return {pending:"در انتظار بررسی رسید", awaiting_telegram:"در انتظار فاکتور تلگرام", approved:"تایید شده", packed:"بسته‌بندی شده", shipped:"ارسال شده", rejected:"رد شده"}[s] || s;
+}
 
 function adminOrders(){
   return `
   <div class="card">
-    <table><thead><tr><th>کد سفارش</th><th>مشتری</th><th>موبایل</th><th>مبلغ</th><th>رسید</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+    <table><thead><tr><th>کد سفارش</th><th>مشتری</th><th>موبایل</th><th>مبلغ</th><th>روش پرداخت</th><th>رسید/فاکتور</th><th>وضعیت</th><th>عملیات</th></tr></thead>
     <tbody>
     ${STORE.orders.slice().reverse().map(o=>`
       <tr>
         <td>${o.id}</td><td>${o.customer.name}</td><td>${o.customer.phone}</td><td>${toman(o.total)}</td>
-        <td><img src="${o.receiptImg}" style="width:42px;height:42px;border-radius:8px;object-fit:cover;cursor:pointer;" onclick="showLightbox('${o.receiptImg}')"></td>
+        <td>${o.payMethod==='telegram'?'📨 تلگرام':'🏦 کارت به کارت'}</td>
+        <td>${o.receiptImg?`<img src="${o.receiptImg}" style="width:42px;height:42px;border-radius:8px;object-fit:cover;cursor:pointer;" onclick="showLightbox('${o.receiptImg}')">`:`<button class="btn btn-outline btn-sm" onclick="openInvoice('${o.id}')">مشاهده فاکتور</button>`}</td>
         <td><span class="status-pill status-${o.status}">${statusLabel(o.status)}</span></td>
         <td style="display:flex; gap:6px; flex-wrap:wrap;">
-          ${o.status==='pending'?`<button class="btn btn-green btn-sm" onclick="approveOrder('${o.id}')">تایید</button><button class="btn btn-danger btn-sm" onclick="rejectOrder('${o.id}')">رد</button>`:''}
-          ${o.status==='approved'?`<button class="btn btn-outline btn-sm" onclick="openInvoice('${o.id}')">فاکتور</button>`:''}
+          ${o.status==='pending'?`<button class="btn btn-green btn-sm" onclick="approveOrder('${o.id}')">تایید رسید</button><button class="btn btn-danger btn-sm" onclick="rejectOrder('${o.id}')">رد</button>`:''}
+          ${o.status==='awaiting_telegram'?`<button class="btn btn-green btn-sm" onclick="approveOrder('${o.id}')">تایید دریافت وجه</button><button class="btn btn-danger btn-sm" onclick="rejectOrder('${o.id}')">رد</button>`:''}
+          ${o.status==='approved'?`<button class="btn btn-gold btn-sm" onclick="advanceOrder('${o.id}','packed')">📦 بسته‌بندی شد</button><button class="btn btn-outline btn-sm" onclick="openInvoice('${o.id}')">فاکتور</button>`:''}
+          ${o.status==='packed'?`<button class="btn btn-green btn-sm" onclick="advanceOrder('${o.id}','shipped')">🚚 ارسال شد</button><button class="btn btn-outline btn-sm" onclick="openInvoice('${o.id}')">فاکتور</button>`:''}
+          ${o.status==='shipped'?`<button class="btn btn-outline btn-sm" onclick="openInvoice('${o.id}')">فاکتور</button>`:''}
         </td>
-      </tr>`).join('') || `<tr><td colspan="7" style="color:var(--muted); text-align:center; padding:30px;">هنوز سفارشی ثبت نشده است</td></tr>`}
+      </tr>`).join('') || `<tr><td colspan="8" style="color:var(--muted); text-align:center; padding:30px;">هنوز سفارشی ثبت نشده است</td></tr>`}
     </tbody></table>
   </div>`;
 }
@@ -928,17 +1115,29 @@ async function approveOrder(id){
   const o = STORE.orders.find(x=>x.id===id); o.status="approved";
   await sset("orders", STORE.orders, true);
   if(!STORE.chats[o.sessionId]) STORE.chats[o.sessionId]=[];
-  STORE.chats[o.sessionId].push({from:"admin", text:`✅ رسید سفارش ${o.id} تایید شد. سفارش شما در حال آماده‌سازی برای ارسال است. متشکریم از خرید شما 🌹`, time:nowStr()});
+  STORE.chats[o.sessionId].push({from:"admin", text:`✅ سفارش ${o.id} تایید شد. سفارش شما در حال آماده‌سازی برای ارسال است. متشکریم از خرید شما 🌹`, time:nowStr()});
   await sset("chats", STORE.chats, true);
   toast("سفارش تایید و فاکتور صادر شد");
   refreshAdmin();
   openInvoice(id);
 }
+async function advanceOrder(id, newStatus){
+  const o = STORE.orders.find(x=>x.id===id); o.status=newStatus;
+  await sset("orders", STORE.orders, true);
+  if(!STORE.chats[o.sessionId]) STORE.chats[o.sessionId]=[];
+  const msg = newStatus==='packed'
+    ? `📦 سفارش ${o.id} بسته‌بندی شد و آماده ارسال است.`
+    : `🚚 سفارش ${o.id} ارسال شد و به‌زودی به دستتان می‌رسد.`;
+  STORE.chats[o.sessionId].push({from:"admin", text:msg, time:nowStr()});
+  await sset("chats", STORE.chats, true);
+  toast(newStatus==='packed' ? "وضعیت سفارش: بسته‌بندی شد" : "وضعیت سفارش: ارسال شد");
+  refreshAdmin();
+}
 async function rejectOrder(id){
   const o = STORE.orders.find(x=>x.id===id); o.status="rejected";
   await sset("orders", STORE.orders, true);
   if(!STORE.chats[o.sessionId]) STORE.chats[o.sessionId]=[];
-  STORE.chats[o.sessionId].push({from:"admin", text:`❌ متاسفانه رسید ارسالی برای سفارش ${o.id} تایید نشد. لطفا از طریق چت با پشتیبانی در ارتباط باشید.`, time:nowStr()});
+  STORE.chats[o.sessionId].push({from:"admin", text:`❌ متاسفانه پرداخت سفارش ${o.id} تایید نشد. لطفا از طریق چت با پشتیبانی در ارتباط باشید.`, time:nowStr()});
   await sset("chats", STORE.chats, true);
   toast("سفارش رد شد");
   refreshAdmin();
@@ -952,7 +1151,7 @@ function openInvoice(id){
     <div class="modal" style="width:760px; padding:0; background:transparent; border:none;">
       <div class="invoice-wrap">
         <div class="inv-head">
-          <div class="brand"><img src="assets/logo.png"><div><b style="font-size:20px;">افضلی‌شاپ</b><div style="font-size:11px; color:#a8842a;">AFZALI SHOP — فاکتور فروش رسمی</div></div></div>
+          <div class="brand"><img src="${STORE.settings.invoiceLogo||'assets/logo.png'}"><div><b style="font-size:20px;">افضلی‌شاپ</b><div style="font-size:11px; color:#a8842a;">AFZALI SHOP — فاکتور فروش رسمی</div></div></div>
           <div style="text-align:left; font-size:12.5px;"><b>شماره فاکتور:</b> ${o.invoiceNo}<br><b>تاریخ:</b> ${o.createdAt}</div>
         </div>
         <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:13px;">
@@ -1114,11 +1313,48 @@ async function adminSendChat(){
 }
 
 function adminSettings(){
-  return `<div class="card" style="max-width:440px;">
+  const s = STORE.settings;
+  return `
+  <div class="card" style="max-width:520px; margin-bottom:18px;">
+    <h3 style="margin-bottom:14px;">اطلاعات پرداخت کارت‌به‌کارت</h3>
+    <div class="field"><label>شماره کارت</label><input id="stCardNum" value="${s.cardNumber}"></div>
+    <div class="field"><label>نام صاحب حساب</label><input id="stCardHolder" value="${s.cardHolder}"></div>
+    <div class="field"><label>آیدی تلگرام پشتیبانی (بدون @)</label><input id="stTelegram" value="${s.telegramUsername}"></div>
+    <button class="btn btn-gold btn-sm" onclick="savePaymentSettings()">ذخیره اطلاعات پرداخت</button>
+  </div>
+  <div class="card" style="max-width:520px; margin-bottom:18px;">
+    <h3 style="margin-bottom:14px;">لوگوی سربرگ فاکتور</h3>
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:12px;">
+      <img src="${s.invoiceLogo}" style="width:56px; height:56px; border-radius:12px; object-fit:cover; border:1px solid var(--line);">
+      <button class="btn btn-outline btn-sm" onclick="document.getElementById('invLogoInput').click()">تغییر لوگو</button>
+      <input type="file" id="invLogoInput" accept="image/*" class="hide" onchange="handleInvoiceLogo(this)">
+    </div>
+    <p style="font-size:12px; color:var(--muted);">این لوگو در بالای فاکتورهایی که برای مشتری چاپ می‌شود نمایش داده می‌شود.</p>
+  </div>
+  <div class="card" style="max-width:440px;">
+    <h3 style="margin-bottom:14px;">ورود مدیر</h3>
     <div class="field"><label>نام کاربری مدیر</label><input id="stUser" value="${STORE.settings.adminUser}"></div>
     <div class="field"><label>رمز عبور جدید</label><input id="stPass" type="password" placeholder="رمز جدید را وارد کنید" value="${STORE.settings.adminPass}"></div>
     <button class="btn btn-gold" onclick="saveSettings()">ذخیره تنظیمات</button>
   </div>`;
+}
+async function savePaymentSettings(){
+  STORE.settings.cardNumber = document.getElementById("stCardNum").value.trim() || STORE.settings.cardNumber;
+  STORE.settings.cardHolder = document.getElementById("stCardHolder").value.trim() || STORE.settings.cardHolder;
+  STORE.settings.telegramUsername = document.getElementById("stTelegram").value.trim().replace(/^@/,"") || STORE.settings.telegramUsername;
+  await sset("settings", STORE.settings, true);
+  toast("اطلاعات پرداخت ذخیره شد");
+}
+function handleInvoiceLogo(input){
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = async e=>{
+    STORE.settings.invoiceLogo = await compressImage(e.target.result, 240);
+    await sset("settings", STORE.settings, true);
+    toast("لوگوی فاکتور به‌روزرسانی شد");
+    refreshAdmin();
+  };
+  reader.readAsDataURL(file);
 }
 async function saveSettings(){
   STORE.settings.adminUser = document.getElementById("stUser").value.trim() || STORE.settings.adminUser;
@@ -1129,12 +1365,14 @@ async function saveSettings(){
 
 /* ---------------- misc ui ---------------- */
 function toggleMobileNav(){
-  const paths = ["#/","#/shop","#/about","#/contact"];
-  const cur = paths.indexOf(route)>-1?paths.indexOf(route):0;
-  go(paths[(cur+1)%paths.length]);
+  const m = document.getElementById("mobileMenu");
+  if(m) m.classList.toggle("hide");
 }
 function afterRender(){
   renderCart();
+  initLoginDrag();
+  const cartBtn = document.getElementById("headerCartBtn");
+  if(cartBtn) cartBtn.onclick = ()=>toggleCart(true);
   document.getElementById("chatFab").onclick = ()=>toggleChat(!document.getElementById("chatPanel").classList.contains("open"));
   if(route.startsWith("#/") && !route.startsWith("#/admin")) renderChatBody();
   // countdown
@@ -1159,7 +1397,7 @@ async function pollUpdates(){
     sget("orders", true), sget("chats", true), sget("content", true), sget("products", true)
   ]);
   if(orders){
-    const pend = orders.filter(o=>o.status==='pending').length;
+    const pend = orders.filter(o=>o.status==='pending'||o.status==='awaiting_telegram').length;
     if(IS_ADMIN && pend > lastSeenOrderCount){
       toast("رسید بانکی جدیدی برای بررسی دریافت شد", "alert"); beep();
     }
