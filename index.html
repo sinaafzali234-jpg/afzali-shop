@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>افضلی‌شاپ | Afzali Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080a; --bg2:#0d0f0b; --panel:#14170f; --panel2:#191c14;
+  --gold:#d4af37; --gold-l:#f3d878; --gold-d:#a8842a;
+  --green:#1e8a4c; --green-l:#2fd170; --green-d:#0f5c31;
+  --ink:#f5f1e6; --muted:#a7a493; --line:#2a2c22;
+  --danger:#e05555; --radius:16px;
+  --shadow-gold:0 0 30px rgba(212,175,55,.25);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:radial-gradient(ellipse at top,#101208 0%,var(--bg) 55%);
+  color:var(--ink); font-family:'Vazirmatn',sans-serif; overflow-x:hidden;
+  min-height:100vh;
+}
+img{max-width:100%; display:block;}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit;}
+input,textarea,select{font-family:inherit; color:var(--ink); background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:11px 14px; font-size:14px; outline:none; transition:.2s;}
+input:focus,textarea:focus,select:focus{border-color:var(--gold);}
+.eng{font-family:'Cinzel',serif; letter-spacing:1px;}
+.wrap{max-width:1280px; margin:0 auto; padding:0 24px;}
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-thumb{background:var(--gold-d); border-radius:8px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+
+/* ---------- utility ---------- */
+.btn{display:inline-flex; align-items:center; gap:8px; padding:13px 26px; border-radius:999px; font-weight:600; font-size:14.5px; transition:.25s; white-space:nowrap;}
+.btn-gold{background:linear-gradient(135deg,var(--gold-l),var(--gold-d)); color:#1a1305; box-shadow:0 6px 20px rgba(212,175,55,.25);}
+.btn-gold:hover{transform:translateY(-2px); box-shadow:0 10px 28px rgba(212,175,55,.4);}
+.btn-outline{border:1px solid var(--gold); color:var(--gold-l);}
+.btn-outline:hover{background:rgba(212,175,55,.1);}
+.btn-green{background:linear-gradient(135deg,var(--green-l),var(--green-d)); color:#052e14; font-weight:700;}
+.btn-green:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(47,209,112,.3);}
+.btn-danger{background:rgba(224,85,85,.15); color:#ff9d9d; border:1px solid rgba(224,85,85,.4);}
+.btn-ghost{color:var(--muted); font-size:13px;}
+.btn-ghost:hover{color:var(--ink);}
+.btn-sm{padding:8px 16px; font-size:13px; border-radius:10px;}
+.pill{display:inline-block; padding:5px 14px; border-radius:999px; font-size:11.5px; font-weight:700; letter-spacing:.3px;}
+.eyebrow{color:var(--gold); font-size:12.5px; letter-spacing:3px; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:10px;}
+.eyebrow::before{content:''; width:26px; height:1px; background:var(--gold);}
+.section{padding:90px 0;}
+.section-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:42px; gap:20px; flex-wrap:wrap;}
+h1,h2,h3{font-weight:800; line-height:1.25;}
+.fade-up{opacity:0; transform:translateY(34px); transition:opacity .8s ease, transform .8s ease;}
+.fade-up.in{opacity:1; transform:translateY(0);}
+.divider-gold{height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:16px 0;}
+.badge-count{position:absolute; top:-6px; left:-6px; background:var(--green); color:#04220f; font-size:10px; font-weight:800; min-width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--bg);}
+.toast-wrap{position:fixed; top:20px; left:20px; z-index:9999; display:flex; flex-direction:column; gap:10px;}
+.toast{background:var(--panel2); border:1px solid var(--gold); border-radius:12px; padding:14px 18px; min-width:260px; box-shadow:0 10px 30px rgba(0,0,0,.5); animation:slideIn .35s ease;}
+.toast b{color:var(--gold-l);}
+@keyframes slideIn{from{opacity:0; transform:translateX(-30px);} to{opacity:1; transform:translateX(0);}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(47,209,112,.55);} 50%{box-shadow:0 0 0 10px rgba(47,209,112,0);}}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(0);} 50%{transform:translateY(-18px) rotate(3deg);}}
+@keyframes shimmer{0%{background-position:-200% 0;} 100%{background-position:200% 0;}}
+@keyframes spin{to{transform:rotate(360deg);}}
+.spark{position:absolute; border-radius:50%; background:var(--gold-l); opacity:.7; filter:blur(1px); animation:floaty 6s ease-in-out infinite;}
+
+/* ---------- announcement + header ---------- */
+.announce{background:linear-gradient(90deg,var(--green-d),var(--green),var(--green-d)); text-align:center; font-size:13px; font-weight:700; padding:9px 12px; color:#eafff0; letter-spacing:.3px;}
+header{position:sticky; top:0; z-index:500; backdrop-filter:blur(14px); background:rgba(7,8,10,.82); border-bottom:1px solid var(--line);}
+.headbar{display:flex; align-items:center; justify-content:space-between; padding:14px 0;}
+.logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:20px;}
+.logo img{width:42px; height:42px; border-radius:50%; box-shadow:0 0 18px rgba(212,175,55,.4);}
+.logo .sub{font-size:10px; color:var(--muted); letter-spacing:2px; display:block; font-family:'Cinzel',serif;}
+nav.mainnav{display:flex; gap:30px; align-items:center;}
+nav.mainnav a{font-size:14.5px; font-weight:600; color:var(--muted); position:relative; padding:6px 0;}
+nav.mainnav a.active,nav.mainnav a:hover{color:var(--gold-l);}
+nav.mainnav a.active::after{content:''; position:absolute; bottom:-4px; right:0; left:0; height:2px; background:var(--gold);}
+.head-icons{display:flex; gap:20px; align-items:center;}
+.icon-btn{position:relative; width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:var(--panel); border:1px solid var(--line); font-size:17px; transition:.2s;}
+.icon-btn:hover{border-color:var(--gold);}
+.burger{display:none;}
+
+/* ---------- hero ---------- */
+.hero{position:relative; min-height:640px; display:flex; align-items:center; overflow:hidden; border-bottom:1px solid var(--line);}
+.hero-bg{position:absolute; inset:0; z-index:0;}
+.hero-bg img{width:100%; height:100%; object-fit:cover; opacity:.55; transform:scale(1.04);}
+.hero-bg::after{content:''; position:absolute; inset:0; background:linear-gradient(90deg,rgba(7,8,10,.97) 20%,rgba(7,8,10,.55) 60%,rgba(7,8,10,.85) 100%);}
+.hero-content{position:relative; z-index:2; max-width:620px; padding:60px 0;}
+.hero-content h1{font-size:52px; margin-bottom:18px;}
+.hero-content h1 .gold-txt{background:linear-gradient(120deg,var(--gold-l),var(--gold));  -webkit-background-clip:text; background-clip:text; color:transparent;}
+.hero-content p{color:var(--muted); font-size:16.5px; line-height:2; margin-bottom:30px; max-width:520px;}
+.hero-cta{display:flex; gap:16px; flex-wrap:wrap;}
+.hero-dec{position:absolute; z-index:1; inset:0; pointer-events:none;}
+
+/* ---------- categories ---------- */
+.cat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+.cat-card{position:relative; border-radius:var(--radius); overflow:hidden; aspect-ratio:1/1; border:1px solid var(--line); background:var(--panel); display:flex; align-items:flex-end; padding:20px; transition:.35s;}
+.cat-card:hover{transform:translateY(-6px); border-color:var(--gold); box-shadow:var(--shadow-gold);}
+.cat-card .ic{font-size:34px; position:absolute; top:20px; right:20px; opacity:.85;}
+.cat-card b{font-size:16px;}
+.cat-card span{display:block; color:var(--gold-l); font-size:12px; margin-top:4px;}
+
+/* ---------- products ---------- */
+.prod-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+.prod-card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; transition:.3s; position:relative; display:flex; flex-direction:column;}
+.prod-card:hover{transform:translateY(-8px); border-color:var(--gold); box-shadow:0 18px 40px rgba(0,0,0,.5), var(--shadow-gold);}
+.prod-img{aspect-ratio:1/1; overflow:hidden; position:relative; background:#0a0b08;}
+.prod-img img{width:100%; height:100%; object-fit:cover; transition:.5s;}
+.prod-card:hover .prod-img img{transform:scale(1.08);}
+.prod-badge{position:absolute; top:12px; right:12px; z-index:2;}
+.prod-fav{position:absolute; top:12px; left:12px; width:34px; height:34px; border-radius:50%; background:rgba(7,8,10,.6); display:flex; align-items:center; justify-content:center; z-index:2; backdrop-filter:blur(4px);}
+.prod-body{padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1;}
+.prod-cat{font-size:11px; color:var(--gold); letter-spacing:1px;}
+.prod-name{font-size:15.5px; font-weight:700;}
+.prod-desc{font-size:12.5px; color:var(--muted); line-height:1.7; flex:1;}
+.prod-foot{display:flex; align-items:center; justify-content:space-between; margin-top:8px;}
+.price{font-weight:800; color:var(--gold-l); font-size:15px;}
+.price .old{color:var(--muted); text-decoration:line-through; font-weight:400; font-size:12px; margin-right:6px;}
+.add-btn{width:38px; height:38px; border-radius:50%; background:var(--gold); color:#1a1305; display:flex; align-items:center; justify-content:center; font-size:18px; transition:.2s;}
+.add-btn:hover{transform:scale(1.1) rotate(90deg); box-shadow:0 0 16px rgba(212,175,55,.6);}
+
+/* ---------- trust strip ---------- */
+.trust-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:30px;}
+.trust-item{display:flex; gap:14px; align-items:center;}
+.trust-item .ic{width:46px; height:46px; border-radius:50%; background:rgba(212,175,55,.12); border:1px solid var(--gold-d); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0;}
+.trust-item b{font-size:14px; display:block;} .trust-item span{font-size:12px; color:var(--muted);}
+
+/* ---------- promo ---------- */
+.promo{position:relative; border-radius:24px; overflow:hidden; padding:50px; display:flex; justify-content:space-between; align-items:center; background:linear-gradient(120deg,var(--panel2),var(--bg2)); border:1px solid var(--gold-d); flex-wrap:wrap; gap:24px;}
+.promo::before{content:''; position:absolute; width:340px; height:340px; background:radial-gradient(circle,rgba(212,175,55,.18),transparent 70%); top:-100px; left:-100px; animation:floaty 8s ease-in-out infinite;}
+.countdown{display:flex; gap:10px;}
+.cd-box{background:var(--bg); border:1px solid var(--gold-d); border-radius:12px; width:64px; height:64px; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+.cd-box b{font-size:22px; color:var(--gold-l);} .cd-box span{font-size:10px; color:var(--muted);}
+
+/* ---------- footer ---------- */
+footer{background:linear-gradient(180deg,var(--bg2),#050604); border-top:1px solid var(--line); padding:70px 0 24px; position:relative; overflow:hidden;}
+.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1.3fr; gap:40px; margin-bottom:50px;}
+.foot-grid h4{color:var(--gold-l); font-size:15px; margin-bottom:18px;}
+.foot-grid ul{list-style:none;} .foot-grid li{margin-bottom:11px;}
+.foot-grid a{color:var(--muted); font-size:13.5px; transition:.2s;} .foot-grid a:hover{color:var(--gold-l); padding-right:4px;}
+.foot-social{display:flex; gap:10px; margin-top:16px;}
+.foot-social a{width:36px; height:36px; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center;}
+.foot-social a:hover{border-color:var(--gold); color:var(--gold-l);}
+.newsletter-row{display:flex; gap:0; margin-top:10px;}
+.newsletter-row input{border-radius:10px 0 0 10px; flex:1; border-left:none;}
+.newsletter-row button{background:var(--gold); color:#1a1305; padding:0 18px; border-radius:0 10px 10px 0; font-weight:700;}
+.foot-bottom{border-top:1px solid var(--line); padding-top:22px; display:flex; justify-content:space-between; color:var(--muted); font-size:12.5px; flex-wrap:wrap; gap:10px;}
+
+/* ---------- floating chat ---------- */
+.chat-fab{position:fixed; bottom:26px; left:26px; z-index:800; width:62px; height:62px; border-radius:50%; background:linear-gradient(135deg,var(--green-l),var(--green-d)); display:flex; align-items:center; justify-content:center; font-size:26px; box-shadow:0 10px 30px rgba(30,138,76,.5); animation:pulse 2.4s infinite;}
+.chat-panel{position:fixed; bottom:100px; left:26px; z-index:800; width:360px; max-width:92vw; height:480px; background:var(--panel2); border:1px solid var(--gold-d); border-radius:18px; display:none; flex-direction:column; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.6);}
+.chat-panel.open{display:flex; animation:slideIn .3s ease;}
+.chat-head{background:linear-gradient(90deg,var(--green-d),var(--green)); padding:14px 18px; display:flex; justify-content:space-between; align-items:center;}
+.chat-head b{font-size:14.5px;} .chat-head span{font-size:11px; opacity:.85;}
+.chat-body{flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px;}
+.msg{max-width:80%; padding:10px 14px; border-radius:14px; font-size:13px; line-height:1.7;}
+.msg.bot{background:var(--panel); align-self:flex-start; border:1px solid var(--line); border-bottom-left-radius:2px;}
+.msg.me{background:var(--gold); color:#1a1305; align-self:flex-end; border-bottom-right-radius:2px; font-weight:600;}
+.msg img{border-radius:10px; margin-top:6px; max-width:180px;}
+.chat-input{display:flex; gap:8px; padding:12px; border-top:1px solid var(--line);}
+.chat-input input{flex:1;}
+.chat-input .icon-btn{width:38px; height:38px; font-size:15px;}
+
+/* ---------- cart drawer ---------- */
+.overlay{position:fixed; inset:0; background:rgba(0,0,0,.6); backdrop-filter:blur(2px); z-index:900; display:none;}
+.overlay.show{display:block;}
+.drawer{position:fixed; top:0; left:-420px; width:400px; max-width:90vw; height:100%; background:var(--panel2); z-index:901; transition:.35s; display:flex; flex-direction:column; border-left:1px solid var(--gold-d);}
+.drawer.open{left:0;}
+.drawer-head{padding:20px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line);}
+.drawer-body{flex:1; overflow-y:auto; padding:18px;}
+.cart-item{display:flex; gap:12px; margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+.cart-item img{width:64px; height:64px; border-radius:10px; object-fit:cover;}
+.cart-item .qty{display:flex; align-items:center; gap:8px; margin-top:6px;}
+.cart-item .qty button{width:24px; height:24px; border:1px solid var(--line); border-radius:6px;}
+.drawer-foot{padding:20px; border-top:1px solid var(--line);}
+
+/* ---------- generic page shell ---------- */
+.page-hero{padding:50px 0 30px; border-bottom:1px solid var(--line); background:linear-gradient(180deg,var(--panel2),transparent);}
+.filters{display:flex; gap:10px; margin-bottom:30px; flex-wrap:wrap;}
+.filter-chip{padding:9px 20px; border-radius:999px; border:1px solid var(--line); font-size:13px; font-weight:600; color:var(--muted);}
+.filter-chip.active{background:var(--gold); color:#1a1305; border-color:var(--gold);}
+
+/* ---------- checkout ---------- */
+.checkout-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:34px; align-items:start;}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:26px;}
+.field-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;}
+.field{margin-bottom:14px;} .field label{display:block; font-size:13px; color:var(--muted); margin-bottom:7px;}
+.field input,.field textarea,.field select{width:100%;}
+.upload-box{border:2px dashed var(--gold-d); border-radius:14px; padding:26px; text-align:center; cursor:pointer; transition:.2s;}
+.upload-box:hover{border-color:var(--gold); background:rgba(212,175,55,.05);}
+.upload-preview{max-width:100%; border-radius:12px; margin-top:12px;}
+.summary-row{display:flex; justify-content:space-between; font-size:14px; margin-bottom:10px; color:var(--muted);}
+.summary-row.total{color:var(--ink); font-weight:800; font-size:17px; border-top:1px solid var(--line); padding-top:14px; margin-top:6px;}
+
+/* ---------- admin ---------- */
+.admin-shell{display:grid; grid-template-columns:250px 1fr; min-height:100vh;}
+.admin-side{background:var(--bg2); border-left:1px solid var(--line); padding:22px 16px; display:flex; flex-direction:column;}
+.admin-side .logo{margin-bottom:30px; padding:0 8px;}
+.admin-nav a{display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:12px; color:var(--muted); font-size:14px; font-weight:600; margin-bottom:4px; position:relative;}
+.admin-nav a:hover{background:var(--panel); color:var(--ink);}
+.admin-nav a.active{background:linear-gradient(90deg,rgba(212,175,55,.18),transparent); color:var(--gold-l); border-right:3px solid var(--gold);}
+.admin-main{padding:26px 32px; overflow-x:hidden;}
+.admin-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:28px;}
+.stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-bottom:30px;}
+.stat-card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px;}
+.stat-card b{font-size:26px; display:block; color:var(--gold-l);} .stat-card span{font-size:12.5px; color:var(--muted);}
+table{width:100%; border-collapse:collapse; font-size:13.5px;}
+th,td{padding:12px 10px; text-align:right; border-bottom:1px solid var(--line);}
+th{color:var(--muted); font-weight:600; font-size:12px;}
+tr:hover td{background:rgba(255,255,255,.02);}
+.status-pill{padding:4px 12px; border-radius:999px; font-size:11px; font-weight:700;}
+.status-pending{background:rgba(212,175,55,.15); color:var(--gold-l);}
+.status-approved{background:rgba(47,209,112,.15); color:var(--green-l);}
+.status-rejected{background:rgba(224,85,85,.15); color:#ff9d9d;}
+.modal-bg{position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:1000; display:flex; align-items:center; justify-content:center; padding:20px;}
+.modal{background:var(--panel2); border:1px solid var(--gold-d); border-radius:18px; padding:28px; width:520px; max-width:100%; max-height:88vh; overflow-y:auto;}
+.modal h3{margin-bottom:18px;}
+.notif-dot{position:absolute; top:8px; left:10px; width:9px; height:9px; border-radius:50%; background:var(--green-l); box-shadow:0 0 0 2px var(--bg2);}
+.login-shell{min-height:100vh; display:flex; align-items:center; justify-content:center;}
+.login-card{width:380px; background:var(--panel); border:1px solid var(--gold-d); border-radius:20px; padding:38px; text-align:center;}
+.chat-inbox{display:grid; grid-template-columns:280px 1fr; gap:18px; height:600px;}
+.inbox-list{background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow-y:auto;}
+.inbox-item{padding:14px 16px; border-bottom:1px solid var(--line); cursor:pointer; transition:.15s;}
+.inbox-item:hover,.inbox-item.active{background:var(--panel2);}
+.inbox-item b{font-size:13.5px; display:block;} .inbox-item span{font-size:11.5px; color:var(--muted);}
+.receipt-pin{background:rgba(212,175,55,.1); border:1px solid var(--gold-d); border-radius:12px; padding:14px; margin-bottom:14px; display:flex; gap:12px; align-items:center;}
+.receipt-pin img{width:56px; height:56px; border-radius:8px; object-fit:cover; cursor:pointer;}
+.admin-chat-thread{background:var(--panel); border:1px solid var(--line); border-radius:14px; display:flex; flex-direction:column; padding:16px;}
+.thread-body{flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:10px; margin-bottom:10px;}
+.img-lightbox{position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:1100; display:flex; align-items:center; justify-content:center; padding:30px;}
+.img-lightbox img{max-height:90vh; border-radius:12px;}
+
+/* ---------- invoice ---------- */
+.invoice-wrap{max-width:720px; margin:40px auto; background:#fff; color:#111; border-radius:14px; padding:44px; font-family:'Vazirmatn',sans-serif;}
+.invoice-wrap h2{color:#111;}
+.inv-head{display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #d4af37; padding-bottom:20px; margin-bottom:24px;}
+.inv-head .brand{display:flex; align-items:center; gap:12px;}
+.inv-head .brand img{width:50px; height:50px;}
+.inv-table{width:100%; border-collapse:collapse; margin:20px 0;}
+.inv-table th{background:#111; color:#d4af37; padding:10px; font-size:12.5px;}
+.inv-table td{padding:10px; border-bottom:1px solid #eee; font-size:13px;}
+.inv-total{text-align:left; font-size:18px; font-weight:800; margin-top:14px;}
+@media print{ body *{visibility:hidden;} .invoice-wrap,.invoice-wrap *{visibility:visible;} .invoice-wrap{position:absolute; top:0; left:0; margin:0; width:100%;} .no-print{display:none!important;} }
+
+/* ---------- responsive ---------- */
+@media(max-width:1000px){
+  .cat-grid,.prod-grid{grid-template-columns:repeat(2,1fr);}
+  .trust-strip{grid-template-columns:repeat(2,1fr);}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+  .checkout-grid{grid-template-columns:1fr;}
+  .admin-shell{grid-template-columns:1fr;}
+  .admin-side{display:none;}
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .chat-inbox{grid-template-columns:1fr; height:auto;}
+  nav.mainnav{display:none;}
+  .burger{display:flex;}
+  .hero-content h1{font-size:36px;}
+}
+.hide{display:none!important;}
+.loader{width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:60px 0;}
+.spinner{width:34px; height:34px; border:3px solid var(--line); border-top-color:var(--gold); border-radius:50%; animation:spin .8s linear infinite;}
+</style>
+</head>
+<body>
+
+<div class="toast-wrap" id="toastWrap"></div>
+<div id="app"></div>
+
+<!-- floating chat -->
+<button class="chat-fab" id="chatFab" title="گفتگو با پشتیبانی">💬<span class="badge-count hide" id="chatBadge">0</span></button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head">
+    <div><b>پشتیبانی افضلی‌شاپ</b><br><span>معمولاً ظرف چند دقیقه پاسخ می‌دهیم</span></div>
+    <button class="icon-btn" onclick="toggleChat(false)" style="background:transparent;border:none;">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-input">
+    <button class="icon-btn" onclick="document.getElementById('chatImgInput').click()">📎</button>
+    <input type="file" id="chatImgInput" accept="image/*" class="hide" onchange="sendChatImage(this)">
+    <input type="text" id="chatText" placeholder="پیام خود را بنویسید...">
+    <button class="icon-btn" onclick="sendChatText()" style="background:var(--green);">➤</button>
+  </div>
+</div>
+
+<!-- cart drawer -->
+<div class="overlay" id="cartOverlay" onclick="toggleCart(false)"></div>
+<div class="drawer" id="cartDrawer">
+  <div class="drawer-head"><h3>سبد خرید</h3><button class="icon-btn" onclick="toggleCart(false)">✕</button></div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot" id="cartFoot"></div>
+</div>
+
+<div class="img-lightbox hide" id="lightbox" onclick="this.classList.add('hide')"><img id="lightboxImg"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* =========================================================
+   AFZALI SHOP — standalone build (GitHub Pages + Supabase)
+   -----------------------------------------------------------
+   Shared data (products/orders/chats/content/settings) is
+   stored as JSON rows in one Supabase table called "site_data"
+   so every visitor's browser and the admin dashboard stay in
+   sync in real time. Personal, per-device data (which browser
+   this is, whether it's logged in as admin) stays in the
+   browser's own localStorage and never leaves the device.
+
+   ONE-TIME SETUP (Supabase SQL editor) — see chat instructions.
+   ========================================================= */
+
+var SUPABASE_URL = "https://kgozwmrntqrwcydaxdhm.supabase.co";
+var SUPABASE_KEY = "sb_publishable_dDcgMafe6ufH7YFDwc7Tvw_TsywuzGD";
+var supabaseClient = null, cloudEnabled = false;
+try{
+  if(SUPABASE_URL && SUPABASE_KEY && window.supabase){
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    cloudEnabled = true;
+  }
+}catch(e){ console.warn("Supabase init failed", e); }
+
+const DEFAULTS = {
+  content: {
+    heroTitle: "به افضلی‌شاپ خوش آمدید",
+    heroSubtitle: "عطرهای اورجینال و منتخب لوکس؛ ارسال به مشهد رایگان است و کمتر از ۴ ساعت درب منزل شماست.",
+    heroEyebrow: "برند برتر عطر و محصولات لوکس",
+    announceText: "🚚 ارسال به مشهد رایگان و زیر ۴ ساعت به دستتان می‌رسد  |  ✅ ضمانت اصالت کالا  |  💬 پشتیبانی آنلاین ۲۴ ساعته",
+    chatWelcome: "سلام 🌹 به افضلی‌شاپ خوش اومدید! چطور می‌تونم کمکتون کنم؟",
+    aboutText: "افضلی‌شاپ با هدف عرضه عطرهای اورجینال و محصولات لوکس با کیفیت تضمین‌شده فعالیت می‌کند. تمام سفارش‌ها با ارسال سریع و بسته‌بندی ویژه به دست مشتریان می‌رسد.",
+    promoTitle: "پیشنهاد ویژه این هفته",
+    promoDesc: "تا ۳۰٪ تخفیف روی محصولات منتخب — فقط تا پایان هفته",
+    freeShipCity: "مشهد"
+  },
+  products: [
+    {id:"p1", name:"او د پرفیوم رویال بلک", cat:"عطر مردانه", price:2850000, oldPrice:3400000, img:"assets/hero.jpg", desc:"رایحه‌ای گرم و مردانه با دوام بالا، مناسب مجالس رسمی.", badge:"پرفروش"},
+    {id:"p2", name:"عطر گلدن الکسیر", cat:"عطر زنانه", price:3100000, oldPrice:0, img:"assets/collection.jpg", desc:"ترکیبی از یاس و عود برای حضوری به‌یادماندنی.", badge:"جدید"},
+    {id:"p3", name:"ست هدیه لوکس", cat:"ست هدیه", price:4200000, oldPrice:4900000, img:"assets/portrait.jpg", desc:"باکس هدیه شامل عطر، لوسیون بدن و کیف مخمل.", badge:"پیشنهادی"},
+    {id:"p4", name:"عطر ادو تویلت سیلور", cat:"عطر مردانه", price:2200000, oldPrice:0, img:"assets/hero.jpg", desc:"رایحه ملایم و اداری، مناسب استفاده روزانه.", badge:""},
+    {id:"p5", name:"رژ لب مخملی شماره ۰۷", cat:"آرایشی", price:590000, oldPrice:690000, img:"assets/collection.jpg", desc:"ماندگاری بالا با بافت مخملی و رنگ ثابت.", badge:""},
+    {id:"p6", name:"کرم مرطوب‌کننده رویال", cat:"آرایشی", price:780000, oldPrice:0, img:"assets/portrait.jpg", desc:"مرطوب‌کننده روزانه با عصاره طلا برای پوستی درخشان.", badge:"جدید"},
+    {id:"p7", name:"عطر جیبی مسک عود", cat:"عطر مردانه", price:1350000, oldPrice:0, img:"assets/hero.jpg", desc:"مناسب حمل در مسافرت، رایحه‌ای ماندگار و خاص.", badge:""},
+    {id:"p8", name:"دستبند طلایی درجه یک", cat:"اکسسوری", price:1650000, oldPrice:1950000, img:"assets/collection.jpg", desc:"طراحی ظریف، آبکاری طلای ۱۸ عیار، ضد حساسیت.", badge:"پرفروش"}
+  ],
+  orders: [],
+  chats: {},
+  settings: { adminUser:"admin", adminPass:"admin123" }
+};
+
+let STORE = JSON.parse(JSON.stringify(DEFAULTS));
+let MY_SESSION = null;
+let IS_ADMIN = false;
+let CART = [];
+let route = "#/";
+let adminTab = "dashboard";
+let adminChatOpen = null;
+let lastSeenOrderCount = 0;
+let lastSeenChatSig = "";
+
+/* ---------------- storage helpers ---------------- */
+// shared = true  -> Supabase "site_data" table (synced across every visitor + admin)
+// shared = false -> this browser's own localStorage (never leaves the device)
+async function sget(key, shared){
+  if(!shared){
+    try{ const v = localStorage.getItem("afz_"+key); return v ? JSON.parse(v) : null; }
+    catch(e){ return null; }
+  }
+  if(!cloudEnabled) return null;
+  try{
+    const { data, error } = await supabaseClient.from("site_data").select("value").eq("key", key).maybeSingle();
+    if(error){ console.warn("supabase read failed", error); return null; }
+    return data ? data.value : null;
+  }catch(e){ console.warn("supabase read failed", e); return null; }
+}
+async function sset(key, val, shared){
+  if(!shared){
+    try{ localStorage.setItem("afz_"+key, JSON.stringify(val)); }catch(e){}
+    return;
+  }
+  if(!cloudEnabled){ toast("اتصال به دیتابیس ابری برقرار نیست — تغییرات فقط روی این مرورگر ذخیره می‌شود"); return; }
+  try{
+    const { error } = await supabaseClient.from("site_data").upsert(
+      { key, value: val, updated_at: new Date().toISOString() }, { onConflict: "key" }
+    );
+    if(error) console.warn("supabase write failed", error);
+  }catch(e){ console.warn("supabase write failed", e); }
+}
+function subscribeRealtime(){
+  if(!cloudEnabled) return;
+  try{
+    supabaseClient.channel("site_data_all")
+      .on("postgres_changes", { event:"*", schema:"public", table:"site_data" }, (payload)=>{
+        const row = payload.new; if(!row) return;
+        if(row.key==="orders"){
+          const pend = (row.value||[]).filter(o=>o.status==="pending").length;
+          if(IS_ADMIN && pend > lastSeenOrderCount){ toast("رسید بانکی جدیدی برای بررسی دریافت شد", "alert"); beep(); }
+          lastSeenOrderCount = pend; STORE.orders = row.value || [];
+        }
+        if(row.key==="chats") STORE.chats = row.value || {};
+        if(row.key==="content") STORE.content = row.value || STORE.content;
+        if(row.key==="products") STORE.products = row.value || STORE.products;
+        if(row.key==="settings") STORE.settings = row.value || STORE.settings;
+        if(route.startsWith("#/admin") && IS_ADMIN) refreshAdmin();
+        else if(document.getElementById("chatPanel")?.classList.contains("open")) renderChatBody();
+      }).subscribe();
+  }catch(e){ console.warn("realtime subscribe failed", e); }
+}
+
+async function loadAll(){
+  const [content, products, orders, chats, settings] = await Promise.all([
+    sget("content", true), sget("products", true), sget("orders", true), sget("chats", true), sget("settings", true)
+  ]);
+  STORE.content = content || DEFAULTS.content;
+  STORE.products = products || DEFAULTS.products;
+  STORE.orders = orders || [];
+  STORE.chats = chats || {};
+  STORE.settings = settings || DEFAULTS.settings;
+  if(!content) sset("content", STORE.content, true);
+  if(!products) sset("products", STORE.products, true);
+  if(!settings) sset("settings", STORE.settings, true);
+
+  let mySess = await sget("my-session-id", false);
+  if(!mySess){ mySess = "u"+Math.random().toString(36).slice(2,10); await sset("my-session-id", mySess, false); }
+  MY_SESSION = mySess;
+  let admin = await sget("is-admin", false);
+  IS_ADMIN = !!admin;
+  lastSeenOrderCount = STORE.orders.filter(o=>o.status==="pending").length;
+}
+
+function fmt(n){ return n.toLocaleString("fa-IR"); }
+function toman(n){ return fmt(n) + " تومان"; }
+function nowStr(){ return new Date().toLocaleString("fa-IR"); }
+
+function toast(msg, kind){
+  const el = document.createElement("div");
+  el.className = "toast";
+  el.innerHTML = `<b>${kind==='alert'?'🔔 اعلان جدید':'✔ انجام شد'}</b><br>${msg}`;
+  document.getElementById("toastWrap").appendChild(el);
+  setTimeout(()=>{ el.style.opacity="0"; el.style.transition=".4s"; setTimeout(()=>el.remove(),400); }, 4200);
+}
+function beep(){
+  try{
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    const o = ctx.createOscillator(); const g = ctx.createGain();
+    o.connect(g); g.connect(ctx.destination);
+    o.frequency.value = 880; g.gain.value = 0.08;
+    o.start(); o.frequency.exponentialRampToValueAtTime(440, ctx.currentTime+.15);
+    o.stop(ctx.currentTime+.2);
+  }catch(e){}
+}
+
+/* ---------------- routing ---------------- */
+window.addEventListener("hashchange", ()=>{ route = location.hash || "#/"; render(); });
+
+function go(r){ location.hash = r; }
+
+async function render(){
+  const app = document.getElementById("app");
+  if(route.startsWith("#/admin")){
+    app.innerHTML = IS_ADMIN ? adminShell() : loginView();
+  } else if(route.startsWith("#/checkout")){
+    app.innerHTML = siteShell(checkoutView());
+  } else if(route.startsWith("#/shop")){
+    app.innerHTML = siteShell(shopView());
+  } else if(route.startsWith("#/order-success")){
+    app.innerHTML = siteShell(orderSuccessView());
+  } else if(route.startsWith("#/about")){
+    app.innerHTML = siteShell(aboutView());
+  } else if(route.startsWith("#/contact")){
+    app.innerHTML = siteShell(contactView());
+  } else {
+    app.innerHTML = siteShell(homeView());
+  }
+  afterRender();
+}
+
+/* ---------------- shared shell (customer site) ---------------- */
+function siteShell(inner){
+  const path = route;
+  const nav = (r,label)=>`<a href="${r}" class="${path===r||(r==='#/'&&path==='#/')?'active':''}">${label}</a>`;
+  return `
+  <div class="announce" id="announceBar">${STORE.content.announceText}</div>
+  <header>
+    <div class="wrap headbar">
+      <a href="#/" class="logo">
+        <img src="assets/logo.png" alt="لوگو افضلی‌شاپ">
+        <div><div>افضلی‌شاپ</div><span class="sub eng">AFZALI SHOP</span></div>
+      </a>
+      <nav class="mainnav">
+        ${nav('#/','خانه')}${nav('#/shop','فروشگاه')}${nav('#/about','درباره ما')}${nav('#/contact','تماس با ما')}
+      </nav>
+      <div class="head-icons">
+        <button class="icon-btn" onclick="go('#/admin')" title="ورود پشتیبانی">🛠</button>
+        <button class="icon-btn" onclick="toggleCart(true)" title="سبد خرید">🛍<span class="badge-count ${CART.length?'':'hide'}" id="cartCount">${CART.reduce((a,c)=>a+c.qty,0)}</span></button>
+        <button class="icon-btn burger" onclick="toggleMobileNav()">☰</button>
+      </div>
+    </div>
+  </header>
+  <main>${inner}</main>
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <div class="logo" style="margin-bottom:14px;"><img src="assets/logo.png"><div>افضلی‌شاپ<div class="sub eng" style="font-size:9px;">AFZALI SHOP</div></div></div>
+          <p style="color:var(--muted); font-size:13px; line-height:1.9;">${STORE.content.aboutText}</p>
+          <div class="foot-social">
+            <a href="#">📸</a><a href="#">✈️</a><a href="#">▶️</a><a href="#">✕</a>
+          </div>
+        </div>
+        <div><h4>دسترسی سریع</h4><ul><li><a href="#/shop">فروشگاه</a></li><li><a href="#/about">درباره ما</a></li><li><a href="#/contact">تماس با ما</a></li><li><a href="#/admin">ورود پشتیبانی</a></li></ul></div>
+        <div><h4>خدمات مشتریان</h4><ul><li><a href="#">سوالات متداول</a></li><li><a href="#">شرایط ارسال</a></li><li><a href="#">بازگشت کالا</a></li><li><a href="#">پیگیری سفارش</a></li></ul></div>
+        <div><h4>عضویت در خبرنامه</h4><p style="color:var(--muted); font-size:13px; margin-bottom:10px;">جدیدترین محصولات و تخفیف‌ها را دریافت کنید</p>
+          <div class="newsletter-row"><input placeholder="ایمیل شما..."><button>عضویت</button></div>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© ۱۴۰۴ افضلی‌شاپ. تمامی حقوق محفوظ است.</span>
+        <span>طراحی و توسعه با ♥ برای عاشقان عطر</span>
+      </div>
+    </div>
+  </footer>`;
+}
+
+/* ---------------- HOME ---------------- */
+function homeView(){
+  const c = STORE.content;
+  const feats = STORE.products.slice(0,4);
+  const cats = [...new Set(STORE.products.map(p=>p.cat))].slice(0,4);
+  const catIcons = {"عطر مردانه":"🧔","عطر زنانه":"🌸","ست هدیه":"🎁","آرایشی":"💄","اکسسوری":"💍"};
+  return `
+  <section class="hero">
+    <div class="hero-bg"><img src="assets/hero.jpg"></div>
+    <div class="hero-dec">
+      <div class="spark" style="width:8px;height:8px;top:20%;left:60%;animation-delay:.2s;"></div>
+      <div class="spark" style="width:5px;height:5px;top:60%;left:75%;animation-delay:1.4s;"></div>
+      <div class="spark" style="width:10px;height:10px;top:40%;left:85%;animation-delay:2.1s;"></div>
+      <div class="spark" style="width:6px;height:6px;top:75%;left:55%;animation-delay:.8s;"></div>
+    </div>
+    <div class="wrap"><div class="hero-content fade-up in">
+      <div class="eyebrow">${c.heroEyebrow}</div>
+      <h1>${c.heroTitle.split(' ').slice(0,-1).join(' ')} <span class="gold-txt">${c.heroTitle.split(' ').slice(-1)}</span></h1>
+      <p>${c.heroSubtitle}</p>
+      <div class="hero-cta">
+        <a href="#/shop" class="btn btn-gold">مشاهده فروشگاه ←</a>
+        <a href="#/about" class="btn btn-outline">درباره افضلی‌شاپ</a>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="section wrap">
+    <div class="eyebrow">دسته‌بندی‌ها</div>
+    <div class="section-head"><h2>خرید بر اساس دسته‌بندی</h2></div>
+    <div class="cat-grid">
+      ${cats.map(cat=>`
+      <a href="#/shop?cat=${encodeURIComponent(cat)}" class="cat-card fade-up" onclick="pendingCat='${cat}'">
+        <div class="ic">${catIcons[cat]||'✨'}</div>
+        <div><b>${cat}</b><span>مشاهده محصولات ←</span></div>
+      </a>`).join('')}
+    </div>
+  </section>
+
+  <section class="section wrap" style="padding-top:0;">
+    <div class="section-head">
+      <div><div class="eyebrow">منتخب فروشگاه</div><h2>پرفروش‌ترین محصولات</h2></div>
+      <a href="#/shop" class="btn btn-outline btn-sm">مشاهده همه محصولات</a>
+    </div>
+    <div class="prod-grid">${feats.map(productCard).join('')}</div>
+  </section>
+
+  <section class="section wrap" style="padding-top:0;">
+    <div class="trust-strip fade-up">
+      <div class="trust-item"><div class="ic">🚚</div><div><b>ارسال رایگان ${c.freeShipCity}</b><span>تحویل زیر ۴ ساعت</span></div></div>
+      <div class="trust-item"><div class="ic">✅</div><div><b>ضمانت اصالت</b><span>۱۰۰٪ کالای اورجینال</span></div></div>
+      <div class="trust-item"><div class="ic">🔒</div><div><b>پرداخت امن</b><span>تایید سریع رسید بانکی</span></div></div>
+      <div class="trust-item"><div class="ic">🎁</div><div><b>بسته‌بندی لوکس</b><span>مناسب هدیه دادن</span></div></div>
+    </div>
+  </section>
+
+  <section class="section wrap" style="padding-top:0;">
+    <div class="promo fade-up">
+      <div>
+        <div class="eyebrow">پیشنهاد محدود</div>
+        <h2 style="font-size:30px; margin-bottom:10px;">${c.promoTitle}</h2>
+        <p style="color:var(--muted); max-width:420px; margin-bottom:20px;">${c.promoDesc}</p>
+        <a href="#/shop" class="btn btn-green">مشاهده تخفیف‌ها</a>
+      </div>
+      <div class="countdown" id="countdownBox"></div>
+    </div>
+  </section>`;
+}
+
+function productCard(p){
+  return `
+  <div class="prod-card fade-up">
+    ${p.badge?`<span class="prod-badge pill" style="background:var(--gold); color:#1a1305;">${p.badge}</span>`:''}
+    <div class="prod-fav">♡</div>
+    <a href="#/shop" class="prod-img"><img src="${p.img}" loading="lazy"></a>
+    <div class="prod-body">
+      <span class="prod-cat">${p.cat}</span>
+      <div class="prod-name">${p.name}</div>
+      <div class="prod-desc">${p.desc}</div>
+      <div class="prod-foot">
+        <div class="price">${p.oldPrice?`<span class="old">${fmt(p.oldPrice)}</span>`:''}${fmt(p.price)} <span style="font-size:11px;">تومان</span></div>
+        <button class="add-btn" onclick="addToCart('${p.id}')">+</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ---------------- SHOP ---------------- */
+let pendingCat = null;
+function shopView(){
+  const params = new URLSearchParams(route.split('?')[1]||'');
+  const activeCat = params.get('cat') || pendingCat || 'همه';
+  pendingCat = null;
+  const cats = ['همه', ...new Set(STORE.products.map(p=>p.cat))];
+  const list = activeCat==='همه' ? STORE.products : STORE.products.filter(p=>p.cat===activeCat);
+  return `
+  <section class="page-hero wrap">
+    <div class="eyebrow">فروشگاه افضلی‌شاپ</div>
+    <h1 style="font-size:34px;">تمام محصولات</h1>
+  </section>
+  <section class="section wrap" style="padding-top:36px;">
+    <div class="filters">${cats.map(c=>`<button class="filter-chip ${c===activeCat?'active':''}" onclick="go('#/shop?cat=${encodeURIComponent(c)}')">${c}</button>`).join('')}</div>
+    <div class="prod-grid">${list.map(productCard).join('') || '<p style="color:var(--muted);">محصولی یافت نشد.</p>'}</div>
+  </section>`;
+}
+
+/* ---------------- ABOUT / CONTACT ---------------- */
+function aboutView(){
+  return `<section class="page-hero wrap"><div class="eyebrow">افضلی‌شاپ</div><h1 style="font-size:34px;">درباره ما</h1></section>
+  <section class="section wrap">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;">
+      <img src="assets/portrait.jpg" style="border-radius:20px;">
+      <div><p style="color:var(--muted); line-height:2.1; font-size:15.5px;">${STORE.content.aboutText}</p>
+      <div class="divider-gold"></div>
+      <p style="color:var(--muted); line-height:2.1; font-size:15.5px;">هدف ما ساده است: عطر و محصولات لوکس اصل، با ارسال سریع و پشتیبانی همیشه در دسترس.</p></div>
+    </div>
+  </section>`;
+}
+function contactView(){
+  return `<section class="page-hero wrap"><div class="eyebrow">در ارتباط باشید</div><h1 style="font-size:34px;">تماس با افضلی‌شاپ</h1></section>
+  <section class="section wrap">
+    <div class="trust-strip">
+      <div class="trust-item"><div class="ic">📞</div><div><b>تماس تلفنی</b><span>۰۵۱-۱۲۳۴۵۶۷</span></div></div>
+      <div class="trust-item"><div class="ic">📍</div><div><b>آدرس</b><span>مشهد، ایران</span></div></div>
+      <div class="trust-item"><div class="ic">💬</div><div><b>چت آنلاین</b><span>از دکمه سبز پایین صفحه</span></div></div>
+      <div class="trust-item"><div class="ic">⏰</div><div><b>ساعات پاسخگویی</b><span>۲۴ ساعته، ۷ روز هفته</span></div></div>
+    </div>
+  </section>`;
+}
+
+/* ---------------- CART ---------------- */
+function addToCart(id){
+  const p = STORE.products.find(x=>x.id===id);
+  const ex = CART.find(x=>x.id===id);
+  if(ex) ex.qty++; else CART.push({id:p.id, name:p.name, price:p.price, img:p.img, qty:1});
+  toast(`«${p.name}» به سبد خرید اضافه شد`);
+  renderCart(); toggleCart(true);
+}
+function changeQty(id,d){
+  const it = CART.find(x=>x.id===id); if(!it) return;
+  it.qty += d; if(it.qty<=0) CART = CART.filter(x=>x.id!==id);
+  renderCart();
+}
+function cartTotal(){ return CART.reduce((a,c)=>a+c.price*c.qty,0); }
+function renderCart(){
+  document.getElementById("cartBody").innerHTML = CART.length ? CART.map(it=>`
+    <div class="cart-item">
+      <img src="${it.img}">
+      <div style="flex:1;">
+        <b style="font-size:13.5px;">${it.name}</b>
+        <div style="color:var(--gold-l); font-size:13px; margin-top:4px;">${toman(it.price)}</div>
+        <div class="qty">
+          <button onclick="changeQty('${it.id}',-1)">−</button><span>${it.qty}</span><button onclick="changeQty('${it.id}',1)">+</button>
+          <button class="btn-ghost" style="margin-right:auto;" onclick="changeQty('${it.id}',-99)">حذف</button>
+        </div>
+      </div>
+    </div>`).join('') : `<p style="color:var(--muted); text-align:center; margin-top:60px;">سبد خرید شما خالی است 🛍</p>`;
+  document.getElementById("cartFoot").innerHTML = CART.length ? `
+    <div class="summary-row total"><span>جمع کل</span><span>${toman(cartTotal())}</span></div>
+    <a href="#/checkout" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:14px;" onclick="toggleCart(false)">ادامه فرآیند خرید ←</a>` : '';
+  const badge = document.getElementById("cartCount");
+  if(badge){ const n = CART.reduce((a,c)=>a+c.qty,0); badge.textContent=n; badge.classList.toggle('hide', n===0); }
+}
+function toggleCart(open){
+  document.getElementById("cartDrawer").classList.toggle("open", open);
+  document.getElementById("cartOverlay").classList.toggle("show", open);
+}
+
+/* ---------------- CHECKOUT ---------------- */
+let receiptBase64 = null;
+function checkoutView(){
+  if(!CART.length) return `<section class="section wrap" style="text-align:center;"><p style="color:var(--muted);">سبد خرید شما خالی است.</p><a href="#/shop" class="btn btn-gold" style="margin-top:16px;">رفتن به فروشگاه</a></section>`;
+  return `
+  <section class="page-hero wrap"><div class="eyebrow">نهایی‌سازی خرید</div><h1 style="font-size:30px;">تکمیل سفارش</h1></section>
+  <section class="section wrap" style="padding-top:36px;">
+    <div class="checkout-grid">
+      <div class="card">
+        <h3 style="margin-bottom:18px;">اطلاعات گیرنده</h3>
+        <div class="field-row">
+          <div class="field"><label>نام و نام خانوادگی</label><input id="ckName" placeholder="مثلا علی افضلی"></div>
+          <div class="field"><label>شماره موبایل</label><input id="ckPhone" placeholder="09xxxxxxxxx"></div>
+        </div>
+        <div class="field"><label>آدرس کامل</label><textarea id="ckAddr" rows="3" placeholder="شهر، خیابان، پلاک، واحد..."></textarea></div>
+        <div class="divider-gold"></div>
+        <h3 style="margin:18px 0;">پرداخت و ارسال رسید بانکی</h3>
+        <p style="font-size:12.5px; color:var(--muted); margin-bottom:14px;">مبلغ سفارش را به شماره کارت زیر واریز کرده و اسکرین‌شات رسید را آپلود کنید. سفارش شما پس از تایید پشتیبانی پردازش می‌شود.</p>
+        <div class="card" style="background:var(--bg2); margin-bottom:16px;"><b style="color:var(--gold-l);">شماره کارت:</b> ۶۰۳۷-۹۹۱۱-۰۰۰۰-۱۲۳۴ به نام افضلی‌شاپ</div>
+        <div class="upload-box" id="uploadBox" onclick="document.getElementById('receiptInput').click()">
+          <div id="uploadInner">📤 <br>برای آپلود اسکرین‌شات رسید بانکی کلیک کنید</div>
+        </div>
+        <input type="file" id="receiptInput" accept="image/*" class="hide" onchange="handleReceipt(this)">
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:16px;">خلاصه سفارش</h3>
+        ${CART.map(it=>`<div class="summary-row"><span>${it.name} × ${it.qty}</span><span>${toman(it.price*it.qty)}</span></div>`).join('')}
+        <div class="summary-row"><span>هزینه ارسال (${STORE.content.freeShipCity})</span><span style="color:var(--green-l);">رایگان</span></div>
+        <div class="summary-row total"><span>مبلغ قابل پرداخت</span><span>${toman(cartTotal())}</span></div>
+        <button class="btn btn-green" style="width:100%; justify-content:center; margin-top:18px;" onclick="submitOrder()">ثبت نهایی سفارش</button>
+      </div>
+    </div>
+  </section>`;
+}
+function handleReceipt(input){
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    receiptBase64 = e.target.result;
+    document.getElementById("uploadInner").innerHTML = `<img src="${receiptBase64}" class="upload-preview"><div style="margin-top:10px; color:var(--green-l); font-size:13px;">✔ رسید آپلود شد — برای تغییر کلیک کنید</div>`;
+  };
+  reader.readAsDataURL(file);
+}
+let lastOrderId = null;
+async function submitOrder(){
+  const name = document.getElementById("ckName").value.trim();
+  const phone = document.getElementById("ckPhone").value.trim();
+  const addr = document.getElementById("ckAddr").value.trim();
+  if(!name||!phone||!addr){ toast("لطفا اطلاعات گیرنده را کامل کنید"); return; }
+  if(!receiptBase64){ toast("لطفا تصویر رسید بانکی را آپلود کنید"); return; }
+  const order = {
+    id: "AFZ-" + Date.now().toString().slice(-8),
+    sessionId: MY_SESSION,
+    customer:{name,phone,addr},
+    items: CART.map(i=>({id:i.id,name:i.name,price:i.price,qty:i.qty})),
+    total: cartTotal(),
+    receiptImg: receiptBase64,
+    status: "pending",
+    createdAt: nowStr(),
+    invoiceNo: "INV-"+Date.now().toString().slice(-6)
+  };
+  STORE.orders.push(order);
+  await sset("orders", STORE.orders, true);
+  // push into chat as a pinned "receipt" system message
+  if(!STORE.chats[MY_SESSION]) STORE.chats[MY_SESSION]=[];
+  STORE.chats[MY_SESSION].push({from:"user", text:"📎 رسید واریزی سفارش "+order.id+" ارسال شد.", img:receiptBase64, time:nowStr(), orderRef:order.id});
+  await sset("chats", STORE.chats, true);
+  lastOrderId = order.id;
+  CART = []; receiptBase64 = null;
+  go("#/order-success");
+}
+function orderSuccessView(){
+  if(!lastOrderId) return `<section class="section wrap" style="text-align:center;"><a href="#/shop" class="btn btn-gold">رفتن به فروشگاه</a></section>`;
+  return `<section class="section wrap" style="text-align:center; padding:120px 0;">
+    <div style="font-size:60px;">✅</div>
+    <h1 style="margin:20px 0 10px;">سفارش شما با موفقیت ثبت شد</h1>
+    <p style="color:var(--muted); max-width:480px; margin:0 auto 20px;">کد پیگیری سفارش: <b style="color:var(--gold-l);">${lastOrderId}</b><br>رسید بانکی شما برای پشتیبانی ارسال شد و پس از تایید، سفارش پردازش خواهد شد. می‌توانید از طریق چت آنلاین وضعیت سفارش را پیگیری کنید.</p>
+    <a href="#/shop" class="btn btn-gold">بازگشت به فروشگاه</a>
+  </section>`;
+}
+
+/* ---------------- CHAT (customer side) ---------------- */
+function toggleChat(open){
+  document.getElementById("chatPanel").classList.toggle("open", open);
+  if(open){ renderChatBody(); document.getElementById("chatBadge").classList.add("hide"); }
+}
+function renderChatBody(){
+  const msgs = STORE.chats[MY_SESSION] || [];
+  const body = document.getElementById("chatBody");
+  if(!msgs.length){
+    body.innerHTML = `<div class="msg bot">${STORE.content.chatWelcome}</div>`;
+  } else {
+    body.innerHTML = `<div class="msg bot">${STORE.content.chatWelcome}</div>` + msgs.map(m=>`
+      <div class="msg ${m.from==='user'?'me':'bot'}">${m.text}${m.img?`<img src="${m.img}">`:''}</div>`).join('');
+  }
+  body.scrollTop = body.scrollHeight;
+}
+async function sendChatText(){
+  const inp = document.getElementById("chatText");
+  const text = inp.value.trim(); if(!text) return;
+  if(!STORE.chats[MY_SESSION]) STORE.chats[MY_SESSION]=[];
+  STORE.chats[MY_SESSION].push({from:"user", text, time:nowStr()});
+  await sset("chats", STORE.chats, true);
+  inp.value=""; renderChatBody();
+}
+async function sendChatImage(input){
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = async e=>{
+    if(!STORE.chats[MY_SESSION]) STORE.chats[MY_SESSION]=[];
+    STORE.chats[MY_SESSION].push({from:"user", text:"📎 تصویر ارسال شد", img:e.target.result, time:nowStr()});
+    await sset("chats", STORE.chats, true);
+    renderChatBody();
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ================= ADMIN ================= */
+function loginView(){
+  return `<div class="login-shell wrap">
+    <div class="login-card">
+      <div class="logo" style="justify-content:center; margin-bottom:20px;"><img src="assets/logo.png"><div style="text-align:right;">افضلی‌شاپ<div class="sub eng" style="font-size:9px;">ADMIN PANEL</div></div></div>
+      <h3 style="margin-bottom:6px;">ورود پشتیبانی و مدیریت</h3>
+      <p style="color:var(--muted); font-size:12.5px; margin-bottom:20px;">نام کاربری پیش‌فرض: admin — رمز: admin123</p>
+      <div class="field"><input id="loginUser" placeholder="نام کاربری"></div>
+      <div class="field"><input id="loginPass" type="password" placeholder="رمز عبور"></div>
+      <button class="btn btn-gold" style="width:100%; justify-content:center;" onclick="doLogin()">ورود به داشبورد</button>
+      <a href="#/" class="btn-ghost" style="display:block; margin-top:16px;">بازگشت به فروشگاه</a>
+    </div>
+  </div>`;
+}
+async function doLogin(){
+  const u = document.getElementById("loginUser").value.trim();
+  const p = document.getElementById("loginPass").value.trim();
+  if(u===STORE.settings.adminUser && p===STORE.settings.adminPass){
+    IS_ADMIN = true; await sset("is-admin", true, false);
+    toast("خوش آمدید، وارد داشبورد شدید");
+    render();
+  } else toast("نام کاربری یا رمز عبور اشتباه است");
+}
+async function doLogout(){ IS_ADMIN=false; await sset("is-admin", false, false); go("#/"); }
+
+function pendingOrdersCount(){ return STORE.orders.filter(o=>o.status==="pending").length; }
+function unreadChatSessions(){
+  // any session whose last message is from user is considered "needs attention"
+  return Object.entries(STORE.chats).filter(([sid,msgs])=>msgs.length && msgs[msgs.length-1].from==='user').length;
+}
+
+function adminShell(){
+  const items = [
+    ["dashboard","📊","داشبورد"],
+    ["orders","🧾","سفارش‌ها و رسیدها"],
+    ["products","🛒","محصولات"],
+    ["content","✏️","محتوای سایت"],
+    ["chat","💬","گفتگوها و پشتیبانی"],
+    ["settings","⚙️","تنظیمات"]
+  ];
+  const pend = pendingOrdersCount(); const unread = unreadChatSessions();
+  return `<div class="admin-shell">
+    <aside class="admin-side">
+      <div class="logo"><img src="assets/logo.png" style="width:36px;height:36px;"><div style="font-size:15px;">افضلی‌شاپ<div class="sub eng" style="font-size:9px;">ADMIN</div></div></div>
+      <nav class="admin-nav">
+        ${items.map(([k,ic,label])=>`
+        <a href="javascript:void(0)" class="${adminTab===k?'active':''}" onclick="setAdminTab('${k}')" style="position:relative;">
+          <span>${ic}</span><span>${label}</span>
+          ${k==='orders'&&pend?`<span class="notif-dot" style="position:static; margin-right:auto; width:auto; height:auto; padding:2px 8px; border-radius:999px; background:var(--gold); color:#1a1305; font-size:10px; font-weight:800;">${pend}</span>`:''}
+          ${k==='chat'&&unread?`<span class="notif-dot" style="position:static; margin-right:auto; width:auto; height:auto; padding:2px 8px; border-radius:999px; background:var(--green); color:#04220f; font-size:10px; font-weight:800;">${unread}</span>`:''}
+        </a>`).join('')}
+      </nav>
+      <div style="margin-top:auto; padding-top:20px; border-top:1px solid var(--line);">
+        <a href="#/" class="btn-ghost" style="display:block; margin-bottom:10px;">👁 مشاهده فروشگاه</a>
+        <button class="btn btn-danger btn-sm" style="width:100%; justify-content:center;" onclick="doLogout()">خروج از داشبورد</button>
+      </div>
+    </aside>
+    <main class="admin-main">
+      <div class="admin-top">
+        <h2>${items.find(i=>i[0]===adminTab)[2]}</h2>
+        <div style="display:flex; gap:14px; align-items:center;">
+          <div class="icon-btn" style="position:relative;" onclick="setAdminTab('orders')">🔔${pend?`<span class="badge-count">${pend}</span>`:''}</div>
+          <div style="font-size:12px; color:${cloudEnabled?'var(--green-l)':'#ff9d9d'};">${cloudEnabled?'🟢 اتصال ابری فعال':'🔴 اتصال ابری غیرفعال'}</div>
+          <div style="font-size:13px; color:var(--muted);">${nowStr()}</div>
+        </div>
+      </div>
+      <div id="adminContent">${adminTabContent(adminTab)}</div>
+    </main>
+  </div>
+  <div id="modalRoot"></div>`;
+}
+function setAdminTab(k){ adminTab=k; adminChatOpen=null; document.getElementById("app").innerHTML = adminShell(); afterRender(); }
+function refreshAdmin(){ const c = document.getElementById("adminContent"); if(c) c.innerHTML = adminTabContent(adminTab); const t=document.querySelector('.admin-top h2'); }
+
+function adminTabContent(tab){
+  if(tab==="dashboard") return adminDashboard();
+  if(tab==="orders") return adminOrders();
+  if(tab==="products") return adminProducts();
+  if(tab==="content") return adminContent();
+  if(tab==="chat") return adminChat();
+  if(tab==="settings") return adminSettings();
+  return "";
+}
+
+function adminDashboard(){
+  const revenue = STORE.orders.filter(o=>o.status==="approved").reduce((a,o)=>a+o.total,0);
+  const today = new Date().toLocaleDateString("fa-IR");
+  return `
+  <div class="stat-grid">
+    <div class="stat-card"><b>${fmt(STORE.orders.length)}</b><span>کل سفارش‌ها</span></div>
+    <div class="stat-card"><b style="color:var(--gold-l);">${fmt(pendingOrdersCount())}</b><span>رسیدهای در انتظار تایید</span></div>
+    <div class="stat-card"><b style="color:var(--green-l);">${toman(revenue)}</b><span>فروش تایید شده</span></div>
+    <div class="stat-card"><b>${fmt(STORE.products.length)}</b><span>تعداد محصولات</span></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-bottom:16px;">آخرین سفارش‌ها</h3>
+    <table><thead><tr><th>کد سفارش</th><th>مشتری</th><th>مبلغ</th><th>وضعیت</th><th>تاریخ</th></tr></thead>
+    <tbody>${STORE.orders.slice(-6).reverse().map(o=>`<tr><td>${o.id}</td><td>${o.customer.name}</td><td>${toman(o.total)}</td><td><span class="status-pill status-${o.status}">${statusLabel(o.status)}</span></td><td>${o.createdAt}</td></tr>`).join('') || `<tr><td colspan="5" style="color:var(--muted); text-align:center;">هنوز سفارشی ثبت نشده</td></tr>`}</tbody></table>
+  </div>`;
+}
+function statusLabel(s){ return s==='pending'?'در انتظار بررسی':s==='approved'?'تایید شده':'رد شده'; }
+
+function adminOrders(){
+  return `
+  <div class="card">
+    <table><thead><tr><th>کد سفارش</th><th>مشتری</th><th>موبایل</th><th>مبلغ</th><th>رسید</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+    <tbody>
+    ${STORE.orders.slice().reverse().map(o=>`
+      <tr>
+        <td>${o.id}</td><td>${o.customer.name}</td><td>${o.customer.phone}</td><td>${toman(o.total)}</td>
+        <td><img src="${o.receiptImg}" style="width:42px;height:42px;border-radius:8px;object-fit:cover;cursor:pointer;" onclick="showLightbox('${o.receiptImg}')"></td>
+        <td><span class="status-pill status-${o.status}">${statusLabel(o.status)}</span></td>
+        <td style="display:flex; gap:6px; flex-wrap:wrap;">
+          ${o.status==='pending'?`<button class="btn btn-green btn-sm" onclick="approveOrder('${o.id}')">تایید</button><button class="btn btn-danger btn-sm" onclick="rejectOrder('${o.id}')">رد</button>`:''}
+          ${o.status==='approved'?`<button class="btn btn-outline btn-sm" onclick="openInvoice('${o.id}')">فاکتور</button>`:''}
+        </td>
+      </tr>`).join('') || `<tr><td colspan="7" style="color:var(--muted); text-align:center; padding:30px;">هنوز سفارشی ثبت نشده است</td></tr>`}
+    </tbody></table>
+  </div>`;
+}
+async function approveOrder(id){
+  const o = STORE.orders.find(x=>x.id===id); o.status="approved";
+  await sset("orders", STORE.orders, true);
+  if(!STORE.chats[o.sessionId]) STORE.chats[o.sessionId]=[];
+  STORE.chats[o.sessionId].push({from:"admin", text:`✅ رسید سفارش ${o.id} تایید شد. سفارش شما در حال آماده‌سازی برای ارسال است. متشکریم از خرید شما 🌹`, time:nowStr()});
+  await sset("chats", STORE.chats, true);
+  toast("سفارش تایید و فاکتور صادر شد");
+  refreshAdmin();
+  openInvoice(id);
+}
+async function rejectOrder(id){
+  const o = STORE.orders.find(x=>x.id===id); o.status="rejected";
+  await sset("orders", STORE.orders, true);
+  if(!STORE.chats[o.sessionId]) STORE.chats[o.sessionId]=[];
+  STORE.chats[o.sessionId].push({from:"admin", text:`❌ متاسفانه رسید ارسالی برای سفارش ${o.id} تایید نشد. لطفا از طریق چت با پشتیبانی در ارتباط باشید.`, time:nowStr()});
+  await sset("chats", STORE.chats, true);
+  toast("سفارش رد شد");
+  refreshAdmin();
+}
+function showLightbox(src){ document.getElementById("lightboxImg").src=src; document.getElementById("lightbox").classList.remove("hide"); }
+
+function openInvoice(id){
+  const o = STORE.orders.find(x=>x.id===id);
+  const root = document.getElementById("modalRoot") || (()=>{ const d=document.createElement('div'); d.id='modalRoot'; document.body.appendChild(d); return d; })();
+  root.innerHTML = `<div class="modal-bg" onclick="if(event.target===this) closeModal()">
+    <div class="modal" style="width:760px; padding:0; background:transparent; border:none;">
+      <div class="invoice-wrap">
+        <div class="inv-head">
+          <div class="brand"><img src="assets/logo.png"><div><b style="font-size:20px;">افضلی‌شاپ</b><div style="font-size:11px; color:#a8842a;">AFZALI SHOP — فاکتور فروش رسمی</div></div></div>
+          <div style="text-align:left; font-size:12.5px;"><b>شماره فاکتور:</b> ${o.invoiceNo}<br><b>تاریخ:</b> ${o.createdAt}</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:13px;">
+          <div><b>خریدار:</b> ${o.customer.name}<br><b>موبایل:</b> ${o.customer.phone}<br><b>آدرس:</b> ${o.customer.addr}</div>
+          <div><b>کد سفارش:</b> ${o.id}<br><b>وضعیت:</b> تایید شده ✅</div>
+        </div>
+        <table class="inv-table"><thead><tr><th>ردیف</th><th>شرح کالا</th><th>تعداد</th><th>قیمت واحد</th><th>جمع</th></tr></thead>
+        <tbody>${o.items.map((it,i)=>`<tr><td>${i+1}</td><td>${it.name}</td><td>${it.qty}</td><td>${toman(it.price)}</td><td>${toman(it.price*it.qty)}</td></tr>`).join('')}</tbody></table>
+        <div class="inv-total">مبلغ کل قابل پرداخت: ${toman(o.total)}</div>
+        <p style="margin-top:24px; font-size:12px; color:#888; border-top:1px dashed #ccc; padding-top:14px;">با تشکر از خرید شما از افضلی‌شاپ 🌹 — ارسال به مشهد رایگان و زیر ۴ ساعت انجام می‌شود.</p>
+      </div>
+      <div class="no-print" style="text-align:center; margin-top:16px; display:flex; gap:10px; justify-content:center;">
+        <button class="btn btn-gold" onclick="window.print()">🖨 چاپ / دانلود PDF</button>
+        <button class="btn btn-outline" onclick="closeModal()">بستن</button>
+      </div>
+    </div>
+  </div>`;
+}
+function closeModal(){ const r = document.getElementById("modalRoot"); if(r) r.innerHTML=""; }
+
+function adminProducts(){
+  return `
+  <div style="display:flex; justify-content:flex-end; margin-bottom:16px;">
+    <button class="btn btn-gold btn-sm" onclick="openProductModal()">+ افزودن محصول جدید</button>
+  </div>
+  <div class="card">
+  <table><thead><tr><th>تصویر</th><th>نام</th><th>دسته</th><th>قیمت</th><th>عملیات</th></tr></thead>
+  <tbody>${STORE.products.map(p=>`
+    <tr><td><img src="${p.img}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;"></td>
+    <td>${p.name}</td><td>${p.cat}</td><td>${toman(p.price)}</td>
+    <td><button class="btn btn-outline btn-sm" onclick='openProductModal(${JSON.stringify(p).replace(/'/g,"&#39;")})'>ویرایش</button>
+    <button class="btn btn-danger btn-sm" onclick="deleteProduct('${p.id}')">حذف</button></td></tr>`).join('')}</tbody></table>
+  </div>`;
+}
+function openProductModal(p){
+  const isNew = !p;
+  p = p || {id:"", name:"", cat:"", price:0, oldPrice:0, img:"assets/hero.jpg", desc:"", badge:""};
+  const root = document.getElementById("modalRoot");
+  root.innerHTML = `<div class="modal-bg" onclick="if(event.target===this) closeModal()">
+    <div class="modal">
+      <h3>${isNew?'افزودن محصول جدید':'ویرایش محصول'}</h3>
+      <div class="field"><label>نام محصول</label><input id="pfName" value="${p.name}"></div>
+      <div class="field-row">
+        <div class="field"><label>دسته‌بندی</label><input id="pfCat" value="${p.cat}" placeholder="عطر مردانه"></div>
+        <div class="field"><label>برچسب (اختیاری)</label><input id="pfBadge" value="${p.badge}" placeholder="پرفروش / جدید"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>قیمت (تومان)</label><input id="pfPrice" type="number" value="${p.price}"></div>
+        <div class="field"><label>قیمت قبل تخفیف (اختیاری)</label><input id="pfOld" type="number" value="${p.oldPrice||0}"></div>
+      </div>
+      <div class="field"><label>آدرس تصویر</label><input id="pfImg" value="${p.img}" placeholder="assets/hero.jpg"></div>
+      <div class="field"><label>توضیحات</label><textarea id="pfDesc" rows="3">${p.desc}</textarea></div>
+      <div style="display:flex; gap:10px; margin-top:10px;">
+        <button class="btn btn-gold" onclick="saveProduct('${p.id}')" style="flex:1; justify-content:center;">ذخیره محصول</button>
+        <button class="btn btn-outline" onclick="closeModal()">انصراف</button>
+      </div>
+    </div>
+  </div>`;
+}
+async function saveProduct(id){
+  const data = {
+    id: id || ("p"+Date.now()),
+    name: document.getElementById("pfName").value.trim(),
+    cat: document.getElementById("pfCat").value.trim(),
+    badge: document.getElementById("pfBadge").value.trim(),
+    price: Number(document.getElementById("pfPrice").value)||0,
+    oldPrice: Number(document.getElementById("pfOld").value)||0,
+    img: document.getElementById("pfImg").value.trim()||"assets/hero.jpg",
+    desc: document.getElementById("pfDesc").value.trim()
+  };
+  if(!data.name||!data.cat){ toast("نام و دسته‌بندی الزامی است"); return; }
+  const idx = STORE.products.findIndex(x=>x.id===id);
+  if(idx>-1) STORE.products[idx]=data; else STORE.products.push(data);
+  await sset("products", STORE.products, true);
+  toast("محصول ذخیره شد"); closeModal(); refreshAdmin();
+}
+async function deleteProduct(id){
+  if(!confirm("محصول حذف شود؟")) return;
+  STORE.products = STORE.products.filter(x=>x.id!==id);
+  await sset("products", STORE.products, true);
+  toast("محصول حذف شد"); refreshAdmin();
+}
+
+function adminContent(){
+  const c = STORE.content;
+  return `<div class="card">
+    <div class="field"><label>پیام خوش‌آمدگویی صفحه اصلی (Hero)</label><input id="cfHero" value="${c.heroTitle}"></div>
+    <div class="field"><label>زیرعنوان صفحه اصلی</label><textarea id="cfSub" rows="2">${c.heroSubtitle}</textarea></div>
+    <div class="field"><label>متن بالای سایت (نوار اعلان)</label><input id="cfAnn" value="${c.announceText}"></div>
+    <div class="field"><label>پیام اول چت آنلاین</label><input id="cfChat" value="${c.chatWelcome}"></div>
+    <div class="field"><label>متن درباره ما</label><textarea id="cfAbout" rows="3">${c.aboutText}</textarea></div>
+    <div class="field-row">
+      <div class="field"><label>عنوان بخش پیشنهاد ویژه</label><input id="cfPromoT" value="${c.promoTitle}"></div>
+      <div class="field"><label>شهر ارسال رایگان</label><input id="cfCity" value="${c.freeShipCity}"></div>
+    </div>
+    <div class="field"><label>توضیح بخش پیشنهاد ویژه</label><input id="cfPromoD" value="${c.promoDesc}"></div>
+    <button class="btn btn-gold" onclick="saveContent()">ذخیره تغییرات محتوا</button>
+  </div>`;
+}
+async function saveContent(){
+  STORE.content = {
+    heroTitle: document.getElementById("cfHero").value,
+    heroSubtitle: document.getElementById("cfSub").value,
+    heroEyebrow: STORE.content.heroEyebrow,
+    announceText: document.getElementById("cfAnn").value,
+    chatWelcome: document.getElementById("cfChat").value,
+    aboutText: document.getElementById("cfAbout").value,
+    promoTitle: document.getElementById("cfPromoT").value,
+    promoDesc: document.getElementById("cfPromoD").value,
+    freeShipCity: document.getElementById("cfCity").value
+  };
+  await sset("content", STORE.content, true);
+  toast("محتوای سایت به‌روزرسانی شد");
+}
+
+function adminChat(){
+  const sessions = Object.keys(STORE.chats).filter(s=>STORE.chats[s].length);
+  if(!adminChatOpen && sessions.length) adminChatOpen = sessions[sessions.length-1];
+  const relatedOrder = adminChatOpen ? STORE.orders.filter(o=>o.sessionId===adminChatOpen).sort((a,b)=>b.createdAt.localeCompare(a.createdAt))[0] : null;
+  const pendingReceipt = relatedOrder && relatedOrder.status==='pending' ? relatedOrder : null;
+  return `<div class="chat-inbox">
+    <div class="inbox-list">
+      ${sessions.length ? sessions.slice().reverse().map(s=>{
+        const msgs = STORE.chats[s]; const last = msgs[msgs.length-1];
+        const hasPending = STORE.orders.some(o=>o.sessionId===s && o.status==='pending');
+        return `<div class="inbox-item ${adminChatOpen===s?'active':''}" onclick="openChatSession('${s}')">
+          <b>مشتری ${s.slice(-5)} ${hasPending?'🔴':''}</b>
+          <span>${(last.text||'').slice(0,34)}...</span>
+        </div>`;
+      }).join('') : `<div style="padding:20px; color:var(--muted); font-size:13px;">هنوز گفتگویی ثبت نشده</div>`}
+    </div>
+    <div class="admin-chat-thread">
+      ${adminChatOpen ? `
+      ${pendingReceipt ? `<div class="receipt-pin">
+        <img src="${pendingReceipt.receiptImg}" onclick="showLightbox('${pendingReceipt.receiptImg}')">
+        <div style="flex:1;">
+          <b style="font-size:13px;">رسید سفارش ${pendingReceipt.id} در انتظار تایید</b>
+          <div style="font-size:12px; color:var(--muted);">مبلغ: ${toman(pendingReceipt.total)}</div>
+        </div>
+        <button class="btn btn-green btn-sm" onclick="approveOrder('${pendingReceipt.id}')">تایید</button>
+        <button class="btn btn-danger btn-sm" onclick="rejectOrder('${pendingReceipt.id}')">رد</button>
+      </div>` : ''}
+      <div class="thread-body" id="threadBody">
+        ${STORE.chats[adminChatOpen].map(m=>`<div class="msg ${m.from==='admin'?'me':'bot'}" style="align-self:${m.from==='admin'?'flex-end':'flex-start'};">${m.text}${m.img?`<img src="${m.img}" style="cursor:pointer;" onclick="showLightbox('${m.img}')">`:''}</div>`).join('')}
+      </div>
+      <div class="chat-input" style="border:1px solid var(--line); border-radius:12px;">
+        <input type="text" id="adminChatText" placeholder="پاسخ به مشتری...">
+        <button class="icon-btn" style="background:var(--green);" onclick="adminSendChat()">➤</button>
+      </div>` : `<div style="margin:auto; color:var(--muted);">گفتگویی برای نمایش انتخاب نشده است</div>`}
+    </div>
+  </div>`;
+}
+function openChatSession(s){ adminChatOpen = s; refreshAdmin(); }
+async function adminSendChat(){
+  const inp = document.getElementById("adminChatText"); const text = inp.value.trim(); if(!text||!adminChatOpen) return;
+  STORE.chats[adminChatOpen].push({from:"admin", text, time:nowStr()});
+  await sset("chats", STORE.chats, true);
+  inp.value=""; refreshAdmin();
+}
+
+function adminSettings(){
+  return `<div class="card" style="max-width:440px;">
+    <div class="field"><label>نام کاربری مدیر</label><input id="stUser" value="${STORE.settings.adminUser}"></div>
+    <div class="field"><label>رمز عبور جدید</label><input id="stPass" type="password" placeholder="رمز جدید را وارد کنید" value="${STORE.settings.adminPass}"></div>
+    <button class="btn btn-gold" onclick="saveSettings()">ذخیره تنظیمات</button>
+  </div>`;
+}
+async function saveSettings(){
+  STORE.settings.adminUser = document.getElementById("stUser").value.trim() || STORE.settings.adminUser;
+  STORE.settings.adminPass = document.getElementById("stPass").value.trim() || STORE.settings.adminPass;
+  await sset("settings", STORE.settings, true);
+  toast("تنظیمات ذخیره شد");
+}
+
+/* ---------------- misc ui ---------------- */
+function toggleMobileNav(){
+  const paths = ["#/","#/shop","#/about","#/contact"];
+  const cur = paths.indexOf(route)>-1?paths.indexOf(route):0;
+  go(paths[(cur+1)%paths.length]);
+}
+function afterRender(){
+  renderCart();
+  document.getElementById("chatFab").onclick = ()=>toggleChat(!document.getElementById("chatPanel").classList.contains("open"));
+  if(route.startsWith("#/") && !route.startsWith("#/admin")) renderChatBody();
+  // countdown
+  const cdBox = document.getElementById("countdownBox");
+  if(cdBox){
+    const end = Date.now() + 1000*60*60*24*2 + 1000*60*60*18;
+    const upd = ()=>{
+      const diff = Math.max(0, end-Date.now());
+      const d=Math.floor(diff/86400000), h=Math.floor(diff/3600000)%24, m=Math.floor(diff/60000)%60, s=Math.floor(diff/1000)%60;
+      cdBox.innerHTML = [[d,'روز'],[h,'ساعت'],[m,'دقیقه'],[s,'ثانیه']].map(([v,l])=>`<div class="cd-box"><b>${String(v).padStart(2,'0')}</b><span>${l}</span></div>`).join('');
+    };
+    upd(); clearInterval(window._cdInt); window._cdInt = setInterval(upd,1000);
+  }
+  // scroll reveal
+  const obs = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }), {threshold:.15});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+}
+
+/* ---------------- polling for realtime-ish sync ---------------- */
+async function pollUpdates(){
+  const [orders, chats, content, products] = await Promise.all([
+    sget("orders", true), sget("chats", true), sget("content", true), sget("products", true)
+  ]);
+  if(orders){
+    const pend = orders.filter(o=>o.status==='pending').length;
+    if(IS_ADMIN && pend > lastSeenOrderCount){
+      toast("رسید بانکی جدیدی برای بررسی دریافت شد", "alert"); beep();
+    }
+    lastSeenOrderCount = pend;
+    STORE.orders = orders;
+  }
+  if(chats){
+    const sig = JSON.stringify(Object.values(chats).map(m=>m.length));
+    if(IS_ADMIN && sig !== lastSeenChatSig && lastSeenChatSig!==""){
+      // detect new user message
+    }
+    lastSeenChatSig = sig;
+    STORE.chats = chats;
+  }
+  if(content) STORE.content = content;
+  if(products) STORE.products = products;
+  // live-refresh visible parts without full reflow jank
+  if(route.startsWith("#/admin") && IS_ADMIN){ refreshAdmin(); }
+  else if(document.getElementById("chatPanel")?.classList.contains("open")) renderChatBody();
+}
+setInterval(pollUpdates, 4000);
+
+/* ---------------- init ---------------- */
+(async function init(){
+  await loadAll();
+  subscribeRealtime();
+  route = location.hash || "#/";
+  await render();
+})();
+</script>
+</body>
+</html>
