@@ -11,6 +11,7 @@
 <title>افضلی‌شاپ | Afzali Shop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root{
   --bg:#07080a; --bg2:#0d0f0b; --panel:#14170f; --panel2:#191c14;
@@ -109,10 +110,12 @@ nav.mainnav a.active::after{content:''; position:absolute; bottom:-4px; right:0;
 .cat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:26px; justify-items:center;}
 .cat-card{display:flex; flex-direction:column; align-items:center; gap:12px; width:100%; max-width:140px; text-align:center; transition:.3s;}
 .cat-card:hover{transform:translateY(-4px);}
-.cat-circle{width:120px; height:120px; border-radius:50%; overflow:hidden; border:1px solid var(--line); background:var(--panel); display:flex; align-items:center; justify-content:center; transition:.3s; flex-shrink:0;}
+.cat-circle{width:120px; height:120px; border-radius:50%; border:1px solid var(--line); background:var(--panel); display:flex; align-items:center; justify-content:center; transition:.3s; flex-shrink:0; position:relative;}
+.cat-circle::before{content:''; position:absolute; inset:-6px; border-radius:50%; padding:3px; background:conic-gradient(from 0deg, #000000, #d4af37, #000000 60%, #000000cc); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; animation:catRingSpin 4s linear infinite; z-index:0;}
+@keyframes catRingSpin{to{transform:rotate(360deg);}}
 .cat-card:hover .cat-circle{border-color:var(--gold); box-shadow:var(--shadow-gold);}
-.cat-circle img{width:100%; height:100%; object-fit:cover;}
-.cat-circle .ic{font-size:42px;}
+.cat-circle img{width:100%; height:100%; object-fit:cover; border-radius:50%; position:relative; z-index:1;}
+.cat-circle .ic{font-size:42px; position:relative; z-index:1;}
 .cat-card b{font-size:13.5px; font-weight:600; line-height:1.3;}
 
 /* ---------- products ---------- */
@@ -203,7 +206,7 @@ footer{background:linear-gradient(180deg,var(--bg2),#050604); border-top:1px sol
 
 /* ---------- checkout ---------- */
 .checkout-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:34px; align-items:start;}
-.card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:26px;}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:26px; overflow-x:auto;}
 .field-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;}
 .field{margin-bottom:14px;} .field label{display:block; font-size:13px; color:var(--muted); margin-bottom:7px;}
 .field input,.field textarea,.field select{width:100%;}
@@ -231,7 +234,7 @@ footer{background:linear-gradient(180deg,var(--bg2),#050604); border-top:1px sol
 .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-bottom:30px;}
 .stat-card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px;}
 .stat-card b{font-size:26px; display:block; color:var(--gold-l);} .stat-card span{font-size:12.5px; color:var(--muted);}
-table{width:100%; border-collapse:collapse; font-size:13.5px;}
+table{width:100%; min-width:640px; border-collapse:collapse; font-size:13.5px;}
 th,td{padding:12px 10px; text-align:right; border-bottom:1px solid var(--line);}
 th{color:var(--muted); font-weight:600; font-size:12px;}
 tr:hover td{background:rgba(255,255,255,.02);}
@@ -311,6 +314,54 @@ tr:hover td{background:rgba(255,255,255,.02);}
 .admin-mobile-nav a{flex-shrink:0; padding:8px 15px; border-radius:999px; background:var(--panel); font-size:12.5px; font-weight:600; color:var(--muted); border:1px solid var(--line); white-space:nowrap; display:flex; align-items:center; gap:6px;}
 .admin-mobile-nav a.active{background:var(--gold); color:#1a1305; border-color:var(--gold);}
 .admin-mobile-nav::-webkit-scrollbar{height:4px;}
+
+/* ---------- سیستم حرفه‌ای گونیا ---------- */
+.gpro-login-wrap{display:flex; align-items:center; justify-content:center; padding:40px 16px;}
+.gpro-login-card{width:100%; max-width:380px; background:linear-gradient(160deg,#12151f,#05060a); border:1px solid #273047; border-radius:20px; padding:2.2rem 1.8rem; text-align:center;}
+.gpro-orbit{position:relative; width:100px; height:100px; margin:0 auto 1.1rem;}
+.gpro-ring{position:absolute; inset:0; border-radius:50%; border:2px solid transparent;}
+.gpro-ring.r1{border-top-color:#000000; border-left-color:#000000; animation:catRingSpin 2.6s linear infinite;}
+.gpro-ring.r2{inset:13px; border-bottom-color:#d4af37; border-right-color:#d4af37; animation:catRingSpin 1.8s linear infinite reverse;}
+.gpro-core{position:absolute; inset:28px; border-radius:50%; background:linear-gradient(135deg,#d4af37,#000000); display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:1.2rem;}
+.gpro-login-card h3{font-size:17px; font-weight:800; margin-bottom:6px; background:linear-gradient(90deg,#4a4a4a,#d4af37); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.gpro-login-card p{font-size:12px; color:var(--muted); margin-bottom:20px;}
+.gpro-field{margin-bottom:12px; text-align:right;}
+.gpro-field input{width:100%; background:#161b27; border:1px solid #273047; border-radius:10px; padding:10px 12px; color:#e2e8f0; font-family:inherit; font-size:13.5px; text-align:center;}
+.gpro-login-btn{width:100%; background:linear-gradient(90deg,#000000,#d4af37); border:none; border-radius:10px; padding:11px; color:#fff; font-weight:800; font-size:13.5px; cursor:pointer; font-family:inherit; margin-top:6px;}
+.gpro-err{color:#f87171; font-size:12px; margin-top:10px; min-height:14px;}
+.gpro-kpi-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:20px;}
+.gpro-kpi-card{background:linear-gradient(160deg,#12151f,#05060a); border:1px solid #273047; border-radius:14px; padding:18px; position:relative; overflow:hidden;}
+.gpro-kpi-card .gpro-ring-sm{position:absolute; top:12px; left:12px; width:30px; height:30px; border-radius:50%; border:3px solid #273047; border-top-color:#d4af37; animation:catRingSpin 3s linear infinite; opacity:.6;}
+.gpro-kpi-card .lbl{font-size:11.5px; color:#8896ab; margin-bottom:6px;}
+.gpro-kpi-card .val{font-size:19px; font-weight:800; color:#e2e8f0;}
+@media(max-width:1000px){ .gpro-kpi-grid{grid-template-columns:repeat(2,1fr);} }
+
+/* ---------- گونیا: بخش‌بندی و نمودارها ---------- */
+.gpro-sec{margin-bottom:26px;}
+.gpro-sec-title{font-size:12px; font-weight:700; letter-spacing:.08em; color:var(--muted); margin-bottom:12px; display:flex; align-items:center; gap:10px;}
+.gpro-sec-title::after{content:''; flex:1; height:1px; background:#273047;}
+.gpro-sec-dot{width:6px; height:6px; border-radius:50%; flex-shrink:0; background:var(--gold);}
+.gpro-charts-3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+.gpro-charts-2{display:grid; grid-template-columns:1.6fr 1fr; gap:14px;}
+.gpro-donut-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+.gpro-ch-card{background:linear-gradient(160deg,#12151f,#05060a); border:1px solid #273047; border-radius:14px; padding:16px;}
+.gpro-ch-card h4{font-size:12px; font-weight:600; color:var(--muted); margin-bottom:12px;}
+.gpro-ch-wrap{position:relative; height:200px; direction:ltr;}
+.gpro-ch-wrap-sm{position:relative; height:160px; direction:ltr;}
+.gpro-empty{display:flex; align-items:center; justify-content:center; height:100%; color:#5b6478; font-size:12px; text-align:center; padding:0 10px;}
+.gpro-tbl-wrap{background:linear-gradient(160deg,#12151f,#05060a); border:1px solid #273047; border-radius:14px; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+.gpro-tbl-wrap table{width:100%; min-width:560px; border-collapse:collapse; font-size:12.5px;}
+.gpro-tbl-wrap thead th{padding:11px 14px; font-size:11px; font-weight:600; color:var(--muted); background:#0d0f0b; border-bottom:1px solid #273047; text-align:center; white-space:nowrap;}
+.gpro-tbl-wrap tbody td{padding:11px 14px; border-bottom:1px solid #1c2033; text-align:center; font-variant-numeric:tabular-nums; white-space:nowrap; color:#e2e8f0;}
+.gpro-tbl-wrap tbody tr:last-child td{border-bottom:none;}
+.gpro-tbl-wrap tbody tr:hover td{background:#171b28;}
+.gpro-status{display:inline-block; padding:.15rem .6rem; border-radius:6px; font-size:11px; font-weight:700;}
+.gpro-status-pending{background:#3a2e1a22; color:#f59e0b; border:1px solid #f59e0b;}
+.gpro-status-approved{background:#1a3a2022; color:#34d399; border:1px solid #34d399;}
+.gpro-status-rejected{background:#3a1a1a22; color:#f87171; border:1px solid #f87171;}
+.gpro-status-other{background:#20202022; color:#8896ab; border:1px solid #5b6478;}
+@media(max-width:1000px){ .gpro-charts-3{grid-template-columns:repeat(2,1fr);} .gpro-charts-2{grid-template-columns:1fr;} }
+@media(max-width:640px){ .gpro-charts-3,.gpro-donut-grid{grid-template-columns:1fr;} }
 
 /* ---------- responsive ---------- */
 @media(max-width:1000px){
@@ -487,6 +538,11 @@ const DEFAULTS = {
     siteLogo: "assets/logo.png",
     chatIcon: "",
     categoryImages: {},
+    footer: {
+      social: { instagram:"", telegram:"", youtube:"", twitter:"" },
+      rightsText: "",
+      madeByText: ""
+    },
     seo: {
       title: "افضلی‌شاپ | Afzali Shop — عطرهای اورجینال و محصولات لوکس",
       description: "خرید عطرهای اورجینال و محصولات لوکس از افضلی‌شاپ؛ ارسال سریع و رایگان، ضمانت اصالت کالا و پشتیبانی آنلاین ۲۴ ساعته.",
@@ -523,7 +579,8 @@ const DEFAULTS = {
     invoiceLogo:"assets/logo.png",
     lastBackupAt: null,
     autoSaveEnabled: true,
-    lastManualSaveAt: null
+    lastManualSaveAt: null,
+    goniaPass: "1385"
   },
   discountCodes: [
     {code:"WELCOME10", type:"percent", value:10, active:true},
@@ -721,6 +778,20 @@ async function render(){
 }
 
 /* ---------------- shared shell (customer site) ---------------- */
+const SOCIAL_ICONS = {
+  instagram: `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>`,
+  telegram: `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 4 3 11l6 2m12-9-3.5 16L9 13m12-9L9 13"/></svg>`,
+  youtube: `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor" stroke="none"/></svg>`,
+  twitter: `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m4 4 16 16M20 4 4 20"/></svg>`
+};
+const SOCIAL_LABELS = {instagram:"اینستاگرام", telegram:"تلگرام", youtube:"یوتیوب", twitter:"ایکس (توییتر)"};
+function footerSocialIcons(footer){
+  const social = (footer && footer.social) || {};
+  return Object.keys(SOCIAL_ICONS).map(key=>{
+    const url = social[key];
+    return `<a href="${url||'#'}" target="${url?'_blank':'_self'}" rel="noopener" title="${SOCIAL_LABELS[key]}" style="${url?'':'opacity:.35; pointer-events:none;'}">${SOCIAL_ICONS[key]}</a>`;
+  }).join('');
+}
 function siteShell(inner){
   const path = route;
   const nav = (r,label)=>`<a href="${r}" class="${path===r||(r==='#/'&&path==='#/')?'active':''}">${label}</a>`;
@@ -758,7 +829,7 @@ function siteShell(inner){
           <div class="logo" style="margin-bottom:14px;"><img src="${logo}"><div>افضلی‌شاپ<div class="sub eng" style="font-size:9px;">AFZALI SHOP</div></div></div>
           <p style="color:var(--muted); font-size:13px; line-height:1.9;">${STORE.content.aboutText}</p>
           <div class="foot-social">
-            <a href="#">📸</a><a href="#">✈️</a><a href="#">▶️</a><a href="#">✕</a>
+            ${footerSocialIcons(STORE.content.footer)}
           </div>
         </div>
         <div><h4>${t('footer_quicklinks')}</h4><ul><li><a href="#/shop">${t('nav_shop')}</a></li><li><a href="#/about">${t('nav_about')}</a></li><li><a href="#/contact">${t('nav_contact')}</a></li><li><a href="#/account">${t('nav_account')}</a></li></ul></div>
@@ -768,8 +839,8 @@ function siteShell(inner){
         </div>
       </div>
       <div class="foot-bottom">
-        <span>${t('footer_rights')}</span>
-        <span>${t('footer_madeby')}</span>
+        <span>${(STORE.content.footer&&STORE.content.footer.rightsText) || t('footer_rights')}</span>
+        <span>${(STORE.content.footer&&STORE.content.footer.madeByText) || t('footer_madeby')}</span>
       </div>
       <div style="text-align:center; padding:14px 0 4px; opacity:.45;">
         <a href="#/admin" title="ورود پشتیبانی" style="display:inline-flex; align-items:center; justify-content:center;">
@@ -1095,6 +1166,7 @@ async function submitOrder(){
     receiptImg: payMethod==='receipt' ? receiptBase64 : null,
     status: payMethod==='telegram' ? "awaiting_telegram" : "pending",
     createdAt: nowStr(),
+    ts: Date.now(),
     invoiceNo: "INV-"+Date.now().toString().slice(-6)
   };
 
@@ -1208,7 +1280,7 @@ function renderChatBody(){
     body.innerHTML = `<div class="msg bot">${STORE.content.chatWelcome}</div>`;
   } else {
     body.innerHTML = `<div class="msg bot">${STORE.content.chatWelcome}</div>` + msgs.map(m=>`
-      <div class="msg ${m.from==='user'?'me':'bot'}">${m.text}${m.img?`<img src="${m.img}">`:''}</div>`).join('');
+      <div class="msg ${m.from==='user'?'me':'bot'}">${m.text}${m.img?`<img src="${m.img}" style="cursor:pointer;" onclick="showLightbox('${m.img}')">`:''}</div>`).join('');
   }
   body.scrollTop = body.scrollHeight;
 }
@@ -1297,6 +1369,8 @@ function adminShell(){
     ["products","🛒","محصولات"],
     ["discounts","🏷️","کدهای تخفیف"],
     ["content","✏️","محتوای سایت"],
+    ["footerinfo","🦶","اطلاعات فوتر"],
+    ["goniapro","👑","سیستم حرفه‌ای گونیا"],
     ["seo","🔍","سئو"],
     ["save","💾","سیو"],
     ["chat","💬","گفتگوها و پشتیبانی"],
@@ -1322,6 +1396,7 @@ function adminShell(){
     <main class="admin-main">
       <div class="admin-mobile-nav">
         ${items.map(([k,ic,label])=>`<a href="javascript:void(0)" class="${adminTab===k?'active':''}" onclick="setAdminTab('${k}')">${ic} ${label}</a>`).join('')}
+        <a href="javascript:void(0)" onclick="doLogout()" style="color:#ff9d9d; border-color:#ff9d9d;">🚪 خروج</a>
       </div>
       <div class="admin-top">
         <h2>${items.find(i=>i[0]===adminTab)[2]}</h2>
@@ -1336,8 +1411,8 @@ function adminShell(){
   </div>
   <div id="modalRoot"></div>`;
 }
-function setAdminTab(k){ adminTab=k; adminChatOpen=null; document.getElementById("app").innerHTML = adminShell(); afterRender(); }
-function refreshAdmin(){ const c = document.getElementById("adminContent"); if(c) c.innerHTML = adminTabContent(adminTab); const t=document.querySelector('.admin-top h2'); }
+function setAdminTab(k){ adminTab=k; adminChatOpen=null; document.getElementById("app").innerHTML = adminShell(); afterRender(); if(k==="goniapro"){ gproRenderLive(); gproRenderCharts(); } }
+function refreshAdmin(){ const c = document.getElementById("adminContent"); if(c) c.innerHTML = adminTabContent(adminTab); if(adminTab==="goniapro"){ gproRenderLive(); gproRenderCharts(); } }
 
 function adminTabContent(tab){
   if(tab==="dashboard") return adminDashboard();
@@ -1347,6 +1422,8 @@ function adminTabContent(tab){
   if(tab==="products") return adminProducts();
   if(tab==="discounts") return adminDiscounts();
   if(tab==="content") return adminContent();
+  if(tab==="footerinfo") return adminFooterInfo();
+  if(tab==="goniapro") return adminGoniaPro();
   if(tab==="seo") return adminSEO();
   if(tab==="save") return adminSave();
   if(tab==="chat") return adminChat();
@@ -1383,7 +1460,7 @@ function adminOrders(){
       <tr>
         <td>${o.id}</td><td>${o.customer.name}</td><td>${o.customer.phone}</td><td>${toman(o.total)}</td>
         <td>${o.payMethod==='telegram'?'📨 تلگرام':'🏦 کارت به کارت'}</td>
-        <td>${o.receiptImg?`<img src="${o.receiptImg}" style="width:42px;height:42px;border-radius:8px;object-fit:cover;cursor:pointer;" onclick="showLightbox('${o.receiptImg}')">`:`<button class="btn btn-outline btn-sm" onclick="openInvoice('${o.id}')">مشاهده فاکتور</button>`}</td>
+        <td>${o.receiptImg?`<img src="${o.receiptImg}" style="width:42px;height:42px;border-radius:8px;object-fit:cover;cursor:pointer;" onclick="showOrderReceipt('${o.id}')">`:`<button class="btn btn-outline btn-sm" onclick="openInvoice('${o.id}')">مشاهده فاکتور</button>`}</td>
         <td><span class="status-pill status-${o.status}">${statusLabel(o.status)}</span></td>
         <td style="display:flex; gap:6px; flex-wrap:wrap;">
           ${o.status==='pending'?`<button class="btn btn-green btn-sm" onclick="approveOrder('${o.id}')">تایید رسید</button><button class="btn btn-danger btn-sm" onclick="rejectOrder('${o.id}')">رد</button>`:''}
@@ -1427,7 +1504,19 @@ async function rejectOrder(id){
   toast("سفارش رد شد");
   refreshAdmin();
 }
-function showLightbox(src){ document.getElementById("lightboxImg").src=src; document.getElementById("lightbox").classList.remove("hide"); }
+function showLightbox(src){
+  if(!src) return;
+  const img = document.getElementById("lightboxImg");
+  const box = document.getElementById("lightbox");
+  if(!img || !box) return; // اگر به هر دلیلی شل اصلی سایت هنوز آماده نبود، خطا ندهد
+  img.src = src;
+  box.classList.remove("hide");
+}
+function showOrderReceipt(id){
+  const o = STORE.orders.find(x=>x.id===id);
+  if(!o || !o.receiptImg){ toast("رسیدی برای این سفارش ثبت نشده"); return; }
+  showLightbox(o.receiptImg);
+}
 
 function invoiceHTML(inv){
   return `
@@ -2009,6 +2098,312 @@ function adminSEO(){
     <span class="autoSaveStatus" style="font-size:11.5px; color:var(--muted); margin-right:12px;">${STORE.settings.autoSaveEnabled ? 'ذخیره خودکار فعال است' : ''}</span>
   </div>`;
 }
+/* ---------------- Footer Info admin ---------------- */
+const autoSaveFooter = debounce(async ()=>{
+  if(!STORE.settings.autoSaveEnabled) return;
+  markAutoSaving();
+  await saveFooterInfo(true);
+  markAutoSaved();
+}, 1200);
+async function saveFooterInfo(silent){
+  const f = Object.assign({social:{}}, DEFAULTS.content.footer, STORE.content.footer||{});
+  f.social = {
+    instagram: document.getElementById("footInsta")?.value.trim() || "",
+    telegram: document.getElementById("footTelegram")?.value.trim() || "",
+    youtube: document.getElementById("footYoutube")?.value.trim() || "",
+    twitter: document.getElementById("footTwitter")?.value.trim() || ""
+  };
+  f.rightsText = document.getElementById("footRights")?.value || "";
+  f.madeByText = document.getElementById("footMadeBy")?.value || "";
+  STORE.content.footer = f;
+  const ok = await sset("content", STORE.content, true);
+  if(!silent) toast(ok ? "اطلاعات فوتر ذخیره شد" : "ذخیره انجام نشد", ok?undefined:"alert");
+}
+function adminFooterInfo(){
+  const f = Object.assign({social:{}}, DEFAULTS.content.footer, STORE.content.footer||{});
+  const s = f.social||{};
+  return `
+  <div class="card">
+    <h3 style="margin-bottom:6px;">🦶 اطلاعات فوتر</h3>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:18px;">لینک شبکه‌های اجتماعی و متن‌های پایین سایت را از همین‌جا مدیریت کنید. آیکون‌هایی که آدرس ندارند به‌صورت کم‌رنگ و غیرفعال در فوتر نمایش داده می‌شوند.</p>
+    <div class="field-row">
+      <div class="field"><label>اینستاگرام</label><input id="footInsta" placeholder="https://instagram.com/..." value="${(s.instagram||'').replace(/"/g,'&quot;')}" oninput="autoSaveFooter()"></div>
+      <div class="field"><label>تلگرام</label><input id="footTelegram" placeholder="https://t.me/..." value="${(s.telegram||'').replace(/"/g,'&quot;')}" oninput="autoSaveFooter()"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>یوتیوب</label><input id="footYoutube" placeholder="https://youtube.com/..." value="${(s.youtube||'').replace(/"/g,'&quot;')}" oninput="autoSaveFooter()"></div>
+      <div class="field"><label>ایکس (توییتر)</label><input id="footTwitter" placeholder="https://x.com/..." value="${(s.twitter||'').replace(/"/g,'&quot;')}" oninput="autoSaveFooter()"></div>
+    </div>
+    <div class="divider-gold"></div>
+    <div class="field"><label>متن حق کپی‌رایت (خالی بگذارید تا متن پیش‌فرض نمایش داده شود)</label><input id="footRights" value="${(f.rightsText||'').replace(/"/g,'&quot;')}" oninput="autoSaveFooter()"></div>
+    <div class="field"><label>متن «طراحی شده توسط» (خالی بگذارید تا متن پیش‌فرض نمایش داده شود)</label><input id="footMadeBy" value="${(f.madeByText||'').replace(/"/g,'&quot;')}" oninput="autoSaveFooter()"></div>
+    <button class="btn btn-gold" onclick="saveFooterInfo()">ذخیره اطلاعات فوتر</button>
+    <span class="autoSaveStatus" style="font-size:11.5px; color:var(--muted); margin-right:12px;">${STORE.settings.autoSaveEnabled ? 'ذخیره خودکار فعال است' : ''}</span>
+  </div>
+  <div class="card" style="margin-top:18px;">
+    <h3 style="margin-bottom:14px;">پیش‌نمایش آیکون‌ها</h3>
+    <div class="foot-social" style="justify-content:flex-start;">${footerSocialIcons(f)}</div>
+  </div>`;
+}
+/* ---------------- سیستم حرفه‌ای گونیا ---------------- */
+function goniaProLogin(){
+  const u = (document.getElementById("gproUser").value||"").trim();
+  const p = (document.getElementById("gproPass").value||"").trim();
+  const err = document.getElementById("gproErr");
+  if(u === STORE.settings.adminUser && p === (STORE.settings.goniaPass||"1385")){
+    sessionStorage.setItem("goniaProSession","1");
+    refreshAdmin();
+  } else {
+    err.textContent = "نام کاربری یا رمز عبور اشتباه است";
+  }
+}
+function goniaProLogout(){ sessionStorage.removeItem("goniaProSession"); refreshAdmin(); }
+async function goniaProChangePass(){
+  const oldP = document.getElementById("gproOldPass").value||"";
+  const newP = document.getElementById("gproNewPass").value||"";
+  const newP2 = document.getElementById("gproNewPass2").value||"";
+  const msg = document.getElementById("gproPassMsg");
+  const cur = STORE.settings.goniaPass || "1385";
+  if(oldP !== cur){ msg.style.color="#f87171"; msg.textContent="رمز فعلی درست نیست"; return; }
+  if(!newP || newP.length < 4){ msg.style.color="#f87171"; msg.textContent="رمز جدید باید حداقل ۴ کاراکتر باشد"; return; }
+  if(newP !== newP2){ msg.style.color="#f87171"; msg.textContent="تکرار رمز جدید مطابقت ندارد"; return; }
+  STORE.settings.goniaPass = newP;
+  await sset("settings", STORE.settings, true);
+  msg.style.color="#34d399"; msg.textContent="رمز عبور با موفقیت تغییر کرد ✅";
+  document.getElementById("gproOldPass").value=""; document.getElementById("gproNewPass").value=""; document.getElementById("gproNewPass2").value="";
+}
+function gproAnimateNum(el, endVal, decimals, suffix){
+  if(!el) return;
+  const dur = 900, t0 = performance.now();
+  function step(t){
+    const p = Math.min(1, (t-t0)/dur);
+    const v = endVal*(1-Math.pow(1-p,3));
+    el.textContent = v.toLocaleString("fa-IR",{maximumFractionDigits:decimals}) + (suffix||"");
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function gproRenderLive(){
+  if(sessionStorage.getItem("goniaProSession")!=="1") return;
+  const approvedRevenue = STORE.orders.filter(o=>o.status==="approved"||o.status==="packed"||o.status==="shipped").reduce((a,o)=>a+o.total,0);
+  const manualRevenue = STORE.invoices.reduce((a,i)=>a+i.total,0);
+  const totalRevenue = approvedRevenue + manualRevenue;
+  const netProfit = totalRevenue - totalExpenses();
+  const pendingCount = STORE.orders.filter(o=>o.status==="pending"||o.status==="awaiting_telegram").length;
+  const custSet = new Set(STORE.orders.map(o=>o.customer.phone));
+  gproAnimateNum(document.getElementById("gproRevenue"), totalRevenue, 0, " تومان");
+  gproAnimateNum(document.getElementById("gproProfit"), netProfit, 0, " تومان");
+  gproAnimateNum(document.getElementById("gproOrders"), STORE.orders.length, 0, "");
+  gproAnimateNum(document.getElementById("gproPending"), pendingCount, 0, "");
+  gproAnimateNum(document.getElementById("gproCustomers"), custSet.size, 0, "");
+  gproAnimateNum(document.getElementById("gproProducts"), STORE.products.length, 0, "");
+}
+
+/* ---- تحلیل داده‌های واقعی سایت برای نمودارهای گونیا ---- */
+const GPRO_PALETTE = ['#d4af37','#6b7f45','#a8842a','#8896ab','#e05555','#34d399','#f59e0b','#4a5d32'];
+function gproHasOrders(){ return STORE.orders.length>0; }
+function gproHasItems(){ return STORE.orders.some(o=>(o.items||[]).length>0); }
+function gproDailySeries(days){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const labels=[], keys=[], map={};
+  for(let i=days-1;i>=0;i--){
+    const d = new Date(today.getTime()-i*86400000);
+    const key = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    keys.push(key);
+    labels.push(d.toLocaleDateString('fa-IR',{month:'2-digit',day:'2-digit'}));
+    map[key] = {revenue:0,count:0};
+  }
+  STORE.orders.forEach(o=>{
+    if(!o.ts) return; // orders saved before this field existed can't be placed on the timeline
+    const d = new Date(o.ts); d.setHours(0,0,0,0);
+    const key = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    if(map[key]){ map[key].revenue += (o.total||0); map[key].count += 1; }
+  });
+  return {
+    labels,
+    revenue: keys.map(k=>map[k].revenue),
+    count: keys.map(k=>map[k].count),
+    avg: keys.map(k=>map[k].count ? Math.round(map[k].revenue/map[k].count) : 0)
+  };
+}
+function gproProdIndex(){ const m={}; STORE.products.forEach(p=>m[p.id]=p); return m; }
+function gproCategoryRevenue(){
+  const prodById = gproProdIndex(), map = {};
+  STORE.orders.forEach(o=>(o.items||[]).forEach(it=>{
+    const cat = (prodById[it.id]&&prodById[it.id].cat) || 'سایر';
+    map[cat] = (map[cat]||0) + (it.price||0)*(it.qty||1);
+  }));
+  return map;
+}
+function gproCategoryQty(){
+  const prodById = gproProdIndex(), map = {};
+  STORE.orders.forEach(o=>(o.items||[]).forEach(it=>{
+    const cat = (prodById[it.id]&&prodById[it.id].cat) || 'سایر';
+    map[cat] = (map[cat]||0) + (it.qty||1);
+  }));
+  return map;
+}
+function gproTopProducts(limit){
+  const map = {};
+  STORE.orders.forEach(o=>(o.items||[]).forEach(it=>{ map[it.name] = (map[it.name]||0) + (it.qty||1); }));
+  return Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,limit);
+}
+function gproStatusCounts(){
+  const map = {};
+  STORE.orders.forEach(o=>{ map[o.status] = (map[o.status]||0)+1; });
+  return map;
+}
+function gproStatusLabel(s){
+  return ({pending:'در انتظار بررسی', awaiting_telegram:'در انتظار تلگرام', approved:'تایید شده', packed:'بسته‌بندی شده', shipped:'ارسال شده', rejected:'رد شده'})[s] || s;
+}
+function gproStatusClass(s){
+  if(s==='approved'||s==='packed'||s==='shipped') return 'gpro-status-approved';
+  if(s==='pending'||s==='awaiting_telegram') return 'gpro-status-pending';
+  if(s==='rejected') return 'gpro-status-rejected';
+  return 'gpro-status-other';
+}
+function gproRecentOrdersRows(){
+  const list = STORE.orders.slice(-10).reverse();
+  if(!list.length) return `<tr><td colspan="5" style="color:var(--muted);">هنوز سفارشی ثبت نشده است</td></tr>`;
+  return list.map(o=>`<tr>
+    <td>${o.id||'—'}</td>
+    <td>${(o.customer&&o.customer.name)||'—'}</td>
+    <td>${(o.total||0).toLocaleString('fa-IR')} تومان</td>
+    <td><span class="gpro-status ${gproStatusClass(o.status)}">${gproStatusLabel(o.status)}</span></td>
+    <td>${o.createdAt||'—'}</td>
+  </tr>`).join('');
+}
+function gproBaseOpts(){
+  return { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+    scales:{
+      x:{ticks:{color:'#8896ab',font:{family:'Vazirmatn',size:10.5}}, grid:{color:'#1c2033'}},
+      y:{ticks:{color:'#8896ab',font:{family:'Vazirmatn',size:10.5}}, grid:{color:'#1c2033'}, beginAtZero:true}
+    }
+  };
+}
+function gproBarOptsH(){
+  const o = gproBaseOpts(); o.indexAxis='y'; return o;
+}
+function gproDonutOpts(){
+  return { responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom',labels:{color:'#8896ab',font:{family:'Vazirmatn',size:10.5},boxWidth:10,padding:9}}}
+  };
+}
+window._gproCharts = window._gproCharts || {};
+function gproChart(id, config){
+  const el = document.getElementById(id);
+  if(!el) return;
+  if(window._gproCharts[id]){ try{ window._gproCharts[id].destroy(); }catch(e){} }
+  window._gproCharts[id] = new Chart(el, config);
+}
+function gproRenderCharts(){
+  if(sessionStorage.getItem("goniaProSession")!=="1") return;
+  if(typeof Chart==="undefined") return;
+  if(gproHasOrders()){
+    const daily = gproDailySeries(14);
+    gproChart('gproChRevenue', {type:'line', data:{labels:daily.labels, datasets:[{label:'درآمد روزانه', data:daily.revenue, borderColor:'#d4af37', backgroundColor:'rgba(212,175,55,.14)', fill:true, tension:.35, pointRadius:2}]}, options:gproBaseOpts()});
+    gproChart('gproChOrders', {type:'line', data:{labels:daily.labels, datasets:[{label:'تعداد سفارش', data:daily.count, borderColor:'#6b7f45', backgroundColor:'rgba(107,127,69,.16)', fill:true, tension:.35, pointRadius:2}]}, options:gproBaseOpts()});
+    gproChart('gproChAvg', {type:'line', data:{labels:daily.labels, datasets:[{label:'میانگین سفارش', data:daily.avg, borderColor:'#a8842a', backgroundColor:'rgba(168,132,42,.14)', fill:true, tension:.35, pointRadius:2}]}, options:gproBaseOpts()});
+    const st = gproStatusCounts(), stLabels = Object.keys(st).map(gproStatusLabel), stData = Object.values(st);
+    gproChart('gproChStatus', {type:'doughnut', data:{labels:stLabels, datasets:[{data:stData, backgroundColor:GPRO_PALETTE, borderColor:'#0d0f0b', borderWidth:2}]}, options:gproDonutOpts()});
+  }
+  if(gproHasItems()){
+    const catRev = gproCategoryRevenue(), catLabels = Object.keys(catRev);
+    gproChart('gproChCatRevenue', {type:'bar', data:{labels:catLabels, datasets:[{label:'درآمد', data:Object.values(catRev), backgroundColor:'#d4af37', borderRadius:6}]}, options:gproBaseOpts()});
+    const top = gproTopProducts(6);
+    gproChart('gproChTopProducts', {type:'bar', data:{labels:top.map(t=>t[0]), datasets:[{label:'تعداد فروش', data:top.map(t=>t[1]), backgroundColor:'#6b7f45', borderRadius:6}]}, options:gproBarOptsH()});
+    const catQty = gproCategoryQty();
+    gproChart('gproChCatQty', {type:'doughnut', data:{labels:Object.keys(catQty), datasets:[{data:Object.values(catQty), backgroundColor:GPRO_PALETTE, borderColor:'#0d0f0b', borderWidth:2}]}, options:gproDonutOpts()});
+  }
+}
+function adminGoniaPro(){
+  if(sessionStorage.getItem("goniaProSession")!=="1"){
+    return `
+    <div class="gpro-login-wrap">
+      <div class="gpro-login-card">
+        <div class="gpro-orbit">
+          <div class="gpro-ring r1"></div>
+          <div class="gpro-ring r2"></div>
+          <div class="gpro-core">G</div>
+        </div>
+        <h3>سیستم حرفه‌ای گونیا</h3>
+        <p>این بخش جدا و امن است — برای ورود، نام کاربری و رمز عبور را وارد کنید</p>
+        <div class="gpro-field"><input id="gproUser" placeholder="نام کاربری"></div>
+        <div class="gpro-field"><input id="gproPass" type="password" placeholder="رمز عبور"></div>
+        <button class="gpro-login-btn" onclick="goniaProLogin()">ورود</button>
+        <div class="gpro-err" id="gproErr"></div>
+      </div>
+    </div>`;
+  }
+  const hasOrders = gproHasOrders(), hasItems = gproHasItems();
+  const noOrdersMsg = '<div class="gpro-empty">هنوز سفارشی ثبت نشده است</div>';
+  const noItemsMsg = '<div class="gpro-empty">هنوز آیتمی فروخته نشده است</div>';
+  return `
+  <div class="card" style="margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+    <div>
+      <h3 style="margin-bottom:4px;">👑 سیستم حرفه‌ای گونیا</h3>
+      <p style="font-size:12px; color:var(--muted);">خلاصه زنده و مستقیم از اطلاعات واقعی سایت — همیشه هماهنگ با بقیه داشبورد</p>
+    </div>
+    <button class="btn btn-outline btn-sm" onclick="goniaProLogout()">خروج از این بخش 🚪</button>
+  </div>
+
+  <div class="gpro-sec">
+    <div class="gpro-sec-title"><span class="gpro-sec-dot"></span><span>نمای کلی</span></div>
+    <div class="gpro-kpi-grid">
+      <div class="gpro-kpi-card"><div class="gpro-ring-sm"></div><div class="lbl">مجموع درآمد</div><div class="val" id="gproRevenue">۰</div></div>
+      <div class="gpro-kpi-card"><div class="gpro-ring-sm"></div><div class="lbl">سود خالص</div><div class="val" id="gproProfit">۰</div></div>
+      <div class="gpro-kpi-card"><div class="gpro-ring-sm"></div><div class="lbl">تعداد کل سفارش‌ها</div><div class="val" id="gproOrders">۰</div></div>
+      <div class="gpro-kpi-card"><div class="gpro-ring-sm"></div><div class="lbl">سفارش‌های در انتظار بررسی</div><div class="val" id="gproPending">۰</div></div>
+      <div class="gpro-kpi-card"><div class="gpro-ring-sm"></div><div class="lbl">تعداد مشتریان</div><div class="val" id="gproCustomers">۰</div></div>
+      <div class="gpro-kpi-card"><div class="gpro-ring-sm"></div><div class="lbl">تعداد محصولات</div><div class="val" id="gproProducts">۰</div></div>
+    </div>
+  </div>
+
+  <div class="gpro-sec">
+    <div class="gpro-sec-title"><span class="gpro-sec-dot"></span><span>روند فروش (۱۴ روز اخیر)</span></div>
+    <div class="gpro-charts-3">
+      <div class="gpro-ch-card"><h4>روند درآمد روزانه</h4><div class="gpro-ch-wrap">${hasOrders?'<canvas id="gproChRevenue"></canvas>':noOrdersMsg}</div></div>
+      <div class="gpro-ch-card"><h4>روند تعداد سفارش‌ها</h4><div class="gpro-ch-wrap">${hasOrders?'<canvas id="gproChOrders"></canvas>':noOrdersMsg}</div></div>
+      <div class="gpro-ch-card"><h4>میانگین ارزش سفارش</h4><div class="gpro-ch-wrap">${hasOrders?'<canvas id="gproChAvg"></canvas>':noOrdersMsg}</div></div>
+    </div>
+  </div>
+
+  <div class="gpro-sec">
+    <div class="gpro-sec-title"><span class="gpro-sec-dot"></span><span>تحلیل محصولات و دسته‌بندی‌ها</span></div>
+    <div class="gpro-charts-2">
+      <div class="gpro-ch-card"><h4>درآمد به تفکیک دسته‌بندی</h4><div class="gpro-ch-wrap">${hasItems?'<canvas id="gproChCatRevenue"></canvas>':noItemsMsg}</div></div>
+      <div class="gpro-ch-card"><h4>پرفروش‌ترین محصولات</h4><div class="gpro-ch-wrap">${hasItems?'<canvas id="gproChTopProducts"></canvas>':noItemsMsg}</div></div>
+    </div>
+  </div>
+
+  <div class="gpro-sec">
+    <div class="gpro-sec-title"><span class="gpro-sec-dot"></span><span>وضعیت سفارش‌ها و دسته‌بندی‌ها</span></div>
+    <div class="gpro-donut-grid">
+      <div class="gpro-ch-card"><h4>وضعیت سفارش‌ها</h4><div class="gpro-ch-wrap-sm">${hasOrders?'<canvas id="gproChStatus"></canvas>':noOrdersMsg}</div></div>
+      <div class="gpro-ch-card"><h4>سهم دسته‌بندی از تعداد فروش</h4><div class="gpro-ch-wrap-sm">${hasItems?'<canvas id="gproChCatQty"></canvas>':noItemsMsg}</div></div>
+    </div>
+  </div>
+
+  <div class="gpro-sec">
+    <div class="gpro-sec-title"><span class="gpro-sec-dot"></span><span>آخرین سفارش‌ها</span></div>
+    <div class="gpro-tbl-wrap">
+      <table>
+        <thead><tr><th>کد سفارش</th><th>مشتری</th><th>مبلغ</th><th>وضعیت</th><th>تاریخ</th></tr></thead>
+        <tbody>${gproRecentOrdersRows()}</tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="max-width:420px;">
+    <h3 style="margin-bottom:14px;">تغییر رمز ورود سیستم حرفه‌ای گونیا</h3>
+    <p style="font-size:11.5px; color:var(--muted); margin-bottom:14px;">نام کاربری این بخش همیشه همان نام کاربری ورود سایت است (<b style="color:var(--gold-l);">${STORE.settings.adminUser}</b>) و از تب «تنظیمات» تغییر می‌کند.</p>
+    <div class="field"><label>رمز فعلی</label><input id="gproOldPass" type="password"></div>
+    <div class="field"><label>رمز جدید</label><input id="gproNewPass" type="password"></div>
+    <div class="field"><label>تکرار رمز جدید</label><input id="gproNewPass2" type="password"></div>
+    <button class="btn btn-gold" onclick="goniaProChangePass()">ذخیره رمز جدید</button>
+    <div class="gpro-err" id="gproPassMsg" style="text-align:right;"></div>
+  </div>`;
+}
 function adminSave(){
   const on = STORE.settings.autoSaveEnabled;
   return `
@@ -2176,7 +2571,7 @@ function adminChat(){
     <div class="admin-chat-thread">
       ${adminChatOpen ? `
       ${pendingReceipt ? `<div class="receipt-pin">
-        <img src="${pendingReceipt.receiptImg}" onclick="showLightbox('${pendingReceipt.receiptImg}')">
+        <img src="${pendingReceipt.receiptImg}" onclick="showOrderReceipt('${pendingReceipt.id}')">
         <div style="flex:1;">
           <b style="font-size:13px;">رسید سفارش ${pendingReceipt.id} در انتظار تایید</b>
           <div style="font-size:12px; color:var(--muted);">مبلغ: ${toman(pendingReceipt.total)}</div>
