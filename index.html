@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07080a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="افضلی‌شاپ">
 <title>افضلی‌شاپ | Afzali Shop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
@@ -62,6 +67,7 @@ h1,h2,h3{font-weight:800; line-height:1.25;}
 .toast b{color:var(--gold-l);}
 @keyframes slideIn{from{opacity:0; transform:translateX(-30px);} to{opacity:1; transform:translateX(0);}}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(47,209,112,.55);} 50%{box-shadow:0 0 0 10px rgba(47,209,112,0);}}
+@keyframes pulseGold{0%,100%{box-shadow:0 0 0 0 rgba(212,175,55,.55);} 50%{box-shadow:0 0 0 10px rgba(212,175,55,0);}}
 @keyframes floaty{0%,100%{transform:translateY(0) rotate(0);} 50%{transform:translateY(-18px) rotate(3deg);}}
 @keyframes shimmer{0%{background-position:-200% 0;} 100%{background-position:200% 0;}}
 @keyframes spin{to{transform:rotate(360deg);}}
@@ -154,9 +160,10 @@ footer{background:linear-gradient(180deg,var(--bg2),#050604); border-top:1px sol
 .foot-bottom{border-top:1px solid var(--line); padding-top:22px; display:flex; justify-content:space-between; color:var(--muted); font-size:12.5px; flex-wrap:wrap; gap:10px;}
 
 /* ---------- floating chat ---------- */
-.chat-fab{position:fixed; bottom:26px; left:26px; z-index:800; width:64px; height:64px; border-radius:50%; background:linear-gradient(145deg,#3ee87f,#0f9e46 55%,#0a6e30); display:flex; align-items:center; justify-content:center; font-size:26px; box-shadow:0 10px 34px rgba(15,158,70,.65), 0 0 0 3px rgba(62,232,127,.18); animation:pulse 2.4s infinite;}
-.chat-fab-badge{position:absolute; top:-4px; left:-4px; width:24px; height:24px; border-radius:50%; background:linear-gradient(135deg,var(--gold-l),var(--gold-d)); display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--bg), 0 3px 8px rgba(0,0,0,.4);}
-.chat-fab-badge svg{width:13px; height:13px;}
+.chat-fab{position:fixed; bottom:26px; left:26px; z-index:800; width:64px; height:64px; border-radius:50%; background:linear-gradient(145deg,var(--gold-l),var(--gold) 55%,var(--gold-d)); display:flex; align-items:center; justify-content:center; font-size:26px; box-shadow:0 10px 34px rgba(212,175,55,.55), 0 0 0 3px rgba(243,216,120,.18); animation:pulseGold 2.4s infinite;}
+.chat-fab #chatFabIcon{display:flex; align-items:center; justify-content:center; width:100%; height:100%;}
+.chat-fab #chatFabIcon svg{width:28px; height:28px;}
+.chat-fab-badge{position:absolute; top:-2px; left:-2px; width:16px; height:16px; border-radius:50%; background:linear-gradient(135deg,#3ee87f,#0a6e30); box-shadow:0 0 0 3px var(--bg), 0 2px 6px rgba(0,0,0,.4);}
 .chat-panel{position:fixed; bottom:100px; left:26px; z-index:800; width:360px; max-width:92vw; height:480px; background:var(--panel2); border:1px solid var(--gold-d); border-radius:18px; display:none; flex-direction:column; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.6);}
 .chat-panel.open{display:flex; animation:slideIn .3s ease;}
 .chat-head{background:linear-gradient(90deg,var(--green-d),var(--green)); padding:14px 18px; display:flex; justify-content:space-between; align-items:center;}
@@ -297,6 +304,12 @@ tr:hover td{background:rgba(255,255,255,.02);}
 .discount-row input{flex:1;}
 .discount-applied{background:rgba(107,127,69,.15); border:1px solid var(--green); border-radius:10px; padding:10px 14px; font-size:13px; color:var(--green-l); margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;}
 
+/* ---------- admin mobile nav (base state: hidden on desktop) ---------- */
+.admin-mobile-nav{display:none; gap:8px; overflow-x:auto; padding:12px 16px; border-bottom:1px solid var(--line); background:var(--bg2); -webkit-overflow-scrolling:touch;}
+.admin-mobile-nav a{flex-shrink:0; padding:8px 15px; border-radius:999px; background:var(--panel); font-size:12.5px; font-weight:600; color:var(--muted); border:1px solid var(--line); white-space:nowrap; display:flex; align-items:center; gap:6px;}
+.admin-mobile-nav a.active{background:var(--gold); color:#1a1305; border-color:var(--gold);}
+.admin-mobile-nav::-webkit-scrollbar{height:4px;}
+
 /* ---------- responsive ---------- */
 @media(max-width:1000px){
   .cat-grid,.prod-grid{grid-template-columns:repeat(2,1fr);}
@@ -310,6 +323,32 @@ tr:hover td{background:rgba(255,255,255,.02);}
   nav.mainnav{display:none;}
   .burger{display:flex;}
   .hero-content h1{font-size:36px;}
+  /* دکمه‌های مشاهده فروشگاه و درباره افضلی‌شاپ در موبایل وسط صفحه */
+  .hero-content{text-align:center; margin:0 auto;}
+  .hero-cta{justify-content:center; width:100%;}
+  /* هدر کوچک‌تر برای موبایل و لوگو وسط صفحه */
+  .headbar{position:relative; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:10px 0;}
+  .headbar .logo{grid-column:2; justify-self:center;}
+  .headbar nav.mainnav{grid-column:2;}
+  .headbar .head-icons{grid-column:3; justify-self:end;}
+  .logo img{width:34px; height:34px;}
+  .logo{font-size:15px; gap:8px;}
+  .logo .sub{font-size:8px;}
+  /* دسته‌بندی‌ها به‌صورت ۴ دایره کنار هم در موبایل */
+  .cat-grid{grid-template-columns:repeat(4,1fr); gap:10px;}
+  .cat-card{aspect-ratio:1/1; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px; text-align:center;}
+  .cat-card .ic{position:static; font-size:20px; margin-bottom:4px; opacity:1;}
+  .cat-card div b{font-size:9px; display:block; line-height:1.2;}
+  .cat-card span{display:none;}
+  /* داشبورد موبایل: نوار تب افقی به‌جای منوی کناری که کلا مخفی می‌شد */
+  .admin-mobile-nav{display:flex;}
+  .admin-main{padding:16px;}
+  .admin-top{flex-wrap:wrap; gap:10px;}
+  .admin-top h2{font-size:18px;}
+}
+@media(max-width:520px){
+  .cat-card div b{font-size:8px;}
+  .cat-card .ic{font-size:17px;}
 }
 .hide{display:none!important;}
 .loader{width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:60px 0;}
@@ -322,7 +361,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
 <div id="app"></div>
 
 <!-- floating chat -->
-<button class="chat-fab" id="chatFab" title="گفتگو با پشتیبانی"><span id="chatFabIcon"></span><span class="badge-count hide" id="chatBadge">0</span><span class="chat-fab-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1305" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span></button>
+<button class="chat-fab" id="chatFab" title="گفتگو با پشتیبانی"><span id="chatFabIcon"></span><span class="badge-count hide" id="chatBadge">0</span><span class="chat-fab-badge" title="آنلاین"></span></button>
 <div class="chat-panel" id="chatPanel">
   <div class="chat-head">
     <div><b>پشتیبانی افضلی‌شاپ</b><br><span>معمولاً ظرف چند دقیقه پاسخ می‌دهیم</span></div>
@@ -414,15 +453,26 @@ const I18N = {
     footer_newsletter_desc:"Get the latest products and discounts", footer_join:"Subscribe",
     footer_rights:"© 2026 Afzali Shop. All rights reserved.", footer_madeby:"Designed with ♥ for fragrance lovers",
     hero_shop:"Shop Now ←", hero_about:"About Afzali Shop",
+    lang_toggle:"AR"
+  },
+  ar: {
+    nav_home:"الرئيسية", nav_shop:"المتجر", nav_about:"من نحن", nav_contact:"اتصل بنا", nav_account:"حسابي",
+    cart_title:"سلة التسوق", cart_empty:"سلة التسوق فارغة 🛍", cart_checkout:"متابعة الشراء ←",
+    footer_quicklinks:"روابط سريعة", footer_service:"خدمة العملاء", footer_newsletter:"النشرة البريدية",
+    footer_newsletter_desc:"احصل على أحدث المنتجات والخصومات", footer_join:"اشتراك",
+    footer_rights:"© 2026 أفضلي شوب. جميع الحقوق محفوظة.", footer_madeby:"صمم بـ ♥ لعشاق العطور",
+    hero_shop:"تسوق الآن ←", hero_about:"عن أفضلي شوب",
     lang_toggle:"فا"
   }
 };
+const LANG_ORDER = ["fa","en","ar"];
 let SITE_LANG = "fa";
 function t(key){ return (I18N[SITE_LANG] && I18N[SITE_LANG][key]) || I18N.fa[key] || key; }
 function toggleLang(){
-  SITE_LANG = SITE_LANG === "fa" ? "en" : "fa";
+  const idx = LANG_ORDER.indexOf(SITE_LANG);
+  SITE_LANG = LANG_ORDER[(idx+1) % LANG_ORDER.length];
   document.documentElement.lang = SITE_LANG;
-  document.documentElement.dir = SITE_LANG === "fa" ? "rtl" : "ltr";
+  document.documentElement.dir = SITE_LANG === "en" ? "ltr" : "rtl";
   localStorage.setItem("afz_lang", SITE_LANG);
   render();
 }
@@ -439,11 +489,11 @@ const DEFAULTS = {
     promoDesc: "تا ۳۰٪ تخفیف روی محصولات منتخب — فقط تا پایان هفته",
     freeShipCity: "مشهد",
     siteLogo: "assets/logo.png",
-    chatIcon: "🤖",
+    chatIcon: "",
     banners: [
-      {img:"assets/hero.jpg", title:"Afzali Shop", subtitle:"عطرهای اورجینال و منتخب لوکس"},
-      {img:"assets/collection.jpg", title:"کالکشن جدید", subtitle:"جدیدترین محصولات را ببینید"},
-      {img:"assets/portrait.jpg", title:"پیشنهاد ویژه", subtitle:"تا ۳۰٪ تخفیف محصولات منتخب"}
+      {img:"assets/hero.jpg", title:"Afzali Shop", subtitle:""},
+      {img:"assets/collection.jpg", title:"New Collection", subtitle:"Discover our latest products"},
+      {img:"assets/portrait.jpg", title:"Special Offer", subtitle:"Up to 30% off selected items"}
     ],
     fonts: { faBody:"Vazirmatn", faHeading:"Vazirmatn", enHeading:"Cinzel" }
   },
@@ -463,13 +513,15 @@ const DEFAULTS = {
     adminUser:"admin", adminPass:"admin123",
     cardNumber:"۶۰۳۷-۹۹۱۱-۰۰۰۰-۱۲۳۴", cardHolder:"افضلی‌شاپ",
     telegramUsername:"afzalishop_support",
-    invoiceLogo:"assets/logo.png"
+    invoiceLogo:"assets/logo.png",
+    lastBackupAt: null
   },
   discountCodes: [
     {code:"WELCOME10", type:"percent", value:10, active:true},
   ],
   invoices: [],
-  crmNotes: {}
+  crmNotes: {},
+  expenses: []
 };
 
 let STORE = JSON.parse(JSON.stringify(DEFAULTS));
@@ -528,6 +580,7 @@ function subscribeRealtime(){
         if(row.key==="discountCodes") STORE.discountCodes = row.value || STORE.discountCodes;
         if(row.key==="invoices") STORE.invoices = row.value || STORE.invoices;
         if(row.key==="crmNotes") STORE.crmNotes = row.value || STORE.crmNotes;
+        if(row.key==="expenses") STORE.expenses = row.value || STORE.expenses;
         if(route.startsWith("#/admin") && IS_ADMIN) refreshAdmin();
         else if(document.getElementById("chatPanel")?.classList.contains("open")) renderChatBody();
       }).subscribe();
@@ -535,20 +588,21 @@ function subscribeRealtime(){
 }
 
 async function loadAll(){
-  const [content, products, orders, chats, settings, discountCodes, invoices, crmNotes] = await Promise.all([
+  const [content, products, orders, chats, settings, discountCodes, invoices, crmNotes, expenses] = await Promise.all([
     sget("content", true), sget("products", true), sget("orders", true), sget("chats", true), sget("settings", true),
-    sget("discountCodes", true), sget("invoices", true), sget("crmNotes", true)
+    sget("discountCodes", true), sget("invoices", true), sget("crmNotes", true), sget("expenses", true)
   ]);
   STORE.content = Object.assign({}, DEFAULTS.content, content || {});
   STORE.products = products || DEFAULTS.products;
   STORE.orders = orders || [];
   STORE.chats = chats || {};
-  STORE.settings = settings || DEFAULTS.settings;
+  STORE.settings = Object.assign({}, DEFAULTS.settings, settings || {});
   STORE.discountCodes = discountCodes || DEFAULTS.discountCodes;
   STORE.invoices = invoices || [];
   STORE.crmNotes = crmNotes || {};
+  STORE.expenses = expenses || [];
   const savedLang = localStorage.getItem("afz_lang");
-  if(savedLang){ SITE_LANG = savedLang; document.documentElement.lang = SITE_LANG; document.documentElement.dir = SITE_LANG==="fa"?"rtl":"ltr"; }
+  if(savedLang){ SITE_LANG = savedLang; document.documentElement.lang = SITE_LANG; document.documentElement.dir = SITE_LANG==="en"?"ltr":"rtl"; }
   applyFonts();
   if(!content) sset("content", STORE.content, true);
   if(!discountCodes) sset("discountCodes", STORE.discountCodes, true);
@@ -1222,6 +1276,9 @@ function adminShell(){
       </div>
     </aside>
     <main class="admin-main">
+      <div class="admin-mobile-nav">
+        ${items.map(([k,ic,label])=>`<a href="javascript:void(0)" class="${adminTab===k?'active':''}" onclick="setAdminTab('${k}')">${ic} ${label}</a>`).join('')}
+      </div>
       <div class="admin-top">
         <h2>${items.find(i=>i[0]===adminTab)[2]}</h2>
         <div style="display:flex; gap:14px; align-items:center;">
@@ -1423,15 +1480,49 @@ async function deleteManualInvoice(id){
   await sset("invoices", STORE.invoices, true);
   toast("فاکتور حذف شد"); refreshAdmin();
 }
+async function addExpense(){
+  const title = document.getElementById("expTitle").value.trim();
+  const amount = Number(document.getElementById("expAmount").value)||0;
+  if(!title || !amount){ toast("عنوان و مبلغ هزینه را وارد کنید"); return; }
+  STORE.expenses.push({id:"EXP-"+Date.now().toString().slice(-8), title, amount, date:nowStr()});
+  await sset("expenses", STORE.expenses, true);
+  toast("هزینه ثبت شد");
+  refreshAdmin();
+}
+async function deleteExpense(id){
+  STORE.expenses = STORE.expenses.filter(x=>x.id!==id);
+  await sset("expenses", STORE.expenses, true);
+  toast("هزینه حذف شد"); refreshAdmin();
+}
+function totalExpenses(){ return STORE.expenses.reduce((a,e)=>a+(Number(e.amount)||0),0); }
 function adminAccounting(){
   const approvedRevenue = STORE.orders.filter(o=>o.status==="approved"||o.status==="packed"||o.status==="shipped").reduce((a,o)=>a+o.total,0);
   const manualRevenue = STORE.invoices.reduce((a,i)=>a+i.total,0);
+  const expenses = totalExpenses();
+  const netProfit = approvedRevenue + manualRevenue - expenses;
   return `
   <div class="stat-grid">
     <div class="stat-card"><b style="color:var(--green-l);">${toman(approvedRevenue)}</b><span>درآمد سفارش‌های آنلاین (تایید شده)</span></div>
     <div class="stat-card"><b style="color:var(--gold-l);">${toman(manualRevenue)}</b><span>درآمد فاکتورهای دستی/حضوری</span></div>
     <div class="stat-card"><b>${toman(approvedRevenue+manualRevenue)}</b><span>مجموع درآمد</span></div>
     <div class="stat-card"><b>${fmt(STORE.invoices.length)}</b><span>تعداد فاکتور دستی</span></div>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card"><b style="color:#ff9d9d;">${toman(expenses)}</b><span>مجموع هزینه‌ها</span></div>
+    <div class="stat-card"><b style="color:${netProfit>=0?'var(--green-l)':'#ff9d9d'};">${toman(netProfit)}</b><span>سود خالص</span></div>
+  </div>
+  <div class="card" style="margin-bottom:20px;">
+    <h3 style="margin-bottom:16px;">💰 مدیریت مالی — ثبت هزینه‌ها</h3>
+    <div class="field-row">
+      <div class="field"><label>عنوان هزینه</label><input id="expTitle" placeholder="مثلا: اجاره، بسته‌بندی، تبلیغات..."></div>
+      <div class="field"><label>مبلغ (تومان)</label><input id="expAmount" type="number"></div>
+    </div>
+    <button class="btn btn-outline btn-sm" onclick="addExpense()">+ ثبت هزینه</button>
+    <div class="divider-gold"></div>
+    <table><thead><tr><th>عنوان</th><th>مبلغ</th><th>تاریخ</th><th>عملیات</th></tr></thead>
+    <tbody>${STORE.expenses.slice().reverse().map(e=>`
+      <tr><td>${e.title}</td><td>${toman(e.amount)}</td><td>${e.date}</td>
+      <td><button class="btn btn-danger btn-sm" onclick="deleteExpense('${e.id}')">حذف</button></td></tr>`).join('') || `<tr><td colspan="4" style="color:var(--muted); text-align:center; padding:20px;">هنوز هزینه‌ای ثبت نشده</td></tr>`}</tbody></table>
   </div>
   <div class="card" style="margin-bottom:20px;">
     <h3 style="margin-bottom:16px;">ثبت فاکتور دستی برای سفارش حضوری</h3>
@@ -1445,6 +1536,50 @@ function adminAccounting(){
       <td style="display:flex; gap:6px;"><button class="btn btn-outline btn-sm" onclick="openManualInvoice('${i.id}')">مشاهده/چاپ</button>
       <button class="btn btn-danger btn-sm" onclick="deleteManualInvoice('${i.id}')">حذف</button></td></tr>`).join('') || `<tr><td colspan="6" style="color:var(--muted); text-align:center; padding:24px;">هنوز فاکتور دستی ثبت نشده</td></tr>`}</tbody></table>
   </div>`;
+}
+
+/* ---------------- SITE BACKUP ---------------- */
+function buildBackupPayload(){
+  return {
+    exportedAt: new Date().toISOString(),
+    content: STORE.content, products: STORE.products, orders: STORE.orders, chats: STORE.chats,
+    settings: STORE.settings, discountCodes: STORE.discountCodes, invoices: STORE.invoices,
+    crmNotes: STORE.crmNotes, expenses: STORE.expenses
+  };
+}
+function downloadBackupFile(){
+  const payload = buildBackupPayload();
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  const stamp = new Date().toISOString().slice(0,10);
+  a.href = url; a.download = `afzalishop-backup-${stamp}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
+}
+async function manualBackup(){
+  downloadBackupFile();
+  STORE.settings.lastBackupAt = new Date().toISOString();
+  await sset("settings", STORE.settings, true);
+  toast("بکاپ سایت گرفته شد و دانلود شد ✅");
+  refreshAdmin();
+}
+async function checkAutoBackup(){
+  if(!IS_ADMIN) return;
+  const last = STORE.settings.lastBackupAt ? new Date(STORE.settings.lastBackupAt) : null;
+  const weekMs = 1000*60*60*24*7;
+  if(last && (Date.now() - last.getTime()) < weekMs) return;
+  // یک هفته از آخرین بکاپ گذشته (یا اصلا بکاپی گرفته نشده) — بکاپ خودکار می‌گیریم و هشدار نشان می‌دهیم
+  downloadBackupFile();
+  STORE.settings.lastBackupAt = new Date().toISOString();
+  await sset("settings", STORE.settings, true);
+  toast("⏰ بکاپ خودکار هفتگی سایت گرفته شد و دانلود شد", "alert");
+  beep();
+  if(route.startsWith("#/admin")) refreshAdmin();
+}
+function lastBackupLabel(){
+  if(!STORE.settings.lastBackupAt) return "هنوز بکاپی گرفته نشده";
+  try{ return new Date(STORE.settings.lastBackupAt).toLocaleString("fa-IR"); }catch(e){ return STORE.settings.lastBackupAt; }
 }
 
 /* ---------------- CRM ---------------- */
@@ -1468,6 +1603,14 @@ function adminCRM(){
   });
   const customers = Object.values(byPhone).sort((a,b)=>b.spent-a.spent);
   return `
+  <div class="card" style="margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;">
+    <div>
+      <h3 style="margin-bottom:6px;">💾 بکاپ‌گیری از سایت</h3>
+      <p style="font-size:12.5px; color:var(--muted);">آخرین بکاپ: <b style="color:var(--gold-l);">${lastBackupLabel()}</b></p>
+      <p style="font-size:11.5px; color:var(--muted); margin-top:4px;">بکاپ به‌صورت خودکار هر ۷ روز یک‌بار گرفته و دانلود می‌شود و یک هشدار نمایش داده می‌شود. همچنین هر زمان بخواهید می‌توانید همین الان بکاپ بگیرید.</p>
+    </div>
+    <button class="btn btn-gold" onclick="manualBackup()">⬇️ دریافت بکاپ اکنون</button>
+  </div>
   <div class="stat-grid">
     <div class="stat-card"><b>${fmt(customers.length)}</b><span>تعداد مشتریان</span></div>
     <div class="stat-card"><b style="color:var(--gold-l);">${fmt(customers.filter(c=>c.orders>1).length)}</b><span>مشتریان تکراری</span></div>
@@ -1654,6 +1797,26 @@ function fontPicker(kind, options){
       <div class="fname">${f.id}</div>
     </div>`).join('')}</div>`;
 }
+let autoSaveTimer = null;
+function debounce(fn, ms){
+  return function(...args){
+    clearTimeout(autoSaveTimer);
+    autoSaveTimer = setTimeout(()=>fn.apply(this,args), ms);
+  };
+}
+function markAutoSaving(){
+  const el = document.getElementById("autoSaveStatus");
+  if(el) el.textContent = "⏳ در حال ذخیره خودکار...";
+}
+function markAutoSaved(){
+  const el = document.getElementById("autoSaveStatus");
+  if(el) el.textContent = "✅ ذخیره خودکار شد — " + nowStr();
+}
+const autoSaveContent = debounce(async ()=>{
+  markAutoSaving();
+  await saveContent(true);
+  markAutoSaved();
+}, 1200);
 function adminContent(){
   const c = STORE.content;
   const banners = c.banners && c.banners.length ? c.banners : DEFAULTS.content.banners;
@@ -1704,21 +1867,24 @@ function adminContent(){
   </div>
 
   <div class="card">
-    <h3 style="margin-bottom:14px;">متن‌های عمومی سایت</h3>
-    <div class="field"><label>پیام خوش‌آمدگویی صفحه اصلی (Hero)</label><input id="cfHero" value="${c.heroTitle}"></div>
-    <div class="field"><label>زیرعنوان صفحه اصلی</label><textarea id="cfSub" rows="2">${c.heroSubtitle}</textarea></div>
-    <div class="field"><label>متن بالای سایت (نوار اعلان)</label><input id="cfAnn" value="${c.announceText}"></div>
-    <div class="field"><label>پیام اول چت آنلاین</label><input id="cfChat" value="${c.chatWelcome}"></div>
-    <div class="field"><label>متن درباره ما</label><textarea id="cfAbout" rows="3">${c.aboutText}</textarea></div>
-    <div class="field-row">
-      <div class="field"><label>عنوان بخش پیشنهاد ویژه</label><input id="cfPromoT" value="${c.promoTitle}"></div>
-      <div class="field"><label>شهر ارسال رایگان</label><input id="cfCity" value="${c.freeShipCity}"></div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+      <h3 style="margin:0;">متن‌های عمومی سایت</h3>
+      <span id="autoSaveStatus" style="font-size:11.5px; color:var(--muted);">ذخیره خودکار فعال — پس از تایپ، خودکار ذخیره می‌شود</span>
     </div>
-    <div class="field"><label>توضیح بخش پیشنهاد ویژه</label><input id="cfPromoD" value="${c.promoDesc}"></div>
+    <div class="field"><label>پیام خوش‌آمدگویی صفحه اصلی (Hero)</label><input id="cfHero" value="${c.heroTitle}" oninput="autoSaveContent()"></div>
+    <div class="field"><label>زیرعنوان صفحه اصلی</label><textarea id="cfSub" rows="2" oninput="autoSaveContent()">${c.heroSubtitle}</textarea></div>
+    <div class="field"><label>متن بالای سایت (نوار اعلان)</label><input id="cfAnn" value="${c.announceText}" oninput="autoSaveContent()"></div>
+    <div class="field"><label>پیام اول چت آنلاین</label><input id="cfChat" value="${c.chatWelcome}" oninput="autoSaveContent()"></div>
+    <div class="field"><label>متن درباره ما</label><textarea id="cfAbout" rows="3" oninput="autoSaveContent()">${c.aboutText}</textarea></div>
+    <div class="field-row">
+      <div class="field"><label>عنوان بخش پیشنهاد ویژه</label><input id="cfPromoT" value="${c.promoTitle}" oninput="autoSaveContent()"></div>
+      <div class="field"><label>شهر ارسال رایگان</label><input id="cfCity" value="${c.freeShipCity}" oninput="autoSaveContent()"></div>
+    </div>
+    <div class="field"><label>توضیح بخش پیشنهاد ویژه</label><input id="cfPromoD" value="${c.promoDesc}" oninput="autoSaveContent()"></div>
     <button class="btn btn-gold" onclick="saveContent()">ذخیره تغییرات محتوا</button>
   </div>`;
 }
-async function saveContent(){
+async function saveContent(silent){
   // keep every field already on STORE.content (logo, banners, fonts, chatIcon, etc.)
   // and only overwrite the ones this form actually edits — previously this rebuilt
   // the whole object from scratch, silently dropping any field not in this form.
@@ -1741,10 +1907,12 @@ async function saveContent(){
   // verify the write actually landed in the cloud instead of assuming success,
   // so the 4-second poll loop below can't silently revert this edit
   const verify = await sget("content", true);
-  if(!cloudEnabled || (verify && JSON.stringify(verify)===JSON.stringify(STORE.content))){
-    toast("محتوای سایت به‌روزرسانی شد");
-  } else {
-    toast("ذخیره تایید نشد، لطفا دوباره تلاش کنید", "alert");
+  const verified = !cloudEnabled || (verify && JSON.stringify(verify)===JSON.stringify(STORE.content));
+  if(!silent){
+    if(verified) toast("محتوای سایت به‌روزرسانی شد");
+    else toast("ذخیره تایید نشد، لطفا دوباره تلاش کنید", "alert");
+  } else if(!verified){
+    toast("ذخیره خودکار تایید نشد، لطفا دوباره تلاش کنید", "alert");
   }
   applyFonts();
   renderChatFabIcon();
@@ -1851,11 +2019,18 @@ function toggleMobileNav(){
   const m = document.getElementById("mobileMenu");
   if(m) m.classList.toggle("hide");
 }
+const DEFAULT_CHAT_ICON_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="#1a1305" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`;
 function renderChatFabIcon(){
   const el = document.getElementById("chatFabIcon"); if(!el) return;
-  const icon = STORE.content.chatIcon || "🤖";
+  const icon = STORE.content.chatIcon || "";
   const looksLikeImage = /^(assets\/|https?:\/\/|data:image)/.test(icon);
-  el.innerHTML = looksLikeImage ? `<img src="${icon}" style="width:30px;height:30px;border-radius:50%;object-fit:cover;">` : icon;
+  if(looksLikeImage){
+    el.innerHTML = `<img src="${icon}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;" onerror="this.parentNode.innerHTML='${DEFAULT_CHAT_ICON_SVG.replace(/'/g,"\\'")}';">`;
+  } else if(icon){
+    el.innerHTML = `<span style="font-size:26px;line-height:1;">${icon}</span>`;
+  } else {
+    el.innerHTML = DEFAULT_CHAT_ICON_SVG;
+  }
 }
 function afterRender(){
   renderChatFabIcon();
@@ -1922,8 +2097,23 @@ async function pollUpdates(){
   if(content) STORE.content = content;
   if(products) STORE.products = products;
   // live-refresh visible parts without full reflow jank
-  if(route.startsWith("#/admin") && IS_ADMIN){ refreshAdmin(); }
+  if(route.startsWith("#/admin") && IS_ADMIN){
+    // BUGFIX: refreshAdmin() replaces the innerHTML of #adminContent, which used to
+    // run every 4s even while the admin was mid-keystroke in a field — that wiped the
+    // input and threw focus/the mobile keyboard away. Now we skip the refresh entirely
+    // while an input/textarea/select inside the admin content area is focused.
+    if(!isEditingAdminForm()) refreshAdmin();
+    checkAutoBackup();
+  }
   else if(document.getElementById("chatPanel")?.classList.contains("open")) renderChatBody();
+}
+function isEditingAdminForm(){
+  const el = document.activeElement;
+  if(!el) return false;
+  const tag = el.tagName;
+  if(tag!=="INPUT" && tag!=="TEXTAREA" && tag!=="SELECT") return false;
+  const box = document.getElementById("adminContent");
+  return !!(box && box.contains(el));
 }
 setInterval(pollUpdates, 4000);
 
@@ -1933,6 +2123,7 @@ setInterval(pollUpdates, 4000);
   subscribeRealtime();
   route = location.hash || "#/";
   await render();
+  checkAutoBackup();
 })();
 </script>
 </body>
