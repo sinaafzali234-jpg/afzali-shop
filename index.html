@@ -106,12 +106,14 @@ nav.mainnav a.active::after{content:''; position:absolute; bottom:-4px; right:0;
 .hero-dec{position:absolute; z-index:1; inset:0; pointer-events:none;}
 
 /* ---------- categories ---------- */
-.cat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
-.cat-card{position:relative; border-radius:var(--radius); overflow:hidden; aspect-ratio:1/1; border:1px solid var(--line); background:var(--panel); display:flex; align-items:flex-end; padding:20px; transition:.35s;}
-.cat-card:hover{transform:translateY(-6px); border-color:var(--gold); box-shadow:var(--shadow-gold);}
-.cat-card .ic{font-size:34px; position:absolute; top:20px; right:20px; opacity:.85;}
-.cat-card b{font-size:16px;}
-.cat-card span{display:block; color:var(--gold-l); font-size:12px; margin-top:4px;}
+.cat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:26px; justify-items:center;}
+.cat-card{display:flex; flex-direction:column; align-items:center; gap:12px; width:100%; max-width:140px; text-align:center; transition:.3s;}
+.cat-card:hover{transform:translateY(-4px);}
+.cat-circle{width:120px; height:120px; border-radius:50%; overflow:hidden; border:1px solid var(--line); background:var(--panel); display:flex; align-items:center; justify-content:center; transition:.3s; flex-shrink:0;}
+.cat-card:hover .cat-circle{border-color:var(--gold); box-shadow:var(--shadow-gold);}
+.cat-circle img{width:100%; height:100%; object-fit:cover;}
+.cat-circle .ic{font-size:42px;}
+.cat-card b{font-size:13.5px; font-weight:600; line-height:1.3;}
 
 /* ---------- products ---------- */
 .prod-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
@@ -312,7 +314,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
 
 /* ---------- responsive ---------- */
 @media(max-width:1000px){
-  .cat-grid,.prod-grid{grid-template-columns:repeat(2,1fr);}
+  .prod-grid{grid-template-columns:repeat(2,1fr);}
   .trust-strip{grid-template-columns:repeat(2,1fr);}
   .foot-grid{grid-template-columns:1fr 1fr;}
   .checkout-grid{grid-template-columns:1fr;}
@@ -326,29 +328,22 @@ tr:hover td{background:rgba(255,255,255,.02);}
   /* دکمه‌های مشاهده فروشگاه و درباره افضلی‌شاپ در موبایل وسط صفحه */
   .hero-content{text-align:center; margin:0 auto;}
   .hero-cta{justify-content:center; width:100%;}
-  /* هدر کوچک‌تر برای موبایل و لوگو وسط صفحه */
-  .headbar{position:relative; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:10px 0;}
-  .headbar .logo{grid-column:2; justify-self:center;}
-  .headbar nav.mainnav{grid-column:2;}
-  .headbar .head-icons{grid-column:3; justify-self:end;}
+  /* هدر کوچک‌تر برای موبایل */
+  .headbar{padding:10px 0;}
   .logo img{width:34px; height:34px;}
   .logo{font-size:15px; gap:8px;}
   .logo .sub{font-size:8px;}
-  /* دسته‌بندی‌ها به‌صورت ۴ دایره کنار هم در موبایل */
-  .cat-grid{grid-template-columns:repeat(4,1fr); gap:10px;}
-  .cat-card{aspect-ratio:1/1; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px; text-align:center;}
-  .cat-card .ic{position:static; font-size:20px; margin-bottom:4px; opacity:1;}
-  .cat-card div b{font-size:9px; display:block; line-height:1.2;}
-  .cat-card span{display:none;}
   /* داشبورد موبایل: نوار تب افقی به‌جای منوی کناری که کلا مخفی می‌شد */
   .admin-mobile-nav{display:flex;}
   .admin-main{padding:16px;}
   .admin-top{flex-wrap:wrap; gap:10px;}
   .admin-top h2{font-size:18px;}
-}
-@media(max-width:520px){
-  .cat-card div b{font-size:8px;}
-  .cat-card .ic{font-size:17px;}
+  /* دسته‌بندی‌ها همچنان ۴ تا کنار هم، فقط کمی جمع‌وجورتر در موبایل */
+  .cat-grid{gap:10px;}
+  .cat-card{gap:8px; max-width:100%;}
+  .cat-circle{width:78px; height:78px;}
+  .cat-circle .ic{font-size:28px;}
+  .cat-card b{font-size:10.5px;}
 }
 .hide{display:none!important;}
 .loader{width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:60px 0;}
@@ -477,6 +472,7 @@ function toggleLang(){
   render();
 }
 
+const CAT_ICONS = {"عطر مردانه":"🧔","عطر زنانه":"🌸","ست هدیه":"🎁","آرایشی":"💄","اکسسوری":"💍"};
 const DEFAULTS = {
   content: {
     heroTitle: "Afzali Shop",
@@ -490,6 +486,17 @@ const DEFAULTS = {
     freeShipCity: "مشهد",
     siteLogo: "assets/logo.png",
     chatIcon: "",
+    categoryImages: {},
+    seo: {
+      title: "افضلی‌شاپ | Afzali Shop — عطرهای اورجینال و محصولات لوکس",
+      description: "خرید عطرهای اورجینال و محصولات لوکس از افضلی‌شاپ؛ ارسال سریع و رایگان، ضمانت اصالت کالا و پشتیبانی آنلاین ۲۴ ساعته.",
+      keywords: "عطر اورجینال, فروشگاه عطر, افضلی شاپ, خرید عطر آنلاین, محصولات لوکس",
+      ogImage: "",
+      canonical: "",
+      robots: "index,follow",
+      gaId: "",
+      gscVerification: ""
+    },
     banners: [
       {img:"assets/hero.jpg", title:"Afzali Shop", subtitle:""},
       {img:"assets/collection.jpg", title:"New Collection", subtitle:"Discover our latest products"},
@@ -514,7 +521,9 @@ const DEFAULTS = {
     cardNumber:"۶۰۳۷-۹۹۱۱-۰۰۰۰-۱۲۳۴", cardHolder:"افضلی‌شاپ",
     telegramUsername:"afzalishop_support",
     invoiceLogo:"assets/logo.png",
-    lastBackupAt: null
+    lastBackupAt: null,
+    autoSaveEnabled: true,
+    lastManualSaveAt: null
   },
   discountCodes: [
     {code:"WELCOME10", type:"percent", value:10, active:true},
@@ -574,7 +583,7 @@ function subscribeRealtime(){
           lastSeenOrderCount = pend; STORE.orders = row.value || [];
         }
         if(row.key==="chats") STORE.chats = row.value || {};
-        if(row.key==="content"){ STORE.content = row.value || STORE.content; applyFonts(); }
+        if(row.key==="content"){ STORE.content = row.value || STORE.content; applyFonts(); applySEOTags(); }
         if(row.key==="products") STORE.products = row.value || STORE.products;
         if(row.key==="settings") STORE.settings = row.value || STORE.settings;
         if(row.key==="discountCodes") STORE.discountCodes = row.value || STORE.discountCodes;
@@ -604,6 +613,7 @@ async function loadAll(){
   const savedLang = localStorage.getItem("afz_lang");
   if(savedLang){ SITE_LANG = savedLang; document.documentElement.lang = SITE_LANG; document.documentElement.dir = SITE_LANG==="en"?"ltr":"rtl"; }
   applyFonts();
+  applySEOTags();
   if(!content) sset("content", STORE.content, true);
   if(!discountCodes) sset("discountCodes", STORE.discountCodes, true);
   if(!invoices) sset("invoices", STORE.invoices, true);
@@ -628,6 +638,38 @@ function applyFonts(){
   document.documentElement.style.setProperty("--font-body", faBody.stack);
   document.documentElement.style.setProperty("--font-heading", faHeading.stack);
   document.documentElement.style.setProperty("--font-eng", enHeading.stack);
+}
+/* ---------------- SEO ---------------- */
+function setMetaTag(attr, key, content){
+  if(!content) return;
+  let el = document.head.querySelector(`meta[${attr}="${key}"]`);
+  if(!el){ el = document.createElement("meta"); el.setAttribute(attr, key); document.head.appendChild(el); }
+  el.setAttribute("content", content);
+}
+function applySEOTags(){
+  const seo = Object.assign({}, DEFAULTS.content.seo, STORE.content.seo || {});
+  if(seo.title) document.title = seo.title;
+  setMetaTag("name","description", seo.description);
+  setMetaTag("name","keywords", seo.keywords);
+  setMetaTag("name","robots", seo.robots || "index,follow");
+  setMetaTag("property","og:title", seo.title);
+  setMetaTag("property","og:description", seo.description);
+  setMetaTag("property","og:type", "website");
+  if(seo.ogImage) setMetaTag("property","og:image", seo.ogImage);
+  if(seo.canonical){
+    let link = document.head.querySelector('link[rel="canonical"]');
+    if(!link){ link = document.createElement("link"); link.rel="canonical"; document.head.appendChild(link); }
+    link.href = seo.canonical;
+  }
+  if(seo.gscVerification) setMetaTag("name","google-site-verification", seo.gscVerification);
+  if(seo.gaId && !document.getElementById("ga-script")){
+    const s1 = document.createElement("script");
+    s1.id = "ga-script"; s1.async = true; s1.src = "https://www.googletagmanager.com/gtag/js?id="+encodeURIComponent(seo.gaId);
+    document.head.appendChild(s1);
+    const s2 = document.createElement("script");
+    s2.text = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '${seo.gaId}');`;
+    document.head.appendChild(s2);
+  }
 }
 function fmt(n){ return n.toLocaleString("fa-IR"); }
 function toman(n){ return fmt(n) + " تومان"; }
@@ -743,7 +785,7 @@ function homeView(){
   const c = STORE.content;
   const feats = STORE.products.slice(0,4);
   const cats = [...new Set(STORE.products.map(p=>p.cat))].slice(0,4);
-  const catIcons = {"عطر مردانه":"🧔","عطر زنانه":"🌸","ست هدیه":"🎁","آرایشی":"💄","اکسسوری":"💍"};
+  const catImgs = c.categoryImages || {};
   const banners = (c.banners && c.banners.length) ? c.banners : DEFAULTS.content.banners;
   return `
   <section class="hero">
@@ -778,8 +820,8 @@ function homeView(){
     <div class="cat-grid">
       ${cats.map(cat=>`
       <a href="#/shop?cat=${encodeURIComponent(cat)}" class="cat-card fade-up" onclick="pendingCat='${cat}'">
-        <div class="ic">${catIcons[cat]||'✨'}</div>
-        <div><b>${cat}</b><span>مشاهده محصولات ←</span></div>
+        <div class="cat-circle">${catImgs[cat] ? `<img src="${catImgs[cat]}">` : `<span class="ic">${CAT_ICONS[cat]||'✨'}</span>`}</div>
+        <b>${cat}</b>
       </a>`).join('')}
     </div>
   </section>
@@ -1255,6 +1297,8 @@ function adminShell(){
     ["products","🛒","محصولات"],
     ["discounts","🏷️","کدهای تخفیف"],
     ["content","✏️","محتوای سایت"],
+    ["seo","🔍","سئو"],
+    ["save","💾","سیو"],
     ["chat","💬","گفتگوها و پشتیبانی"],
     ["settings","⚙️","تنظیمات"]
   ];
@@ -1303,6 +1347,8 @@ function adminTabContent(tab){
   if(tab==="products") return adminProducts();
   if(tab==="discounts") return adminDiscounts();
   if(tab==="content") return adminContent();
+  if(tab==="seo") return adminSEO();
+  if(tab==="save") return adminSave();
   if(tab==="chat") return adminChat();
   if(tab==="settings") return adminSettings();
   return "";
@@ -1745,6 +1791,25 @@ async function handleSiteLogo(input){
   };
   reader.readAsDataURL(file);
 }
+async function handleCategoryImage(input, cat){
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = async e=>{
+    if(!STORE.content.categoryImages) STORE.content.categoryImages = {};
+    STORE.content.categoryImages[cat] = await compressImage(e.target.result, 300);
+    const ok = await sset("content", STORE.content, true);
+    if(ok) toast("عکس دسته‌بندی «"+cat+"» به‌روزرسانی شد"); else toast("ذخیره انجام نشد", "alert");
+    refreshAdmin();
+  };
+  reader.readAsDataURL(file);
+}
+async function resetCategoryImage(cat){
+  if(!STORE.content.categoryImages) return;
+  delete STORE.content.categoryImages[cat];
+  await sset("content", STORE.content, true);
+  toast("عکس دسته‌بندی به حالت پیش‌فرض برگشت");
+  refreshAdmin();
+}
 async function setChatIconEmoji(){
   const v = prompt("یک ایموجی برای آیکون پشتیبانی آنلاین وارد کنید:", STORE.content.chatIcon||"🤖");
   if(v===null) return;
@@ -1797,26 +1862,179 @@ function fontPicker(kind, options){
       <div class="fname">${f.id}</div>
     </div>`).join('')}</div>`;
 }
-let autoSaveTimer = null;
 function debounce(fn, ms){
+  let timer = null;
   return function(...args){
-    clearTimeout(autoSaveTimer);
-    autoSaveTimer = setTimeout(()=>fn.apply(this,args), ms);
+    clearTimeout(timer);
+    timer = setTimeout(()=>fn.apply(this,args), ms);
   };
 }
 function markAutoSaving(){
-  const el = document.getElementById("autoSaveStatus");
-  if(el) el.textContent = "⏳ در حال ذخیره خودکار...";
+  document.querySelectorAll(".autoSaveStatus").forEach(el=> el.textContent = "⏳ در حال ذخیره خودکار...");
 }
 function markAutoSaved(){
-  const el = document.getElementById("autoSaveStatus");
-  if(el) el.textContent = "✅ ذخیره خودکار شد — " + nowStr();
+  document.querySelectorAll(".autoSaveStatus").forEach(el=> el.textContent = "✅ ذخیره خودکار شد — " + nowStr());
 }
 const autoSaveContent = debounce(async ()=>{
+  if(!STORE.settings.autoSaveEnabled) return;
   markAutoSaving();
   await saveContent(true);
   markAutoSaved();
 }, 1200);
+async function toggleAutoSave(){
+  STORE.settings.autoSaveEnabled = !STORE.settings.autoSaveEnabled;
+  await sset("settings", STORE.settings, true);
+  toast(STORE.settings.autoSaveEnabled ? "ذخیره خودکار فعال شد" : "ذخیره خودکار غیرفعال شد");
+  refreshAdmin();
+}
+async function saveEverythingNow(){
+  const btn = document.getElementById("saveAllBtn");
+  if(btn){ btn.disabled = true; btn.textContent = "⏳ در حال ذخیره..."; }
+  // اگر فرم محتوای سایت باز است، اول مقادیر فیلدهایش را هم ذخیره کن
+  if(document.getElementById("cfHero")) await saveContent(true);
+  await Promise.all([
+    sset("products", STORE.products, true),
+    sset("orders", STORE.orders, true),
+    sset("discountCodes", STORE.discountCodes, true),
+    sset("invoices", STORE.invoices, true),
+    sset("crmNotes", STORE.crmNotes, true),
+    sset("expenses", STORE.expenses, true),
+    sset("chats", STORE.chats, true)
+  ]);
+  STORE.settings.lastManualSaveAt = new Date().toISOString();
+  await sset("settings", STORE.settings, true);
+  toast("همه‌چیز ذخیره شد ✅");
+  refreshAdmin();
+}
+function lastManualSaveLabel(){
+  if(!STORE.settings.lastManualSaveAt) return "هنوز ذخیره دستی انجام نشده";
+  try{ return new Date(STORE.settings.lastManualSaveAt).toLocaleString("fa-IR"); }catch(e){ return STORE.settings.lastManualSaveAt; }
+}
+/* ---------------- SEO admin ---------------- */
+const autoSaveSEO = debounce(async ()=>{
+  if(!STORE.settings.autoSaveEnabled) return;
+  markAutoSaving();
+  await saveSEO(true);
+  markAutoSaved();
+}, 1200);
+async function saveSEO(silent){
+  const seo = Object.assign({}, DEFAULTS.content.seo, STORE.content.seo || {});
+  const val = (id)=> document.getElementById(id) ? document.getElementById(id).value : undefined;
+  STORE.content.seo = {
+    ...seo,
+    title: val("seoTitle") ?? seo.title,
+    description: val("seoDesc") ?? seo.description,
+    keywords: val("seoKeywords") ?? seo.keywords,
+    canonical: val("seoCanonical") ?? seo.canonical,
+    robots: val("seoRobots") ?? seo.robots,
+    gaId: val("seoGaId") ?? seo.gaId,
+    gscVerification: val("seoGsc") ?? seo.gscVerification
+  };
+  const ok = await sset("content", STORE.content, true);
+  applySEOTags();
+  if(!silent){
+    toast(ok ? "تنظیمات سئو ذخیره شد" : "ذخیره انجام نشد — اتصال ابری برقرار نیست", ok?undefined:"alert");
+  }
+}
+async function handleSeoOgImage(input){
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = async e=>{
+    if(!STORE.content.seo) STORE.content.seo = {...DEFAULTS.content.seo};
+    STORE.content.seo.ogImage = await compressImage(e.target.result, 800);
+    await sset("content", STORE.content, true);
+    applySEOTags();
+    toast("تصویر اشتراک‌گذاری (OG) به‌روزرسانی شد");
+    refreshAdmin();
+  };
+  reader.readAsDataURL(file);
+}
+function autoFillSEO(){
+  const c = STORE.content;
+  const cats = [...new Set(STORE.products.map(p=>p.cat))];
+  const title = `${(c.heroTitle||'افضلی‌شاپ').trim()} | Afzali Shop — ${(c.heroEyebrow||'عطر و محصولات لوکس').trim()}`;
+  const rawDesc = (c.aboutText || c.heroSubtitle || "").replace(/\s+/g," ").trim();
+  const description = rawDesc.length > 155 ? rawDesc.slice(0,152).trim()+"…" : rawDesc;
+  const keywords = ["افضلی شاپ","Afzali Shop", ...cats, "خرید آنلاین", "ارسال به "+(c.freeShipCity||"مشهد")].filter(Boolean).join("، ");
+  STORE.content.seo = { ...Object.assign({}, DEFAULTS.content.seo, STORE.content.seo||{}), title, description, keywords };
+  refreshAdmin();
+  toast("عنوان، توضیحات و کلمات کلیدی از روی محتوای سایت ساخته شد — بررسی کن و ذخیره کن");
+}
+function adminSEO(){
+  const seo = Object.assign({}, DEFAULTS.content.seo, STORE.content.seo || {});
+  const descLen = (seo.description||"").length;
+  return `
+  <div class="card" style="margin-bottom:18px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:6px;">
+      <h3 style="margin:0;">🔍 سئو سایت</h3>
+      <button class="btn btn-outline btn-sm" onclick="autoFillSEO()">✨ تولید خودکار از محتوای سایت</button>
+    </div>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:16px;">این بخش عنوان، توضیحات و سایر اطلاعاتی که گوگل و شبکه‌های اجتماعی برای سایت شما نمایش می‌دهند را مدیریت می‌کند. با دکمه بالا می‌توانید این اطلاعات را خودکار از روی متن‌های سایت بسازید و فقط در صورت نیاز ویرایش کنید — دیگر لازم نیست از صفر بنویسید.</p>
+
+    <div class="field"><label>عنوان سئو (Title)</label><input id="seoTitle" value="${(seo.title||'').replace(/"/g,'&quot;')}" oninput="autoSaveSEO()"></div>
+    <div class="field">
+      <label>توضیحات متا (Meta Description)</label>
+      <textarea id="seoDesc" rows="3" oninput="document.getElementById('seoDescCount').textContent=this.value.length; autoSaveSEO()">${seo.description||''}</textarea>
+      <span id="seoDescCount" style="font-size:11px; color:var(--muted);">${descLen}</span><span style="font-size:11px; color:var(--muted);"> / حدود ۱۵۵ کاراکتر ایده‌آل است</span>
+    </div>
+    <div class="field"><label>کلمات کلیدی (با ویرگول جدا کنید)</label><input id="seoKeywords" value="${(seo.keywords||'').replace(/"/g,'&quot;')}" oninput="autoSaveSEO()"></div>
+    <div class="field-row">
+      <div class="field"><label>آدرس اصلی سایت (Canonical URL)</label><input id="seoCanonical" placeholder="https://example.com" value="${(seo.canonical||'').replace(/"/g,'&quot;')}" oninput="autoSaveSEO()"></div>
+      <div class="field"><label>وضعیت ایندکس در گوگل</label>
+        <select id="seoRobots" onchange="autoSaveSEO()">
+          <option value="index,follow" ${seo.robots==='index,follow'?'selected':''}>ایندکس شود ✅ (پیشنهادی)</option>
+          <option value="noindex,nofollow" ${seo.robots==='noindex,nofollow'?'selected':''}>ایندکس نشود 🚫</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>تصویر اشتراک‌گذاری (Open Graph) — هنگام اشتراک لینک در تلگرام/واتساپ/اینستاگرام نمایش داده می‌شود</label>
+      <div style="display:flex; align-items:center; gap:12px;">
+        ${seo.ogImage?`<img src="${seo.ogImage}" style="width:90px;height:56px;border-radius:8px;object-fit:cover;border:1px solid var(--line);">`:`<div style="width:90px;height:56px;border-radius:8px;background:var(--panel2);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);">بدون عکس</div>`}
+        <button class="btn btn-outline btn-sm" onclick="document.getElementById('seoOgInput').click()">آپلود عکس</button>
+        <input type="file" id="seoOgInput" accept="image/*" class="hide" onchange="handleSeoOgImage(this)">
+      </div>
+    </div>
+
+    <div class="divider-gold"></div>
+    <h3 style="margin-bottom:10px; font-size:14.5px;">اتصال به ابزارهای گوگل (اختیاری)</h3>
+    <div class="field-row">
+      <div class="field"><label>کد Google Analytics (Measurement ID)</label><input id="seoGaId" placeholder="G-XXXXXXXXXX" value="${(seo.gaId||'').replace(/"/g,'&quot;')}" oninput="autoSaveSEO()"></div>
+      <div class="field"><label>کد تایید Google Search Console</label><input id="seoGsc" placeholder="کد verification" value="${(seo.gscVerification||'').replace(/"/g,'&quot;')}" oninput="autoSaveSEO()"></div>
+    </div>
+    <p style="font-size:11.5px; color:var(--muted); margin-bottom:14px;">این کدها را از Google Analytics و Google Search Console بگیرید و همین‌جا بچسبانید؛ نیازی به تغییر کد سایت نیست.</p>
+
+    <button class="btn btn-gold" onclick="saveSEO()">ذخیره تنظیمات سئو</button>
+    <span class="autoSaveStatus" style="font-size:11.5px; color:var(--muted); margin-right:12px;">${STORE.settings.autoSaveEnabled ? 'ذخیره خودکار فعال است' : ''}</span>
+  </div>`;
+}
+function adminSave(){
+  const on = STORE.settings.autoSaveEnabled;
+  return `
+  <div class="card" style="margin-bottom:20px;">
+    <h3 style="margin-bottom:6px;">💾 سیو</h3>
+    <p style="font-size:12.5px; color:var(--muted); margin-bottom:20px;">همه‌ی کارهای مربوط به ذخیره‌سازی اطلاعات داشبورد از همین‌جا و به‌صورت ساده انجام می‌شود.</p>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:16px; border:1px solid var(--line); border-radius:14px; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
+      <div>
+        <b style="font-size:14px;">ذخیره خودکار</b>
+        <p style="font-size:12px; color:var(--muted); margin-top:4px;">وقتی فعال باشد، تغییرات فرم «محتوای سایت» بعد از چند لحظه خودش ذخیره می‌شود.</p>
+        <span class="autoSaveStatus" style="font-size:11.5px; color:var(--gold-l); display:block; margin-top:6px;">${on ? "✅ ذخیره خودکار فعال است" : "⛔ ذخیره خودکار غیرفعال است"}</span>
+      </div>
+      <button class="btn ${on?'btn-green':'btn-outline'} btn-sm" onclick="toggleAutoSave()">${on?'غیرفعال کردن':'فعال کردن'}</button>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:16px; border:1px solid var(--line); border-radius:14px; flex-wrap:wrap; gap:12px;">
+      <div>
+        <b style="font-size:14px;">ذخیره دستی همه چیز</b>
+        <p style="font-size:12px; color:var(--muted); margin-top:4px;">با یک کلیک، تمام اطلاعات داشبورد (محتوا، محصولات، سفارش‌ها، فاکتورها، هزینه‌ها، تخفیف‌ها و گفتگوها) همین الان ذخیره می‌شود.</p>
+        <span style="font-size:11.5px; color:var(--muted); display:block; margin-top:6px;">آخرین ذخیره دستی: <b style="color:var(--gold-l);">${lastManualSaveLabel()}</b></span>
+      </div>
+      <button class="btn btn-gold" id="saveAllBtn" onclick="saveEverythingNow()">💾 ذخیره همه چیز</button>
+    </div>
+  </div>`;
+}
 function adminContent(){
   const c = STORE.content;
   const banners = c.banners && c.banners.length ? c.banners : DEFAULTS.content.banners;
@@ -1838,6 +2056,26 @@ function adminContent(){
         <button class="btn btn-outline btn-sm" onclick="document.getElementById('chatIconInput').click()">آپلود تصویر</button>
         <input type="file" id="chatIconInput" accept="image/*" class="hide" onchange="handleChatIconUpload(this)">
       </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:18px;">
+    <h3 style="margin-bottom:6px;">تصاویر دایره‌ای دسته‌بندی‌ها (صفحه اصلی)</h3>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:14px;">برای هر دسته‌بندی می‌توانید یک عکس دلخواه آپلود کنید؛ اگر عکسی انتخاب نشود همان آیکون پیش‌فرض نمایش داده می‌شود.</p>
+    <div style="display:flex; gap:18px; flex-wrap:wrap;">
+      ${[...new Set(STORE.products.map(p=>p.cat))].map((cat,i)=>{
+        const img = (c.categoryImages||{})[cat];
+        return `
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; width:100px; text-align:center;">
+          <div style="width:72px; height:72px; border-radius:50%; overflow:hidden; border:1px solid var(--line); background:var(--panel2); display:flex; align-items:center; justify-content:center;">
+            ${img ? `<img src="${img}" style="width:100%;height:100%;object-fit:cover;">` : `<span style="font-size:28px;">${CAT_ICONS[cat]||'✨'}</span>`}
+          </div>
+          <span style="font-size:11.5px;">${cat}</span>
+          <button class="btn btn-outline btn-sm" style="padding:5px 10px; font-size:11px;" onclick="document.getElementById('catImgInput${i}').click()">تغییر عکس</button>
+          <input type="file" id="catImgInput${i}" accept="image/*" class="hide" onchange="handleCategoryImage(this,'${cat.replace(/'/g,"\\'")}')">
+          ${img?`<button class="btn-ghost" style="font-size:10.5px;" onclick="resetCategoryImage('${cat.replace(/'/g,"\\'")}')">بازگشت به آیکون</button>`:''}
+        </div>`;
+      }).join('')}
     </div>
   </div>
 
@@ -1869,7 +2107,7 @@ function adminContent(){
   <div class="card">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
       <h3 style="margin:0;">متن‌های عمومی سایت</h3>
-      <span id="autoSaveStatus" style="font-size:11.5px; color:var(--muted);">ذخیره خودکار فعال — پس از تایپ، خودکار ذخیره می‌شود</span>
+      <span class="autoSaveStatus" style="font-size:11.5px; color:var(--muted);">${STORE.settings.autoSaveEnabled ? 'ذخیره خودکار فعال — پس از تایپ، خودکار ذخیره می‌شود' : '⛔ ذخیره خودکار غیرفعال است — از تب «سیو» می‌توانید فعالش کنید'}</span>
     </div>
     <div class="field"><label>پیام خوش‌آمدگویی صفحه اصلی (Hero)</label><input id="cfHero" value="${c.heroTitle}" oninput="autoSaveContent()"></div>
     <div class="field"><label>زیرعنوان صفحه اصلی</label><textarea id="cfSub" rows="2" oninput="autoSaveContent()">${c.heroSubtitle}</textarea></div>
@@ -1915,6 +2153,7 @@ async function saveContent(silent){
     toast("ذخیره خودکار تایید نشد، لطفا دوباره تلاش کنید", "alert");
   }
   applyFonts();
+  applySEOTags();
   renderChatFabIcon();
 }
 
